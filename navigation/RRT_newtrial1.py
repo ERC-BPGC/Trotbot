@@ -2,7 +2,6 @@
 
 """
 RRT with pre-fed lists of polygons and circles. 
-Polygons aren't shown in the graphical representation
 """
 
 import matplotlib.pyplot as plt
