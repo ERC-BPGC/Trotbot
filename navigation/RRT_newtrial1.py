@@ -23,7 +23,7 @@ class RRT():
     """
 
     def __init__(self, start, goal, obstacleList, obstacleList2,
-                 randArea, expandDis=1.0, goalSampleRate=10, maxIter=500):
+                 randArea, expandDis=1.0, goalSampleRate=10, maxIter=500,mnl=0.1):
         """
         Setting Parameter
 
@@ -42,6 +42,7 @@ class RRT():
         self.maxIter = maxIter
         self.obstacleList = obstacleList
         self.obstacleList2 = obstacleList2
+        self.mnl=mnl
 
     def Planning(self, animation=True):
         """
