@@ -23,7 +23,7 @@ class RRT():
     """
 
     def __init__(self, start, goal, obstacleList, obstacleList2,
-                 randArea, expandDis=1.0, goalSampleRate=10, maxIter=500):
+                 randArea, expandDis=1.0, goalSampleRate=10, maxIter=500,mnl=0.1):
         """
         Setting Parameter
 
@@ -42,6 +42,7 @@ class RRT():
         self.maxIter = maxIter
         self.obstacleList = obstacleList
         self.obstacleList2 = obstacleList2
+        self.mnl=mnl
 
     def Planning(self, animation=True):
         """
@@ -88,7 +89,38 @@ class RRT():
 
             if animation:
                 self.DrawGraph(rnd)
-
+       #straight line check
+            st_count=0
+            
+            if d>self.expandDis:
+            	st_nodelist=self.nodeList[:]
+            	st_theta=math.atan2(self.end.y-newNode.y,self.end.x-newNode.x)
+            	st_distance=d
+            	iterations=int(st_distance//self.mnl)
+            	st_start=len(st_nodelist)
+            	
+            	for i in range(1,iterations):
+            		st_x = newNode.x + (self.mnl)*i*math.cos(st_theta)
+            		st_y = newNode.y + (self.mnl)*i*math.sin(st_theta)
+            		
+            		st_newnode=Node(st_x,st_y)
+            		st_newnode.parent=st_start+i-2
+            		if not self.__CollisionCheck(st_newnode, self.obstacleList, self.obstacleList2):
+            			break
+            		st_nodelist.append(st_newnode)
+            		
+            		st_dx = st_newnode.x - self.end.x
+            		st_dy = st_newnode.y - self.end.y
+            		st_d = math.sqrt(st_dx * st_dx + st_dy * st_dy)
+            		if st_d <= self.expandDis:
+            			st_count+=1
+            			self.nodeList=st_nodelist
+            			print("Goal!!")
+            			break
+            if st_count!=0:
+            	break
+        
+        
         path = [[self.end.x, self.end.y]]
         lastIndex = len(self.nodeList) - 1
         while self.nodeList[lastIndex].parent is not None:
