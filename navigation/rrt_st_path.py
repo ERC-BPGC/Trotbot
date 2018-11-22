@@ -9,13 +9,14 @@ import matplotlib.pyplot as plt
 import random
 import math
 import copy
+import time
 
 from shapely.geometry import Polygon
 from shapely.geometry import Point
 from descartes import PolygonPatch
 
 
-show_animation = True
+show_animation = False
 
 
 class RRT():
@@ -24,7 +25,7 @@ class RRT():
     """
 
     def __init__(self, start, goal, obstacleList, obstacleList2,
-                 randArea, expandDis=1.0, goalSampleRate=10, maxIter=500,mnl=0.1):
+                 randArea, goalSampleRate, expandDis=1.0,  maxIter=500,mnl=0.1):
         """
         Setting Parameter
         start:Start Position [x,y]
@@ -97,7 +98,7 @@ class RRT():
                 continue
 
             self.nodeList.append(newNode)
-            print("nNodelist:", len(self.nodeList))
+            #print("nNodelist:", len(self.nodeList))
 
             # check goal
             dx = newNode.x - self.end.x
@@ -227,8 +228,8 @@ def final_path(f_path_i,ol1,ol2):
     return f_path_o
 
 
-def main():
-    print("start simple RRT path planning")
+def main(gsr):
+    #print("start simple RRT path planning")
 
     # ====Search Path with RRT====
     obstacleList = [
@@ -248,12 +249,12 @@ def main():
 
     # Set Initial parameters
     rrt = RRT(start=[0, 0], goal=[5, 10],
-              randArea=[-2, 15], obstacleList=obstacleList, obstacleList2=obstacleList2)
+              randArea=[-2, 15], obstacleList=obstacleList, obstacleList2=obstacleList2, goalSampleRate=gsr)
     path = rrt.Planning(animation=show_animation)
     path_in=list(reversed(path[:]))
     final_path_r=final_path(path_in,obstacleList,obstacleList2)
-    print("this is final path ->")
-    print(final_path_r)
+    #print("this is final path ->")
+    #print(final_path_r)
 # Draw final path
     if show_animation:
         rrt.DrawGraph()
@@ -265,5 +266,11 @@ def main():
         for i in (final_path_r):
             plt.plot(i[0], i[1], marker='o', markersize=7, color="yellow")
         plt.show()
+
+def foo_tester(gsr):
+    start = time.time()
+    main(gsr)
+    return(time.time() - start)
+
 if __name__ == '__main__':
-	main()
+    foo_tester()
