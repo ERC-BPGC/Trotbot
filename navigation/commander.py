@@ -3,7 +3,8 @@ __author__ = "Atharv"
 
 import rospy
 import dynamic_rrt_integration as dri
-from obstacle_expander.msg import Ipoly
+from obstacle_expander.msg import Ipoly, bliss
+from std_msgs.msg import *
 
 
 class Current():
@@ -11,7 +12,7 @@ class Current():
     Class for current status of bot
     """
 
-    def __init__(self)
+    def __init__(self):
         self.initialize_data()
 
     def initialize_data(self):
@@ -28,8 +29,8 @@ class Current():
         self, curr_pos = (data.pose.pose.position.x, data.pose.pose.position.y)
 
     def main_response(self, data):
-       """Updates goal position and calls rrt."""
-        if((data.x, data.y) != self.curr_target):
+       	"""Updates goal position and calls rrt."""
+	if((data.x, data.y) != self.curr_target):
             self.curr_target = (data.x, data.y)
             path = do_RRT(show_animation = False, start_points_coors = (0, 0), end_point_coors = self.curr_target, self.obstacle_list)
             self.target_changed = True
@@ -57,11 +58,11 @@ def main():
    
     odometry_sub = rospy.Subscriber("odom", Odom, curr.odom_update)
     obstacle_sub = rospy.Subscriber("ol1", Ipoly, curr.update_obst_list)
-    gp_sub = rospy.Subscriber("global_plan", Float32[], curr.main_response)
+    gp_sub = rospy.Subscriber("global_plan", Float32MultiArray, curr.main_response)
     
     rospy.Timer(rospy.Duration(0.05), curr.dynamic_caller())
 
-    path_pub = rospy.Publisher("final_path", Float32[][], queue_size = 10)
+    path_pub = rospy.Publisher("final_path", bliss, queue_size = 10)
     path_pub.publish(curr.path)
 
     rospy.spin()
