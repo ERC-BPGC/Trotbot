@@ -5,7 +5,8 @@ mcs12085_dx() and mcs12085_dy() to read distance mouse has moved since
 last call.
 
 
-#Procedure to run obstacle_expansion:
+# Procedure to run obstacle_expansion:
+
 1.Create a catkin package named obstacle_expander 
 (dependencies:message_runtime
 rospy
