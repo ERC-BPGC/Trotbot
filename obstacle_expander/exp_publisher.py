@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 
-
-
 import rospy
 import math
 from sensor_msgs.msg import LaserScan
@@ -13,13 +11,13 @@ from obstacle_expander.msg import Ipoly,Exp_msg,Cordi#for polygon conversion
 #for decreasing the coordinate val 
 def decrease_in_direction(val): 
 	if val!="inf":
-		val-=0.5 #change this vaue according to bot size
+		val-=0.1 #change this vaue according to bot size
 	return val
 
 #for increasing the coordinate val
 def increase_in_direction(val):
 	if val!="inf":
-		val+=1.0 #-4 because the value is changed in decrease_in_direction
+		val+=0.2 #-4 because the value is changed in decrease_in_direction
 	return val
 
 
@@ -27,9 +25,10 @@ def increase_in_direction(val):
 def getting_cordi(A,B,shu):
 	theta_increment=shu
 	re=PolygonArray()
-	re.header.frame_id="odom"
+	re.header.frame_id="base_scan"
 	roar=PolygonStamped()
-	roar.header.frame_id="odom"
+	roar.header.frame_id="base_scan"
+	roar.header.stamp=rospy.Time.now()
 	pt=Exp_msg()
 	count=0
 	baby=Ipoly()
@@ -48,14 +47,14 @@ def getting_cordi(A,B,shu):
 			y=A[i]*math.sin(theta1)       
 			roar.polygon.points.append(Point32(x,y,0))
 			pt.bliss.append(Cordi(x,y,0))
-			if i==len(A)-1 or str(A[i+1])=="inf" or abs(A[i+1]-A[i])>0.5:
-				for t in range(1,5):
+			if i==len(A)-1 or str(A[i+1])=="inf" or abs(A[i+1]-A[i])>0.1:
+				for t in range(1,4):
 					theta1=(t+i)*theta_increment
 					x=A[i]*math.cos(theta1)
 					y=A[i]*math.sin(theta1)       
 					roar.polygon.points.append(Point32(x,y,0))
 					pt.bliss.append(Cordi(x,y,0))
-				for t in range(3,0,-1):
+				for t in range(3,1,-1):
 					theta1=(t+i)*theta_increment
 					x=B[i]*math.cos(theta1)
 					y=B[i]*math.sin(theta1)       
@@ -67,7 +66,7 @@ def getting_cordi(A,B,shu):
 					y=B[j]*math.sin(theta2)       
 					roar.polygon.points.append(Point32(x,y,0))
 					pt.bliss.append(Cordi(x,y,0))
-				for t in range(-1,-3,-1):
+				for t in range(-1,-4,-1):
 					theta2=(j+t)*theta_increment
 					x=B[j]*math.cos(theta2)
 					y=B[j]*math.sin(theta2)       
@@ -78,7 +77,8 @@ def getting_cordi(A,B,shu):
 				count=0
 				re.polygons.append(roar)
 				roar=PolygonStamped()
-				roar.header.frame_id="odom"
+				roar.header.frame_id="base_scan"
+				roar.header.stamp=rospy.Time.now()
 	pubf=rospy.Publisher("ol2",Ipoly,queue_size=0)
 	pubf.publish(baby)
 	return re		
@@ -120,10 +120,10 @@ def dothis(data):
 	xy_e1=getting_cordi(edited1,list(map(increase_in_direction,toedit1.ranges[:])),data.angle_increment)
 	pub5=rospy.Publisher("tp5xy5",PolygonArray,queue_size=0)
 	pub5.publish(xy_e1)
-	pub1=rospy.Publisher("tp1",LaserScan,queue_size=10)
+	pub1=rospy.Publisher("tp1",LaserScan,queue_size=0)
 	pub1.publish(toedit1)
 	rate=rospy.Rate(10)
-	rate.sleep()
+#	rate.sleep()
 
 
 
@@ -133,10 +133,10 @@ def dothat(datta):
 	toedit2=datta
 	edited2=list(map(increase_in_direction,toedit2.ranges[:]))
 	toedit2.ranges=edited2[:]
-	pub3=rospy.Publisher("tp3",LaserScan,queue_size=10)
+	pub3=rospy.Publisher("tp3",LaserScan,queue_size=1)
 	pub3.publish(toedit2)
 	rate=rospy.Rate(10)
-	rate.sleep()
+#	rate.sleep()
 	
 	
 #subscriber. scan topic, takes LaserScan and passes it to callBack functions	
