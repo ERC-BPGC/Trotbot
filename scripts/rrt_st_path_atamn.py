@@ -80,7 +80,6 @@ class RRT():
                     self.minrand, self.maxrand)]
             else:
                 rnd = [self.end.x, self.end.y]
-            print(rnd)
 
             # Find nearest node
             nind = self.GetNearestListIndex(self.nodeList, rnd)
@@ -162,6 +161,7 @@ class RRT():
                  ** 2 for node in nodeList]
         minind = dlist.index(min(dlist))
         return minind
+
     @staticmethod
     def CollisionCheck(node, obstacleList, obstacleList2):
 
@@ -232,7 +232,7 @@ def final_path(f_path_i,ol1,ol2):
 def do_RRT(obstacleList2, show_animation, start_point_coors , end_point_coors):
     print("start simple RRT path planning")
 #	obstacleList=[]
-    
+
     # ====Search Path with RRT====
 #    obstacleList = [
 #        (5, 5, 0),
@@ -244,17 +244,17 @@ def do_RRT(obstacleList2, show_animation, start_point_coors , end_point_coors):
          ((1.7071067811865475, 0.29289321881345254), (2.7071067811865475, 1.2928932188134525), (3.7071067811865475, 2.2928932188134525), (2.2928932188134525, 3.7071067811865475), (1.2928932188134525, 2.7071067811865475), (0.2928932188134524, 1.7071067811865475))
     ]
     '''
-    
-    
+
+
 
 
     # Set Initial parameters
     rrt = RRT(start= start_point_coors, goal= end_point_coors,
-              randArea=[-2, 15], obstacleList= obstacleList, obstacleList2=obstacleList2)
+              randArea=[-1, 5], obstacleList= obstacleList, obstacleList2=obstacleList2)
     path = rrt.Planning(animation=show_animation)
     path_in=list(reversed(path[:]))
     final_path_r=final_path(path_in,obstacleList,obstacleList2)
-    final_path_r = [tuple(coors) for coors in final_path_r]    
+    final_path_r = [tuple(coors) for coors in final_path_r]
     print("this is final path ->")
     print(final_path_r)
     return final_path_r
@@ -275,5 +275,3 @@ if __name__ == '__main__':
     start = time.time()
     do_RRT(show_animation = True , start_point_coors = [0 , 0] , end_point_coors = [5 , 10] , obstacleList2 = [((1,1), (3,3), (1,3)) , (((5,4), (4,4), (4,5), (5,6)))])
     print(time.time() - start)
-
-
