@@ -9,7 +9,7 @@ from geometry_msgs.msg import Polygon,Point32,PolygonStamped
 from std_msgs.msg import Header
 from jsk_recognition_msgs.msg import PolygonArray
 from obstacle_expander.msg import Ipoly,Exp_msg,Cordi#for polygon conversion
-from obstacle_expander.srv import Exp_srv, Exp_srvResponse
+
 
 #for decreasing the coordinate val
 def decrease_in_direction(val):
@@ -87,18 +87,16 @@ def getting_cordi(A,B,shu):
 	return re
 
 def dothis(data):
-	data=data.get_Laser
 	edited1=list(map(decrease_in_direction,data.ranges[:]))
 	xy_e1=getting_cordi(edited1,list(map(increase_in_direction,data.ranges[:])),data.angle_increment)
 	pub5=rospy.Publisher("tp5xy5",PolygonArray,queue_size=0)
 	pub5.publish(xy_e1)
-	return True
 
 
 #subscriber. scan topic, takes LaserScan and passes it to callBack functions
 def expander_Attempt1():
 	rospy.init_node("object_expander",anonymous=True)
-	sub1=rospy.Service("Expanding",Exp_srv,dothis)
+	sub1=rospy.Service("scan",LaserScan,dothis)
 	rospy.spin()
 
 

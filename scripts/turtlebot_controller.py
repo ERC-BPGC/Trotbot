@@ -11,10 +11,10 @@ from nav_msgs.msg import *
 from obstacle_expander.msg import *
 from tf.transformations import euler_from_quaternion
 
-ang_vel = 0.6
-lin_vel = 0.3
+ang_vel = 0.5
+lin_vel = 0.5
 pt_buffer = 0.05
-ang_buffer = 0.01
+ang_buffer = 0.08
 
 class Controller():
 
@@ -46,7 +46,6 @@ class Controller():
 
 	def path_update(self, data):
 		"""Update path to be taken by both."""
-		self.old_path = self.curr_path[:]
 		self.curr_path = []
 		for epoint in data.bliss:
 			i = (epoint.x, epoint.y)
@@ -69,13 +68,16 @@ class Controller():
 		ang_diff = -self.curr_ang + math.atan((next_pt[1] - self.curr_pos[1]) / (next_pt[0] - self.curr_pos[0]))
 		vel = Twist()
 
-		while (abs(ang_diff) > ang_buffer):
+		while (True):
 			ang_diff = -self.curr_ang + math.atan((next_pt[1] - self.curr_pos[1]) / (next_pt[0] - self.curr_pos[0]))
 			# print(ang_diff)
-			turn_time = abs(ang_diff / ang_vel)
-			vel.linear.x = 0.3
+			# turn_time = abs(ang_diff / ang_vel)
+			vel.linear.x = 0.4
 			vel.angular.z = ang_diff*ang_vel/abs(ang_diff)
-			# print ("vel")
+			if abs(ang_diff) < ang_buffer:
+				vel.angular.z=0
+				self.vel_pub.publish(vel)
+				break# print ("vel")
 			self.vel_pub.publish(vel)
 
 			# print("vel")

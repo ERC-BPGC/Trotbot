@@ -1,4 +1,5 @@
 
+
 #!/usr/bin/env python
 
 """
@@ -11,7 +12,7 @@ import math
 import copy
 
 from shapely.geometry import Polygon
-from shapely.geometry import Point,LineString
+from shapely.geometry import Point
 from descartes import PolygonPatch
 
 
@@ -44,12 +45,24 @@ class RRT():
         self.mnl=mnl
 
     def st_linecheck(self,newNode,d):
-        line=LineString([(self.end.x,self.end.y),(newNode.x,newNode.y)])
-        ob=[Polygon(list(x)) for x in self.obstacleList2]
-        for obst in ob:
-            if line.intersects(obst):
-                return 0
-        return 1
+        st_count=0
+        st_nodelist=self.nodeList[:]
+        st_theta=math.atan2(self.end.y-newNode.y,self.end.x-newNode.x)
+        st_distance=d
+        iterations=int(st_distance/self.mnl)
+        st_start=len(st_nodelist)
+        st_cos=math.cos(st_theta)
+        st_sin=math.sin(st_theta)
+        for i in range(1,iterations):
+            st_x = newNode.x + (self.mnl)*i*st_cos
+            st_y = newNode.y + (self.mnl)*i*st_sin
+
+            st_newnode=Node(st_x,st_y)
+            if not self.CollisionCheck(st_newnode, self.obstacleList, self.obstacleList2):
+                st_count=-1
+                break
+        st_count+=1
+        return st_count
 
 
 
@@ -141,7 +154,7 @@ class RRT():
         plt.plot(self.end.x, self.end.y, "xr")
         plt.axis([-2, 15, -2, 15])
         plt.grid(True)
-        plt.pause(0.000000000000000000000000001)
+        plt.pause(0.001)
 
     def GetNearestListIndex(self, nodeList, rnd):
         dlist = [(node.x - rnd[0]) ** 2 + (node.y - rnd[1])
@@ -183,37 +196,35 @@ def final_path(f_path_i,ol1,ol2):
     f_path_o=[]
     f_path_o.append(f_path_i[0])
     f_path_i_len=len(f_path_i)
-    if f_path_i_len<5:
-        return f_path_i
-    # temp=1
+    min_in=0.1
+    temp=0
     current_index=0
-    ob=[Polygon(list(x)) for x in ol2]
-    # for p in ob:
-        # print (list((p.exterior.coords)))
-
-    while current_index < f_path_i_len-2:
-
-        # print("in while")
-        for temp in range(current_index+1,f_path_i_len-1):
-
-            flag=0
-            # print(current_index)
-
-            line_check=LineString([(f_path_i[temp][0],f_path_i[temp][1]),(f_path_i[current_index][0],f_path_i[current_index][1])])
-            # print(line_check.length)
-            for obst in ob:
-                if line_check.intersects((obst)):
-                    # print("obstacle")
-                    if temp==current_index+1:
-                        temp2=temp
-                    flag=1
+    while current_index < (len(f_path_i)):
+        if current_index==f_path_i_len-1 :
+            break
+        cu_y=f_path_i[current_index][1]
+        cu_x=f_path_i[current_index][0]
+        for check_index in range(current_index+1,f_path_i_len):
+            ch_x=f_path_i[check_index][0]
+            ch_y=f_path_i[check_index][1]
+            alpha=math.atan2(ch_y-cu_y,ch_x-cu_x)
+            sin=math.sin(alpha)
+            cos=math.cos(alpha)
+            f_dist=math.sqrt((ch_y-cu_y)**2+(ch_x-cu_x)**2)
+            f_iter=int(f_dist/min_in)
+            col_check=0
+            for k in range(1,f_iter+1):
+                f_x=cu_x+min_in*k*cos
+                f_y=cu_y+min_in*k*sin
+                f_node=Node(f_x,f_y)
+                if not RRT.CollisionCheck(f_node,ol1,ol2):
+                    col_check+=1
                     break
-            if flag==0:
-                temp2=temp
-
-        f_path_o.append([f_path_i[temp2][0],f_path_i[temp2][1]])
-        current_index=temp2
-    f_path_o.append(f_path_i[-1])    #     break# f_path_o.append(f_path_i[-1])
+            if col_check==0:
+                temp=check_index
+        f_path_o.append(f_path_i[temp])
+        current_index=temp
+        temp=temp+1
     return f_path_o
 
 
@@ -222,18 +233,19 @@ def main():
 
     # ====Search Path with RRT====
     obstacleList = [
-        # (5, 5, 1),
-        # (3, 6, 2),
-        # (2,8,0.5),
-        # # (8,2,2),
-        # (0,4,1),
-        # # (7,2,0.5),
-        # (6,3,2),
-        # (8,6,1),
+        (5, 5, 1),
+        (3, 6, 2),
+        (2,8,0.5),
+        # (8,2,2),
+        (0,4,1),
+        # (7,2,0.5),
+        (6,3,2),
+        (8,6,1),
         # (6,8,2)
     ]  # [x,y,size]
     obstacleList2 = [
-        ((2,6),(4,6),(4,8),(2,8)),((1.7071067811865475, 0.29289321881345254), (2.7071067811865475, 1.2928932188134525), (3.7071067811865475, 2.2928932188134525), (2.2928932188134525, 3.7071067811865475), (1.2928932188134525, 2.7071067811865475), (0.2928932188134524, 1.7071067811865475)),((0,6),(2,6),(0,4))]
+        # ((1.7071067811865475, 0.29289321881345254), (2.7071067811865475, 1.2928932188134525), (3.7071067811865475, 2.2928932188134525), (2.2928932188134525, 3.7071067811865475), (1.2928932188134525, 2.7071067811865475), (0.2928932188134524, 1.7071067811865475))
+    ]
 
     # Set Initial parameters
     rrt = RRT(start=[0, 0], goal=[5, 10],
@@ -256,3 +268,19 @@ def main():
         plt.show()
 if __name__ == '__main__':
 	main()
+
+    © 2019 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
+Press h to open a hovercard with more details.

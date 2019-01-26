@@ -1,6 +1,6 @@
 __author__ = 'Atman'
 #This code is to integrate
-#dynamic checker along with 
+#dynamic checker along with
 #RRT path finder
 
 #The dynamic_1.py code will
@@ -21,7 +21,7 @@ import random
 
 # Function to check
 # if the path between
-# any two path_free points 
+# any two path_free points
 # intersects an obstacle or not
 def path_obstacle_free(points , obstacles):
 	path = [Point(p[0] , p[1]) for p in points]
@@ -29,7 +29,7 @@ def path_obstacle_free(points , obstacles):
 		dPath = LineString([(path[point_id].x , path[point_id].y) , (path[point_id - 1].x , path[point_id - 1].y)])
 		for o in obstacles:
 			if dPath.intersects(o):
-				return False 
+				return False
 	return True
 
 #points = dynamic_1.pointPath
