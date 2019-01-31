@@ -14,13 +14,13 @@ from obstacle_expander.srv import Exp_srv, Exp_srvResponse
 #for decreasing the coordinate val
 def decrease_in_direction(val):
 	if val!="inf":
-		val-=0.2 #change this vaue according to bot size
+		val-=0.3 #change this vaue according to bot size
 	return val
 
 #for increasing the coordinate val
 def increase_in_direction(val):
 	if val!="inf":
-		val+=0.2 #-4 because the value is changed in decrease_in_direction
+		val+=0.3 #-4 because the value is changed in decrease_in_direction
 	return val
 
 
@@ -40,41 +40,41 @@ def getting_cordi(A,B,shu):
 			if count==0:
 				for t in range(10,1,-1):
 					theta1=(i-t)*theta_increment
-					x=A[i]*math.cos(theta1)
-					y=A[i]*math.sin(theta1)
+					x=-A[i]*math.cos(theta1)
+					y=-A[i]*math.sin(theta1)
 					roar.polygon.points.append(Point32(x,y,0))
 					pt.bliss.append(Cordi(x,y,0))
 			count+=1
 			theta1=(i)*theta_increment
-			x=A[i]*math.cos(theta1)
-			y=A[i]*math.sin(theta1)
+			x=-A[i]*math.cos(theta1)
+			y=-A[i]*math.sin(theta1)
 			roar.polygon.points.append(Point32(x,y,0))
 			pt.bliss.append(Cordi(x,y,0))
-			if i==len(A)-1 or abs(A[i+1]-A[i])>0.15:
+			if i==len(A)-1 or str(A[i+1])=="inf" or abs(A[i+1]-A[i])>0.15:
 				# ra=A[i]/math.cos(theta_increment)
 				for t in range(1,10):
 					theta1=(t+i)*theta_increment
 					# ra=ra/math.cos(theta_increment)
-					x=A[i]*math.cos(theta1)
-					y=A[i]*math.sin(theta1)
+					x=-A[i]*math.cos(theta1)
+					y=-A[i]*math.sin(theta1)
 					roar.polygon.points.append(Point32(x,y,0))
 					pt.bliss.append(Cordi(x,y,0))
 				for t in range(10,1,-1):
 					theta1=(t+i)*theta_increment
-					x=(B[i])*math.cos(theta1)
-					y=(B[i])*math.sin(theta1)
+					x=-(B[i])*math.cos(theta1)
+					y=-(B[i])*math.sin(theta1)
 					roar.polygon.points.append(Point32(x,y,0))
 					pt.bliss.append(Cordi(x,y,0))
 				for j in range(i,i-count,-1):
 					theta2=(j)*theta_increment
-					x=B[j]*math.cos(theta2)
-					y=B[j]*math.sin(theta2)
+					x=-B[j]*math.cos(theta2)
+					y=-B[j]*math.sin(theta2)
 					roar.polygon.points.append(Point32(x,y,0))
 					pt.bliss.append(Cordi(x,y,0))
 				for t in range(-1,-10,-1):
 					theta2=(j+t)*theta_increment
-					x=B[j]*math.cos(theta2)
-					y=B[j]*math.sin(theta2)
+					x=-B[j]*math.cos(theta2)
+					y=-B[j]*math.sin(theta2)
 					roar.polygon.points.append(Point32(x,y,0))
 					pt.bliss.append(Cordi(x,y,0))
 				baby.eternal_bliss.append(pt)
@@ -87,7 +87,15 @@ def getting_cordi(A,B,shu):
 	return re
 
 def dothis(data):
-	data=data.get_Laser
+	
+#	data=data.get_Laser
+#	print(data.ranges)
+	list_ranges=list(data.ranges)
+	for i in list_ranges:
+		if i>2:
+			list_ranges[list_ranges.index(i)]="inf"
+	data.ranges=tuple(list_ranges)
+#	print((data.ranges))
 	edited1=list(map(decrease_in_direction,data.ranges[:]))
 	xy_e1=getting_cordi(edited1,list(map(increase_in_direction,data.ranges[:])),data.angle_increment)
 	pub5=rospy.Publisher("tp5xy5",PolygonArray,queue_size=0)
@@ -98,7 +106,7 @@ def dothis(data):
 #subscriber. scan topic, takes LaserScan and passes it to callBack functions
 def expander_Attempt1():
 	rospy.init_node("object_expander",anonymous=True)
-	sub1=rospy.Service("Expanding",Exp_srv,dothis)
+	sub1=rospy.Subscriber("scan",LaserScan,dothis)
 	rospy.spin()
 
 

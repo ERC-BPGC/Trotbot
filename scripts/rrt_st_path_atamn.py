@@ -13,10 +13,10 @@ import time
 
 from shapely.geometry import Polygon
 from shapely.geometry import Point,LineString
-from descartes import PolygonPatch
+#from descartes import PolygonPatch
 
 
-#show_animation = False
+show_animation = True
 
 
 class RRT():
@@ -25,7 +25,7 @@ class RRT():
     """
 
     def __init__(self, start, goal, obstacleList, obstacleList2,
-                 randArea, expandDis=1.0, goalSampleRate=15, maxIter=500,mnl=0.01):
+                 randArea, expandDis=0.1, goalSampleRate=15, maxIter=500,mnl=0.01):
         """
         Setting Parameter
         start:Start Position [x,y]
@@ -44,9 +44,9 @@ class RRT():
         self.obstacleList2 = obstacleList2
         self.mnl=mnl
 
-    def st_linecheck(self,newNode,d):
+    def st_linecheck(self,newNode):
         line=LineString([(self.end.x,self.end.y),(newNode.x,newNode.y)])
-        ob=[Polygon(list(x)) for x in self.obstacleList2[:]]
+        ob=self.obstacleList2[:]
         for obst in ob:
             if line.intersects(obst):
                 return 0
@@ -61,6 +61,9 @@ class RRT():
 
         self.nodeList = [self.start]
         while True:
+            if self.st_linecheck(self.start):
+                self.nodeList.append(self.end)
+                break
             # Random Sampling
             if random.randint(0, 100) > self.goalSampleRate:
                 rnd = [random.uniform(self.minrand, self.maxrand), random.uniform(
@@ -85,7 +88,7 @@ class RRT():
                 continue
 
             self.nodeList.append(newNode)
-            print("nNodelist:", len(self.nodeList))
+            #print("nNodelist:", len(self.nodeList))
 
             # check goal
             dx = newNode.x - self.end.x
@@ -102,7 +105,7 @@ class RRT():
 
 #straight line check
             if d > self.expandDis:
-                st_count=self.st_linecheck(newNode,d)
+                st_count=self.st_linecheck(newNode)
                 if st_count!=0:
             	       break
 
@@ -139,7 +142,7 @@ class RRT():
             ax.add_patch(poly_patch)
         plt.plot(self.start.x, self.start.y, "xr")
         plt.plot(self.end.x, self.end.y, "xr")
-        plt.axis([-2, 15, -2, 15])
+        plt.axis([-2, 4, -2, 4])
         plt.grid(True)
         plt.pause(0.000000000000000000000000001)
 
@@ -188,7 +191,7 @@ def final_path(f_path_i,ol1,ol2):
         return f_path_i
     # temp=1
     current_index=0
-    ob=[Polygon(list(x)) for x in ol2]
+    ob=ol2
     # for p in ob:
         # print (list((p.exterior.coords)))
 
@@ -224,22 +227,22 @@ def do_RRT(obstacleList2, show_animation, start_point_coors , end_point_coors):
 
     # ====Search Path with RRT====
 #    obstacleList = [
-#        (5, 5, 0),
+#        (5, 5, 0)
 #    ]  # [x,y,size]
     obstacleList=[]
-    obstacleList2=[]
-    '''
-    obstacleList2 = [
-         ((1.7071067811865475, 0.29289321881345254), (2.7071067811865475, 1.2928932188134525), (3.7071067811865475, 2.2928932188134525), (2.2928932188134525, 3.7071067811865475), (1.2928932188134525, 2.7071067811865475), (0.2928932188134524, 1.7071067811865475))
-    ]
-    '''
+#    obstacleList2=[]
+    
+#    obstacleList2 = [
+#         ((1.7071067811865475, 0.29289321881345254), (2.7071067811865475, 1.2928932188134525), (3.7071067811865475, 2.2928932188134525), (2.2928932188134525, 3.7071067811865475), (1.2928932188134525, 2.7071067811865475), (0.2928932188134524, 1.7071067811865475))
+#    ]
+    
 
 
 
 
     # Set Initial parameters
     rrt = RRT(start= start_point_coors, goal= end_point_coors,
-              randArea=[-5, 5], obstacleList= obstacleList, obstacleList2=obstacleList2)
+              randArea=[-2, 2], obstacleList= obstacleList, obstacleList2=obstacleList2)
     path = rrt.Planning(animation=show_animation)
     path_in=list(reversed(path[:]))
     final_path_r=final_path(path_in,obstacleList,obstacleList2)
@@ -260,7 +263,7 @@ def do_RRT(obstacleList2, show_animation, start_point_coors , end_point_coors):
         plt.show()
 
 
-if __name__ == '__main__':
-    start = time.time()
-    do_RRT(show_animation = True , start_point_coors = [0 , 0] , end_point_coors = [5 , 10] , obstacleList2 = [((1,1), (3,3), (1,3)) , (((5,4), (4,4), (4,5), (5,6)))])
-    print(time.time() - start)
+#if __name__ == '__main__':
+#    start = time.time()
+#    do_RRT(show_animation = True , start_point_coors = [0 , 0] , end_point_coors = [5 , 10] , obstacleList2 = [((1,1), (3,3), (1,3)) , (((5,4), (4,4), (4,5), (5,6)))])
+#    print(time.time() - start)

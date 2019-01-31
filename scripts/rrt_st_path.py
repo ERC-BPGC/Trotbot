@@ -43,7 +43,7 @@ class RRT():
         self.obstacleList2 = obstacleList2
         self.mnl=mnl
 
-    def st_linecheck(self,newNode,d):
+    def st_linecheck(self,newNode):
         line=LineString([(self.end.x,self.end.y),(newNode.x,newNode.y)])
         ob=[Polygon(list(x)) for x in self.obstacleList2]
         for obst in ob:
@@ -61,6 +61,9 @@ class RRT():
 
         self.nodeList = [self.start]
         while True:
+            if self.st_linecheck(self.start):
+                self.nodeList.append(self.end)
+                break
             # Random Sampling
             if random.randint(0, 100) > self.goalSampleRate:
                 rnd = [random.uniform(self.minrand, self.maxrand), random.uniform(
@@ -102,7 +105,7 @@ class RRT():
 
 #straight line check
             if d > self.expandDis:
-                st_count=self.st_linecheck(newNode,d)
+                st_count=self.st_linecheck(newNode)
                 if st_count!=0:
             	       break
 
