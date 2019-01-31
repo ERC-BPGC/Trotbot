@@ -87,6 +87,7 @@ def getting_cordi(A,B,shu):
 	return re
 
 def dothis(data):
+	for i in data
 	edited1=list(map(decrease_in_direction,data.ranges[:]))
 	xy_e1=getting_cordi(edited1,list(map(increase_in_direction,data.ranges[:])),data.angle_increment)
 	pub5=rospy.Publisher("tp5xy5",PolygonArray,queue_size=0)
