@@ -100,6 +100,8 @@ def dothis(data):
 	xy_e1=getting_cordi(edited1,list(map(increase_in_direction,data.ranges[:])),data.angle_increment)
 	pub5=rospy.Publisher("tp5xy5",PolygonArray,queue_size=0)
 	pub5.publish(xy_e1)
+	# print(xy_e1)
+	# print("in dothis")
 	return True
 
 

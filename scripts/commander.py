@@ -74,9 +74,12 @@ class Current():
             self.gp_counter+=1
         if ((self.curr_pos[0]-(self.next_path_point[0]+self.prev_path_point[0])**2 + (self.curr_pos[1]-(self.next_path_point[1]+self.prev_path_point[1]))**2))<0.0000005:
             print("reached--> nxt_pt"+str(self.curr_pos[0])+","+str(self.curr_pos[1]))
+            print(self.next_path_point[0]+self.prev_path_point[0])
             self.prev_path_point=self.curr_pos[0],self.curr_pos[1]
             self.next_pt_count+=1
-						
+            if self.next_pt_count >= len(self.rel_path):
+                self.next_pt_count -= 1
+
 			
     def gb_path(self,data):
         '''Plans locally between global path.'''
@@ -134,8 +137,9 @@ class Current():
             curr_path=self.rel_path[:]
             self.rel_path= dri.dynamic_rrt(start = (0,0), end =(self.curr_target[0]-self.curr_pos[0],self.curr_target[1]-self.curr_pos[1]), path = self.rel_path, obstacle_list = self.obstacle_list)
             if self.rel_path != curr_path:
-            	self.next_pt_count=1
+            	self.next_pt_count=0
             print(self.next_pt_count)
+                # print("path not same")
             print(self.rel_path)
             self.next_path_point=self.rel_path[self.next_pt_count]
             

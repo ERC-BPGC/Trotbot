@@ -10,6 +10,6 @@ pub=rospy.Publisher("global_plan",Exp_msg,queue_size=1)
 
 while not rospy.is_shutdown():
 	temp=Exp_msg()
-	temp.bliss=[Cordi(2,0,0)]
+	temp.bliss=[Cordi(3,0,0)]
 
 	pub.publish(temp)
