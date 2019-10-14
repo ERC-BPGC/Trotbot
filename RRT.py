@@ -230,7 +230,21 @@ def final_path(f_path_i,ol1,ol2):
     return f_path_o
 
 
-def do_RRT(obstacleList2, show_animation, start_point_coors , end_point_coors):
+
+"""
+Changes to do_RRT on 14/10/2019:
+
+RRT object is no longer created in this function,
+it is passed as a paramneter to do_RRT
+
+do_RRT calls rrt.Planning
+
+RRT.planning now has start and end as arguments
+
+"""
+
+
+def do_RRT(rrt, obstacleList2, show_animation, start, goal):
     print("start simple RRT path planning")
 #	obstacleList=[]
 
@@ -244,15 +258,19 @@ def do_RRT(obstacleList2, show_animation, start_point_coors , end_point_coors):
     # obstacleList2 = [
           # ((1.7071067811865475, 0.29289321881345254), (2.7071067811865475, 1.2928932188134525), (3.7071067811865475, 2.2928932188134525), (2.2928932188134525, 3.7071067811865475), (1.2928932188134525, 2.7071067811865475), (0.2928932188134524, 1.7071067811865475))
      # ]
-    
 
 
+    #________COPY THIS INITIALIZATION TO MAIN______________
 
-
-    # Set Initial parameters
+    """ 
     rrt = RRT(start= start_point_coors, goal= end_point_coors,
               randArea=[-5, 5], obstacleList= obstacleList, obstacleList2=obstacleList2)
-    path = rrt.Planning(animation=True)
+    """
+    #______________________________________________________
+
+
+
+    path = rrt.Planning(start, goal, animation=True)
     path_in=list(reversed(path[:]))
     final_path_r=final_path(path_in,obstacleList,obstacleList2)
     final_path_r = [tuple(coors) for coors in final_path_r]
