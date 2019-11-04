@@ -42,7 +42,7 @@ class RRT():
     """RRT Planner Class.
 
     Attributes:
-        sample_area: area for sampling random points
+        sample_area: area for sampling random points (min,max)
         sampler: function to sample random points in sample_area
         expand_dis: distance to expand tree by at each step
         goal_sample_rate: rate at which to sample goal during random sampling
@@ -94,6 +94,9 @@ class RRT():
                 nearest_node_index = min( xrange(len(distance_list)), key=distance_list.__getitem__)
                 nearest_node = node_list[nearest_node_index]
 
+                # print("nearest_node"),
+                # print(nearest_node)
+
                 # Create new point in the direction of sampled point
                 theta = math.atan2(rnd_point[1] - nearest_node.y, rnd_point[0] - nearest_node.x)  
                 new_point = nearest_node.x + self.expand_dis*math.cos(theta), \
@@ -106,14 +109,15 @@ class RRT():
 
                 # Expand tree
                 new_node = Node.from_coordinates(new_point)
-                new_node.parent = nearest_node_index
+                new_node.parent = nearest_node
                 node_list.append(new_node)
 
                 # Check if goal has been reached or if there is direct connection to goal
                 del_x, del_y = new_node.x - goal_node.x, new_node.y - goal_node.y
                 distance_to_goal = math.sqrt(del_x**2+ del_y**2)
-                if distance_to_goal < self.expand_dis or not check_intersection(
+                if distance_to_goal < self.expand_dis or not check_intersection(\
                         [new_node.to_tuple(), goal_node.to_tuple()], obstacle_list):
+                    goal_node.parent = node_list[-1]
                     node_list.append(goal_node)
                     print("Goal reached!")
                     break
@@ -121,12 +125,16 @@ class RRT():
 
         # Construct path by traversing backwards through the tree
         path = []
-        last_index = node_list[-1]
-        while node_list[last_index].parent is not None:
-            node = node_list[last_index]
+        last_node = node_list[-1]
+
+        while node_list[node_list.index(last_node)].parent is not None:
+            node = node_list[node_list.index(last_node)]
             path.append(node.to_tuple())
-            last_index = node.parent
-        path.append(start_point)
+            last_node = node.parent
+        path.append(start)
+
+        if animation == True:
+            self.visualize_tree(node_list,obstacle_list)
 
         return path
 
@@ -152,8 +160,8 @@ class RRT():
         # Plot each edge of the tree
         for node in node_list:
             if node.parent is not None:
-                plt.plot([node.x, node_list[node.parent].x], 
-                         [node.y, node_list[node.parent].y], "-g")
+                plt.plot([node.x, node_list[node_list.index(node.parent)].x], 
+                         [node.y, node_list[node_list.index(node.parent)].y], "-g")
 
         # Draw the obstacles in the environment
         for obstacle in obstacle_list:
@@ -162,3 +170,5 @@ class RRT():
             ax = fig.add_subplot(111)
             poly_patch = PolygonPatch(obstacle_polygon)
             ax.add_patch(poly_patch)
+
+        plt.show()
