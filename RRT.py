@@ -94,9 +94,6 @@ class RRT():
                 nearest_node_index = min( xrange(len(distance_list)), key=distance_list.__getitem__)
                 nearest_node = node_list[nearest_node_index]
 
-                # print("nearest_node"),
-                # print(nearest_node)
-
                 # Create new point in the direction of sampled point
                 theta = math.atan2(rnd_point[1] - nearest_node.y, rnd_point[0] - nearest_node.x)  
                 new_point = nearest_node.x + self.expand_dis*math.cos(theta), \
@@ -105,12 +102,16 @@ class RRT():
                 # Check whether new point is inside an obstacles
                 for obstacle in obstacle_list:
                     if Point(new_point).within(Polygon(obstacle)):
+                        new_point = float('nan'),float('nan')
                         continue
 
                 # Expand tree
-                new_node = Node.from_coordinates(new_point)
-                new_node.parent = nearest_node
-                node_list.append(new_node)
+                if math.isnan(new_point[0]):
+                    continue
+                else:
+                    new_node = Node.from_coordinates(new_point)
+                    new_node.parent = nearest_node
+                    node_list.append(new_node)
 
                 # Check if goal has been reached or if there is direct connection to goal
                 del_x, del_y = new_node.x - goal_node.x, new_node.y - goal_node.y
@@ -121,6 +122,10 @@ class RRT():
                     node_list.append(goal_node)
                     print("Goal reached!")
                     break
+
+        else:
+            goal_node.parent = start
+            node_list = [start,goal_node]
 
 
         # Construct path by traversing backwards through the tree
@@ -171,4 +176,4 @@ class RRT():
             poly_patch = PolygonPatch(obstacle_polygon)
             ax.add_patch(poly_patch)
 
-        plt.show()
+        # plt.show()
