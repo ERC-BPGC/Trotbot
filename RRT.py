@@ -1,4 +1,4 @@
-#! /usr/bin/env python2.7
+#! /usr/bin/env python
 
 import random
 import math
@@ -7,6 +7,7 @@ from descartes import PolygonPatch
 import matplotlib.pyplot as plt
 
 from utils import check_intersection
+from utils import adjustable_random_sampler as sampler
 
 
 class Node():
@@ -19,7 +20,9 @@ class Node():
     """
 
     def __init__(self, x, y):
-    """Init node with x and y coordinates."""
+        """
+        Init node with x and y coordinates.
+        """
         self.x = x
         self.y = y
         self.parent = None
@@ -70,14 +73,14 @@ class RRT():
         """
 
         # Initialize start and goal nodes
-        start_node = Node.from_coordinates(start_point)
+        start = Node.from_coordinates(start_point)
         goal_node = Node.from_coordinates(goal_point)
 
         # Initialize node_list with start
         node_list = [start]
 
         # Calculate distances between start and goal
-        del_x, del_y = start.x - goal.x, start.y - goal.y
+        del_x, del_y = start.x - goal_node.x, start.y - goal_node.y
         distance_to_goal = math.sqrt(del_x**2+ del_y**2)
 
         # Loop to keep expanding the tree towards goal if there is no direct connection
@@ -87,13 +90,13 @@ class RRT():
                 rnd_point = sampler(self.sample_area, goal_point, self.goal_sample_rate)
 
                 # Find nearest node to the sampled point
-                distance_list = [(node.x - rnd_point[0])**2 + (node.y - rnd_point[1])**2 for node in nodeList]
-                nearest_node_index = min(xrange(len(distance_list)), key=distance_list.__getitem__)
+                distance_list = [(node.x - rnd_point[0])**2 + (node.y - rnd_point[1])**2 for node in node_list]
+                nearest_node_index = min( xrange(len(distance_list)), key=distance_list.__getitem__)
                 nearest_node = node_list[nearest_node_index]
 
                 # Create new point in the direction of sampled point
                 theta = math.atan2(rnd_point[1] - nearest_node.y, rnd_point[0] - nearest_node.x)  
-                new_point = nearest_node.x + self.expand_dis*math.cos(theta),
+                new_point = nearest_node.x + self.expand_dis*math.cos(theta), \
                                 nearest_node.y + self.expand_dis*math.sin(theta)
 
                 # Check whether new point is inside an obstacles
@@ -104,7 +107,7 @@ class RRT():
                 # Expand tree
                 new_node = Node.from_coordinates(new_point)
                 new_node.parent = nearest_node_index
-                self.nodeList.append(new_node)
+                node_list.append(new_node)
 
                 # Check if goal has been reached or if there is direct connection to goal
                 del_x, del_y = new_node.x - goal_node.x, new_node.y - goal_node.y
@@ -114,6 +117,7 @@ class RRT():
                     node_list.append(goal_node)
                     print("Goal reached!")
                     break
+
 
         # Construct path by traversing backwards through the tree
         path = []
@@ -143,7 +147,7 @@ class RRT():
 
         # Plot randomly sampled point
         if rnd_point is not None:
-            plt.plot(rnd[0], rnd[1], "^k")
+            plt.plot(rnd_point[0], rnd_point[1], "^k")
 
         # Plot each edge of the tree
         for node in node_list:

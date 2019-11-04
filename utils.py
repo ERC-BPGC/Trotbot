@@ -1,4 +1,4 @@
-#! /usr/bin/env python2.7
+#! /usr/bin/env python
 
 import random
 import math
@@ -19,7 +19,7 @@ def check_intersection(points_list, obstacle_list):
         and of the obstacles. 
     """
 
-    direct_line = LineString(point_list)
+    direct_line = LineString(points_list)
     for obstacle in obstacle_list:
         if direct_line.intersects(Polygon(obstacle)):
             return True
@@ -32,7 +32,7 @@ def adjustable_random_sampler(sample_area, goal, goal_sample_rate):
         at a specified rate.
 
         Args:
-            sample_area: area to sample point in.
+            sample_area: area to sample point in (min and max)
             goal: tuple containing goal point coordinates.
             goal_sample_rate: number between 0 and 1 specifying how often 
                                 to sample the goal point.
@@ -44,7 +44,7 @@ def adjustable_random_sampler(sample_area, goal, goal_sample_rate):
 
     if random.random() > goal_sample_rate:
         return (random.uniform(sample_area[0], sample_area[1]), 
-                random.uniform(sample_area[0], sample_area1))
+                random.uniform(sample_area[0], sample_area[1]))
     else:
         return goal
 
@@ -97,3 +97,4 @@ def los_optimizer(path, obstacle_list):
             return optimized_path
     
     return optimized_path
+
