@@ -102,7 +102,7 @@ class RRT():
                 # Check whether new point is inside an obstacles
                 for obstacle in obstacle_list:
                     if Point(new_point).within(Polygon(obstacle)):
-                        new_point = float('nan'),float('nan')
+                        new_point = float('nan'), float('nan')
                         continue
 
                 # Expand tree
@@ -116,6 +116,7 @@ class RRT():
                 # Check if goal has been reached or if there is direct connection to goal
                 del_x, del_y = new_node.x - goal_node.x, new_node.y - goal_node.y
                 distance_to_goal = math.sqrt(del_x**2+ del_y**2)
+                
                 if distance_to_goal < self.expand_dis or not check_intersection(\
                         [new_node.to_tuple(), goal_node.to_tuple()], obstacle_list):
                     goal_node.parent = node_list[-1]
@@ -125,7 +126,7 @@ class RRT():
 
         else:
             goal_node.parent = start
-            node_list = [start,goal_node]
+            node_list = [start, goal_node]
 
 
         # Construct path by traversing backwards through the tree
@@ -136,14 +137,15 @@ class RRT():
             node = node_list[node_list.index(last_node)]
             path.append(node.to_tuple())
             last_node = node.parent
-        path.append(start)
+        path.append(start.to_tuple())
 
         if animation == True:
-            self.visualize_tree(node_list,obstacle_list)
+            RRT.visualize_tree(node_list, obstacle_list)
 
-        return path
+        return path, node_list
 
-    def visualize_tree(self, node_list, obstacle_list, rnd_point=None):
+    @staticmethod
+    def visualize_tree(node_list, obstacle_list, rnd_point=None):
         """Draw the tree along with randomly sampled point.
         
             Args:
@@ -171,9 +173,9 @@ class RRT():
         # Draw the obstacles in the environment
         for obstacle in obstacle_list:
             obstacle_polygon = Polygon(obstacle)
-            fig = plt.figure(1, figsize=(5,5), dpi=90)
+            fig = plt.figure(1, figsize=(5, 5), dpi=90)
             ax = fig.add_subplot(111)
             poly_patch = PolygonPatch(obstacle_polygon)
             ax.add_patch(poly_patch)
 
-        # plt.show()
+        plt.show()
