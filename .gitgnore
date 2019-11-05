@@ -1,2 +1,2 @@
-RRT.pyc utils.pyc
+*.pyc
 .vscode
