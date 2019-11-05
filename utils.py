@@ -23,6 +23,7 @@ def check_intersection(points_list, obstacle_list):
     for obstacle in obstacle_list:
         if direct_line.intersects(Polygon(obstacle)):
             return True
+
     return False
 
 
@@ -39,7 +40,6 @@ def adjustable_random_sampler(sample_area, goal, goal_sample_rate):
     
         Return:
             Randomly selected point as a tuple.
-
     """
 
     if random.random() > goal_sample_rate:
@@ -98,3 +98,29 @@ def los_optimizer(path, obstacle_list):
     
     return optimized_path
 
+def visualize_path(path, obstacle_list):
+    """Draw the path along with environment obstacles.
+
+        Args:
+            path: list of points in the path as tuples.
+            obstacle_list: list of obtacles.
+
+        Returns:
+            Nothing. Function is used to visualize path.
+    """
+
+    # Clear the figure
+    plt.clf()
+
+    # Plot each point in the path
+    plt.plot([x for (x, _) in path], [y for (_, y) in path])
+
+    # Draw the obstacles in the environment
+    for obstacle in obstacle_list:
+        obstacle_polygon = Polygon(obstacle)
+        fig = plt.figure(1, figsize=(5, 5), dpi=90)
+        ax = fig.add_subplot(111)
+        poly_patch = PolygonPatch(obstacle_polygon)
+        ax.add_patch(poly_patch)
+
+    plt.show()
