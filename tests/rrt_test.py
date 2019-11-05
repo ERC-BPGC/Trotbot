@@ -1,23 +1,47 @@
-#! /usr/bin/env
+#! /usr/bin/env python
+
+import time
 
 from context import RRT, utils
-from RRT import RRT as rrt
+from RRT import RRT
 
+import utils
 from utils import adjustable_random_sampler as sampler
 from utils import los_optimizer as path_optimizer
 
 import matplotlib.pyplot as plt
 
-obstacle_list = [[[7,5.10000003],[6,4.9000007],[2.1,9],[2.9,5]],[[3,3],[3,5],[5,5],[5,3]]] 
-# obstacle_list = [[[-1,5],[1,4],[2,7],[0,8]]]
-my_tree = rrt(sample_area=(-5,5),sampler=sampler,expand_dis=0.1) # object init
-path = my_tree((0,0),(10,10),obstacle_list,animation=True) # object called
+if __name__ == '__main__':
+    
+    # List of obtacles as a list of lists of points
+    obstacle_list = [ [ (8, 5), (7, 8), (2, 9), (3, 5) ],
+                      [ (3, 3), (3, 5), (5, 5), (5, 3) ] ]
 
-# for nodes in path:
-    # print(nodes)
+    # Instatiate rrt planner object
+    my_tree = RRT(sample_area=(-5, 15), sampler=sampler, expand_dis=0.1)
 
-# new_path = path_optimizer(path,obstacle_list)
-# print(new_path)
-# temp_vis = my_tree.visualize_tree(path,obstacle_list)
 
-plt.show()
+    # Plan path while timing
+    print('\n ' + '-'*30 +  "\n> Starting operation ...\n " + '-'*30 + '\n')
+    start_time = time.time()
+
+    path, node_list = my_tree((0, 0), (10, 10), obstacle_list)
+    print("Path planned.")
+
+    print('\n ' + '-'*30 + "\n> Time taken: {:.4} seconds.\n ".format(time.time() - start_time) + '-'*30 + '\n')
+
+    # Visualize tree
+    RRT.visualize_tree(node_list, obstacle_list)
+
+
+    # Testing los path optimizer
+    print('\n ' + '-'*30 +  "\n> Starting operation ...\n " + '-'*30 + '\n')
+    start_time = time.time()
+
+    optimized_path = path_optimizer(path, obstacle_list)
+    print("Path optimized.")
+
+    print('\n ' + '-'*30 + "\n> Time taken: {:.4} seconds.\n ".format(time.time() - start_time) + '-'*30 + '\n')
+
+    # Visualize path
+    utils.visualize_path(optimized_path, obstacle_list)
