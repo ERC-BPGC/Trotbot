@@ -1,4 +1,4 @@
-#! /usr/bin/env python2.7
+#! /usr/bin/env python
 
 import random
 import math
@@ -19,10 +19,11 @@ def check_intersection(points_list, obstacle_list):
         and of the obstacles. 
     """
 
-    direct_line = LineString(point_list)
+    direct_line = LineString(points_list)
     for obstacle in obstacle_list:
         if direct_line.intersects(Polygon(obstacle)):
             return True
+
     return False
 
 
@@ -32,19 +33,18 @@ def adjustable_random_sampler(sample_area, goal, goal_sample_rate):
         at a specified rate.
 
         Args:
-            sample_area: area to sample point in.
+            sample_area: area to sample point in (min and max)
             goal: tuple containing goal point coordinates.
             goal_sample_rate: number between 0 and 1 specifying how often 
                                 to sample the goal point.
     
         Return:
             Randomly selected point as a tuple.
-
     """
 
     if random.random() > goal_sample_rate:
         return (random.uniform(sample_area[0], sample_area[1]), 
-                random.uniform(sample_area[0], sample_area1))
+                random.uniform(sample_area[0], sample_area[1]))
     else:
         return goal
 
@@ -97,3 +97,30 @@ def los_optimizer(path, obstacle_list):
             return optimized_path
     
     return optimized_path
+
+def visualize_path(path, obstacle_list):
+    """Draw the path along with environment obstacles.
+
+        Args:
+            path: list of points in the path as tuples.
+            obstacle_list: list of obtacles.
+
+        Returns:
+            Nothing. Function is used to visualize path.
+    """
+
+    # Clear the figure
+    plt.clf()
+
+    # Plot each point in the path
+    plt.plot([x for (x, _) in path], [y for (_, y) in path])
+
+    # Draw the obstacles in the environment
+    for obstacle in obstacle_list:
+        obstacle_polygon = Polygon(obstacle)
+        fig = plt.figure(1, figsize=(5, 5), dpi=90)
+        ax = fig.add_subplot(111)
+        poly_patch = PolygonPatch(obstacle_polygon)
+        ax.add_patch(poly_patch)
+
+    plt.show()
