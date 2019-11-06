@@ -1,0 +1,8 @@
+prefix=/home/harshal/trotbot/trotbot_ws/devel/.private/navigation
+
+Name: navigation
+Description: Description of navigation
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/harshal/trotbot/trotbot_ws/devel/.private/navigation/lib 
+Requires: 

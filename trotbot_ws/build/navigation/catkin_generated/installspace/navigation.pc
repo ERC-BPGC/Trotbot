@@ -1,0 +1,8 @@
+prefix=/home/harshal/trotbot/trotbot_ws/install
+
+Name: navigation
+Description: Description of navigation
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/harshal/trotbot/trotbot_ws/install/lib 
+Requires: 
