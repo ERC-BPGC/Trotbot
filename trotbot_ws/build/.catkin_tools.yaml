@@ -1,6 +1,0 @@
-devel_space: /home/twm/comp/trotbot/new/Trotbot/trotbot_ws/devel
-install: false
-install_space: /home/twm/comp/trotbot/new/Trotbot/trotbot_ws/install
-profile: default
-source_space: /home/twm/comp/trotbot/new/Trotbot/trotbot_ws/src
-workspace: /home/twm/comp/trotbot/new/Trotbot/trotbot_ws

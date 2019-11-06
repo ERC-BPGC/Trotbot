@@ -1,8 +1,0 @@
-prefix=/home/twm/comp/trotbot/new/Trotbot/trotbot_ws/install
-
-Name: catkin_tools_prebuild
-Description: Description of catkin_tools_prebuild
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/twm/comp/trotbot/new/Trotbot/trotbot_ws/install/lib 
-Requires: 
