@@ -31,6 +31,14 @@ def split_array(ranges, threshold):
 	Returns: 
 		obstacles_1D: List of list of ranges
 	"""
+	obstacles_1D = [[ranges[0]]]
+	current_obstacle_index = 0;
+	for i in range(len(ranges)-1):
+		if abs(ranges[i] - ranges[i+1]) > threshold:
+			obstacles_1D.append([])
+			current_obstacle_index +=1
+		obstacles_1D[current_obstacle_index].append(ranges[i+1])
+
 
 	return obstacles_1D
 
@@ -75,7 +83,7 @@ if __name__ == "__main__":
 	rospy.init_node("obstacle_detection", anonymous=True)
 
 	
-	obstacles_pub = rospy.Publisher("obstacles", PointArray ,queue_size=5)
+	obstacles_pub = rospy.Publisher("obstacles", PolygonArray ,queue_size=5)
 	lidar_sub = rospy.Subscriber("scan", LaserScan, callback_laserscan)
 
 	rospy.spin()
