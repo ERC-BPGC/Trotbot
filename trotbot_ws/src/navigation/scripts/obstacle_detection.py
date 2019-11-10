@@ -49,6 +49,8 @@ def expand(obstacles_1D, expand_dis, angle_deviation=0):
 	Args:
 		obstacles_1D: List of lists of ranges in every obstacle
 		expand_dis: Expansion magnitude
+		angle_deviation: Deviation of the zero ofthe lidar from zero of the bot
+		(in radians)
 
 	Calls: rtheta_to_xy()
 
@@ -60,7 +62,10 @@ def expand(obstacles_1D, expand_dis, angle_deviation=0):
 	obstacles = PolygonArray()
 
 	#Create tuples of ranges with their angles
-	angle_inc = 
+	least_angle = 2*math.pi/len(obstacles_1D)
+
+	for i in range(len(obstacles_1D)):
+		obstacles_1D[i] = (obstacles_1D[i], angle_deviation + i*least_angle)
 
 
 	#For each 1D obstacle, create a new list
@@ -71,24 +76,18 @@ def expand(obstacles_1D, expand_dis, angle_deviation=0):
 	for obstacle in obstacles_1D:
 		point_list = []
 		for p in obstacle:
-			point_list.append(max(0, p - expand_dis))
-		point_list.append(obstacle[-1])
+			point_list.append(max(0, p[0] - expand_dis),p[1])
+		point_list.append((obstacle[-1][0] , obstacle[-1][1]+3*least_angle))
 		for p in reversed(obstacle):
-			point_list.append(p + expand_dis)
-		point_list.append(obstacle[0])
+			point_list.append((p[0] + expand_dis), p[1])
+		point_list.append((obstacle[0][0] , obstacle[0][1]-3*least_angle))
 
 		#Call rtheta_to_xy for each point in the list
 		point_list = [rtheta_to_xy(p) for p in point_list]
 
 		#Convert new list to geometry_msgs Polygons
 		polygon = PointArray()
-		polygon.points = []
-		for p in point_list:
-			vertex = Point32()
-			vertex.x=p[0]
-			vertex.y=p[1]
-			vertex.z=0
-			polygon.points.append(vertex)
+		polygon.points = point_list
 
 		obstacle_list.append(polygon)
 
@@ -97,15 +96,20 @@ def expand(obstacles_1D, expand_dis, angle_deviation=0):
 	return obstacles
 
 
-def rtheta_to_xy(ranges):
+def rtheta_to_xy(point_rtheta):
 	"""
 	Args:
-		ranges: list of ranges
+		point_rtheta: point in R-Theta form(range, angle)
 
 	Returns:
-		points: list of geometry_msgs.Point32's
+		point: geometry_msgs.Point32
 	"""
-	return points
+	point = Point32()
+	point.x = point_rtheta[0]*math.cos(point_rtheta[1])
+	point.y = point_rtheta[0]*math.sin(point_rtheta[1])
+	point.z=0
+
+	return point
 
 #-------------------------------
 
