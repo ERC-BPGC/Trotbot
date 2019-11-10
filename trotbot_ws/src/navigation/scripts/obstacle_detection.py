@@ -42,7 +42,9 @@ def split_array(ranges, threshold):
 
 	return obstacles_1D
 
-def expand(obstacles_1D, expand_dis):
+
+
+def expand(obstacles_1D, expand_dis, angle_deviation=0):
 	"""
 	Args:
 		obstacles_1D: List of lists of ranges in every obstacle
@@ -54,14 +56,43 @@ def expand(obstacles_1D, expand_dis):
 		obstacles: Array of geometry_msgs.Polygon
 
 	"""
+	obstacle_list = []
+	obstacles = PolygonArray()
+
+	#Create tuples of ranges with their angles
+	angle_inc = 
+
 
 	#For each 1D obstacle, create a new list
 	#Fill the new list by expanding on one side
 	#Append the list by expanding on the other side in reverse order
+	
 
-	#Call rtheta_to_xy for each point in the list
+	for obstacle in obstacles_1D:
+		point_list = []
+		for p in obstacle:
+			point_list.append(max(0, p - expand_dis))
+		point_list.append(obstacle[-1])
+		for p in reversed(obstacle):
+			point_list.append(p + expand_dis)
+		point_list.append(obstacle[0])
 
-	#Convert new list to geometry_msgs Polygons
+		#Call rtheta_to_xy for each point in the list
+		point_list = [rtheta_to_xy(p) for p in point_list]
+
+		#Convert new list to geometry_msgs Polygons
+		polygon = PointArray()
+		polygon.points = []
+		for p in point_list:
+			vertex = Point32()
+			vertex.x=p[0]
+			vertex.y=p[1]
+			vertex.z=0
+			polygon.points.append(vertex)
+
+		obstacle_list.append(polygon)
+
+	obstacles.polygons = obstacle_list
 
 	return obstacles
 
