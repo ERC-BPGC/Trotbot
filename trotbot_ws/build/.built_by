@@ -1,1 +1,1 @@
-catkin build
+catkin_make

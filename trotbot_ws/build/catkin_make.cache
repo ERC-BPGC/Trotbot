@@ -1,0 +1,2 @@
+navigation
+-DCATKIN_DEVEL_PREFIX=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/install -G Unix Makefiles

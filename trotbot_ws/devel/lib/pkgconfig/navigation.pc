@@ -1,1 +1,8 @@
-/home/harshal/trotbot/trotbot_ws/devel/.private/navigation/lib/pkgconfig/navigation.pc
+prefix=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel
+
+Name: navigation
+Description: Description of navigation
+Version: 0.0.0
+Cflags: -I/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include
+Libs: -L/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib 
+Requires: 
