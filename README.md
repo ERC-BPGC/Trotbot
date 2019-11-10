@@ -25,6 +25,7 @@ source devel/setup.bash
 - [ ] Using some kind of python collection for storing path (05/11/19)
 - [ ] Use namedtuple() for coordinates
 - [ ] Implement adjustable sample_area
-- [ ] Transform path in odom update
+- [X] Transform path in odom update
 - [ ] Modify dynamic_caller to call any type of algorithm
-- [ ] Make skeleton ROS code for each node
+- [X] Make skeleton ROS code for each node
+- [ ] Write Controller Action server
