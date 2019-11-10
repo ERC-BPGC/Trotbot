@@ -4,19 +4,22 @@ import numpy
 
 from geometry_msgs import Polygon, Point32
 from sensor_msgs.msg import LaserScan
+from stad_msgs import float32
 
-
-#IMPORT CUSTOM MESSAGES HERE
+#IMPORT CUSTOM MESSAGES HERE (PointArray and PolygonArray)
 
 def callback_laserscan(msg):
 	"""
 
 	"""
 	#Split obstacles
+	obstacles_1D = split_array(msg.ranges, 0.5)	#Tuning required
 
 	#Expand Obstacles
+	obstacle_list = expand(obstacles_1D, 0.35)	#Tuning required
 
 	#Publish
+	obstacles_pub.publish(obstacle_list)
 
 
 def split_array(ranges, threshold):
@@ -71,8 +74,8 @@ if __name__ == "__main__":
 
 	rospy.init_node("obstacle_detection", anonymous=True)
 
-	#ADD MESSAGE TYPE IN PUBLISHER!!
-	obstacle_pub = rospy.Publisher("obstacles", ,queue_size=5)
+	
+	obstacles_pub = rospy.Publisher("obstacles", PointArray ,queue_size=5)
 	lidar_sub = rospy.Subscriber("scan", LaserScan, callback_laserscan)
 
 	rospy.spin()
