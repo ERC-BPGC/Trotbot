@@ -43,81 +43,81 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src
+CMAKE_SOURCE_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build
+CMAKE_BINARY_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation
 
 # Utility rule file for navigation_generate_messages_py.
 
 # Include the progress variables for this target.
-include navigation/CMakeFiles/navigation_generate_messages_py.dir/progress.make
+include CMakeFiles/navigation_generate_messages_py.dir/progress.make
 
-navigation/CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
-navigation/CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
-navigation/CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py
-navigation/CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/__init__.py
-navigation/CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/__init__.py
+CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
+CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
+CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py
+CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/__init__.py
+CMakeFiles/navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/__init__.py
 
 
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py: /opt/ros/kinetic/share/geometry_msgs/msg/Point.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG navigation/PointArray"
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PointArray.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PointArray.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PointArray.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PointArray.py: /opt/ros/kinetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python from MSG navigation/PointArray"
+	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg
 
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /opt/ros/kinetic/share/geometry_msgs/msg/Point32.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /opt/ros/kinetic/share/geometry_msgs/msg/Polygon.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG navigation/PolygonArray"
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /opt/ros/kinetic/share/geometry_msgs/msg/Point32.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py: /opt/ros/kinetic/share/geometry_msgs/msg/Polygon.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG navigation/PolygonArray"
+	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg
 
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/share/std_msgs/msg/MultiArrayDimension.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/share/std_msgs/msg/Float32.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/share/std_msgs/msg/MultiArrayLayout.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/share/std_msgs/msg/Float32MultiArray.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python code from SRV navigation/Planner"
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/share/std_msgs/msg/Float32.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py: /opt/ros/kinetic/share/geometry_msgs/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python code from SRV navigation/Planner"
+	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv
 
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python msg __init__.py for navigation"
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg --initpy
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python msg __init__.py for navigation"
+	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg --initpy
 
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python srv __init__.py for navigation"
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv --initpy
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/__init__.py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python srv __init__.py for navigation"
+	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv --initpy
 
-navigation_generate_messages_py: navigation/CMakeFiles/navigation_generate_messages_py
-navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
-navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
-navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py
-navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/__init__.py
-navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/__init__.py
-navigation_generate_messages_py: navigation/CMakeFiles/navigation_generate_messages_py.dir/build.make
+navigation_generate_messages_py: CMakeFiles/navigation_generate_messages_py
+navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
+navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
+navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/_Planner.py
+navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/msg/__init__.py
+navigation_generate_messages_py: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib/python2.7/dist-packages/navigation/srv/__init__.py
+navigation_generate_messages_py: CMakeFiles/navigation_generate_messages_py.dir/build.make
 
 .PHONY : navigation_generate_messages_py
 
 # Rule to build all files generated by this target.
-navigation/CMakeFiles/navigation_generate_messages_py.dir/build: navigation_generate_messages_py
+CMakeFiles/navigation_generate_messages_py.dir/build: navigation_generate_messages_py
 
-.PHONY : navigation/CMakeFiles/navigation_generate_messages_py.dir/build
+.PHONY : CMakeFiles/navigation_generate_messages_py.dir/build
 
-navigation/CMakeFiles/navigation_generate_messages_py.dir/clean:
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && $(CMAKE_COMMAND) -P CMakeFiles/navigation_generate_messages_py.dir/cmake_clean.cmake
-.PHONY : navigation/CMakeFiles/navigation_generate_messages_py.dir/clean
+CMakeFiles/navigation_generate_messages_py.dir/clean:
+	$(CMAKE_COMMAND) -P CMakeFiles/navigation_generate_messages_py.dir/cmake_clean.cmake
+.PHONY : CMakeFiles/navigation_generate_messages_py.dir/clean
 
-navigation/CMakeFiles/navigation_generate_messages_py.dir/depend:
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles/navigation_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
-.PHONY : navigation/CMakeFiles/navigation_generate_messages_py.dir/depend
+CMakeFiles/navigation_generate_messages_py.dir/depend:
+	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles/navigation_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+.PHONY : CMakeFiles/navigation_generate_messages_py.dir/depend
 

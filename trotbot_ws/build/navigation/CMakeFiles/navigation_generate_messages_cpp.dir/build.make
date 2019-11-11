@@ -43,67 +43,67 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src
+CMAKE_SOURCE_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build
+CMAKE_BINARY_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation
 
 # Utility rule file for navigation_generate_messages_cpp.
 
 # Include the progress variables for this target.
-include navigation/CMakeFiles/navigation_generate_messages_cpp.dir/progress.make
+include CMakeFiles/navigation_generate_messages_cpp.dir/progress.make
 
-navigation/CMakeFiles/navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h
-navigation/CMakeFiles/navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h
-navigation/CMakeFiles/navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h
+CMakeFiles/navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PointArray.h
+CMakeFiles/navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h
+CMakeFiles/navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h
 
 
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h: /opt/ros/kinetic/share/geometry_msgs/msg/Point.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from navigation/PointArray.msg"
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation && /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation -e /opt/ros/kinetic/share/gencpp/cmake/..
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PointArray.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PointArray.h: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PointArray.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PointArray.h: /opt/ros/kinetic/share/geometry_msgs/msg/Point.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PointArray.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from navigation/PointArray.msg"
+	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation && /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation -e /opt/ros/kinetic/share/gencpp/cmake/..
 
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h: /opt/ros/kinetic/share/geometry_msgs/msg/Point32.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h: /opt/ros/kinetic/share/geometry_msgs/msg/Polygon.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from navigation/PolygonArray.msg"
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation && /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation -e /opt/ros/kinetic/share/gencpp/cmake/..
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h: /opt/ros/kinetic/share/geometry_msgs/msg/Point32.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h: /opt/ros/kinetic/share/geometry_msgs/msg/Polygon.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from navigation/PolygonArray.msg"
+	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation && /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation -e /opt/ros/kinetic/share/gencpp/cmake/..
 
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h: /opt/ros/kinetic/share/std_msgs/msg/MultiArrayDimension.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h: /opt/ros/kinetic/share/std_msgs/msg/Float32.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h: /opt/ros/kinetic/share/std_msgs/msg/MultiArrayLayout.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h: /opt/ros/kinetic/share/std_msgs/msg/Float32MultiArray.msg
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h: /opt/ros/kinetic/share/gencpp/msg.h.template
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h: /opt/ros/kinetic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from navigation/Planner.srv"
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation && /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation -e /opt/ros/kinetic/share/gencpp/cmake/..
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h: /opt/ros/kinetic/share/std_msgs/msg/Float32.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h: /opt/ros/kinetic/share/std_msgs/msg/Header.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h: /opt/ros/kinetic/share/geometry_msgs/msg/Point.msg
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h: /opt/ros/kinetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from navigation/Planner.srv"
+	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation && /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv -Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg -Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p navigation -o /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation -e /opt/ros/kinetic/share/gencpp/cmake/..
 
-navigation_generate_messages_cpp: navigation/CMakeFiles/navigation_generate_messages_cpp
-navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h
-navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h
-navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h
-navigation_generate_messages_cpp: navigation/CMakeFiles/navigation_generate_messages_cpp.dir/build.make
+navigation_generate_messages_cpp: CMakeFiles/navigation_generate_messages_cpp
+navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PointArray.h
+navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h
+navigation_generate_messages_cpp: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h
+navigation_generate_messages_cpp: CMakeFiles/navigation_generate_messages_cpp.dir/build.make
 
 .PHONY : navigation_generate_messages_cpp
 
 # Rule to build all files generated by this target.
-navigation/CMakeFiles/navigation_generate_messages_cpp.dir/build: navigation_generate_messages_cpp
+CMakeFiles/navigation_generate_messages_cpp.dir/build: navigation_generate_messages_cpp
 
-.PHONY : navigation/CMakeFiles/navigation_generate_messages_cpp.dir/build
+.PHONY : CMakeFiles/navigation_generate_messages_cpp.dir/build
 
-navigation/CMakeFiles/navigation_generate_messages_cpp.dir/clean:
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && $(CMAKE_COMMAND) -P CMakeFiles/navigation_generate_messages_cpp.dir/cmake_clean.cmake
-.PHONY : navigation/CMakeFiles/navigation_generate_messages_cpp.dir/clean
+CMakeFiles/navigation_generate_messages_cpp.dir/clean:
+	$(CMAKE_COMMAND) -P CMakeFiles/navigation_generate_messages_cpp.dir/cmake_clean.cmake
+.PHONY : CMakeFiles/navigation_generate_messages_cpp.dir/clean
 
-navigation/CMakeFiles/navigation_generate_messages_cpp.dir/depend:
-	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles/navigation_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
-.PHONY : navigation/CMakeFiles/navigation_generate_messages_cpp.dir/depend
+CMakeFiles/navigation_generate_messages_cpp.dir/depend:
+	cd /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles/navigation_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+.PHONY : CMakeFiles/navigation_generate_messages_cpp.dir/depend
 

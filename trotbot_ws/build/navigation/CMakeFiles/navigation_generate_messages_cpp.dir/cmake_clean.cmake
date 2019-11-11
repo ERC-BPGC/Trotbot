@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h"
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h"
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/Planner.h"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PointArray.h"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include/navigation/PolygonArray.h"
   "CMakeFiles/navigation_generate_messages_cpp"
 )
 

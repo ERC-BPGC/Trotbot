@@ -1,10 +1,1 @@
-(cl:in-package navigation-srv)
-(cl:export '(START-VAL
-          START
-          GOAL-VAL
-          GOAL
-          PATH-VAL
-          PATH
-          ACK-VAL
-          ACK
-))
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/common-lisp/ros/navigation/srv/_package_Planner.lisp

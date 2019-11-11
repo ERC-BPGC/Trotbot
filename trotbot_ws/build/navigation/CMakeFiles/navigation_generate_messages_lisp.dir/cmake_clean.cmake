@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/msg/PointArray.lisp"
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/msg/PolygonArray.lisp"
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/srv/Planner.lisp"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/common-lisp/ros/navigation/msg/PointArray.lisp"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/common-lisp/ros/navigation/msg/PolygonArray.lisp"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/common-lisp/ros/navigation/srv/Planner.lisp"
   "CMakeFiles/navigation_generate_messages_lisp"
 )
 

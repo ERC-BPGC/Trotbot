@@ -1,0 +1,46 @@
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./setup.bash
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./setup.sh
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./env.sh
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./_setup_util.py
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./cmake.lock
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./local_setup.bash
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./local_setup.sh
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./setup.zsh
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./local_setup.zsh
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/pkgconfig/catkin_tools_prebuild.pc
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/local_setup.bash, /home/harshal/trotbot/trotbot_ws/devel/./local_setup.bash)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/cmake.lock, /home/harshal/trotbot/trotbot_ws/devel/./cmake.lock)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/env.sh, /home/harshal/trotbot/trotbot_ws/devel/./env.sh)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/_setup_util.py, /home/harshal/trotbot/trotbot_ws/devel/./_setup_util.py)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/setup.zsh, /home/harshal/trotbot/trotbot_ws/devel/./setup.zsh)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/setup.sh, /home/harshal/trotbot/trotbot_ws/devel/./setup.sh)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/setup.bash, /home/harshal/trotbot/trotbot_ws/devel/./setup.bash)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/local_setup.zsh, /home/harshal/trotbot/trotbot_ws/devel/./local_setup.zsh)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/local_setup.sh, /home/harshal/trotbot/trotbot_ws/devel/./local_setup.sh)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake, /home/harshal/trotbot/trotbot_ws/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake, /home/harshal/trotbot/trotbot_ws/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/catkin_tools_prebuild/lib/pkgconfig/catkin_tools_prebuild.pc, /home/harshal/trotbot/trotbot_ws/devel/lib/pkgconfig/catkin_tools_prebuild.pc)
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./local_setup.bash
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./env.sh
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./_setup_util.py
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./setup.zsh
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./setup.sh
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./setup.bash
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./local_setup.zsh
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./local_setup.sh
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig.cmake
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/share/catkin_tools_prebuild/cmake/catkin_tools_prebuildConfig-version.cmake
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/lib/pkgconfig/catkin_tools_prebuild.pc
+Already unlinked: {}

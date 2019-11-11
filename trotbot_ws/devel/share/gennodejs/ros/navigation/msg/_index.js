@@ -1,10 +1,1 @@
-
-"use strict";
-
-let PolygonArray = require('./PolygonArray.js');
-let PointArray = require('./PointArray.js');
-
-module.exports = {
-  PolygonArray: PolygonArray,
-  PointArray: PointArray,
-};
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/gennodejs/ros/navigation/msg/_index.js

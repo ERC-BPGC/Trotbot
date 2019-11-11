@@ -1,13 +1,1 @@
-
-(cl:in-package :asdf)
-
-(defsystem "navigation-msg"
-  :depends-on (:roslisp-msg-protocol :roslisp-utils :geometry_msgs-msg
-               :std_msgs-msg
-)
-  :components ((:file "_package")
-    (:file "PointArray" :depends-on ("_package_PointArray"))
-    (:file "_package_PointArray" :depends-on ("_package"))
-    (:file "PolygonArray" :depends-on ("_package_PolygonArray"))
-    (:file "_package_PolygonArray" :depends-on ("_package"))
-  ))
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/common-lisp/ros/navigation/msg/navigation-msg.asd

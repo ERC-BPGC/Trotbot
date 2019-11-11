@@ -1,10 +1,1 @@
-(cl:defpackage navigation-srv
-  (:use )
-  (:export
-   "PLANNER"
-   "<PLANNER-REQUEST>"
-   "PLANNER-REQUEST"
-   "<PLANNER-RESPONSE>"
-   "PLANNER-RESPONSE"
-  ))
-
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/common-lisp/ros/navigation/srv/_package.lisp

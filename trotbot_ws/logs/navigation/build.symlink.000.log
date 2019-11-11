@@ -1,0 +1,48 @@
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/pkgconfig/navigation.pc
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/__init__.py
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/_Planner.py
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/srv/__init__.py
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PointArray.py
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/_PolygonArray.py
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/python2.7/dist-packages/navigation/msg/__init__.py
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/navigation/cmake/navigation-msg-paths.cmake
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/navigation/cmake/navigationConfig.cmake
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/navigation/cmake/navigation-msg-extras.cmake
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/navigation/cmake/navigationConfig-version.cmake
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/gennodejs/ros/navigation/_index.js
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/gennodejs/ros/navigation/srv/_index.js
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/gennodejs/ros/navigation/srv/Planner.js
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/gennodejs/ros/navigation/msg/PolygonArray.js
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/gennodejs/ros/navigation/msg/_index.js
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/gennodejs/ros/navigation/msg/PointArray.js
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/roseus/ros/navigation/manifest.l
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/roseus/ros/navigation/srv/Planner.l
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/roseus/ros/navigation/msg/PointArray.l
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/roseus/ros/navigation/msg/PolygonArray.l
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/srv/_package_Planner.lisp
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/srv/Planner.lisp
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/srv/navigation-srv.asd
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/srv/_package.lisp
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/msg/PointArray.lisp
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/msg/PolygonArray.lisp
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/msg/_package_PointArray.lisp
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/msg/navigation-msg.asd
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/msg/_package_PolygonArray.lisp
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/common-lisp/ros/navigation/msg/_package.lisp
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/Planner.h
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PlannerRequest.h
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PlannerResponse.h
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PointArray.h
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/include/navigation/PolygonArray.h
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/navigation/cmake.lock, /home/harshal/trotbot/trotbot_ws/devel/./cmake.lock)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/navigation/share/navigation/cmake/navigationConfig-version.cmake, /home/harshal/trotbot/trotbot_ws/devel/share/navigation/cmake/navigationConfig-version.cmake)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/navigation/share/navigation/cmake/navigationConfig.cmake, /home/harshal/trotbot/trotbot_ws/devel/share/navigation/cmake/navigationConfig.cmake)
+Cleaning: (/home/harshal/trotbot/trotbot_ws/devel/.private/navigation/lib/pkgconfig/navigation.pc, /home/harshal/trotbot/trotbot_ws/devel/lib/pkgconfig/navigation.pc)
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/./cmake.lock
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/share/navigation/cmake/navigationConfig-version.cmake
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/share/navigation/cmake/navigationConfig.cmake
+Already unlinked: {}
+Unlinking: /home/harshal/trotbot/trotbot_ws/devel/lib/pkgconfig/navigation.pc
+Already unlinked: {}

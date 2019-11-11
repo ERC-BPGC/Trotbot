@@ -1,8 +1,1 @@
-
-"use strict";
-
-let Planner = require('./Planner.js')
-
-module.exports = {
-  Planner: Planner,
-};
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/gennodejs/ros/navigation/srv/_index.js
