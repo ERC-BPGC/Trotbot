@@ -1,5 +1,6 @@
-std_msgs/Float32[] start
-std_msgs/Float32[] goal
+navigation/Point_xy start
+navigation/Point_xy goal
+navigation/PolyArray obstacle_list
 ---
 navigation/PointArray path
 bool ack

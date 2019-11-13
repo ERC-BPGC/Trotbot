@@ -53,8 +53,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
  add_message_files(
    FILES
+   Point_xy.msg
    PointArray.msg
-   PolygonArray.msg
+   PolyArray.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -75,7 +76,7 @@ find_package(catkin REQUIRED COMPONENTS
  generate_messages(
    DEPENDENCIES
    geometry_msgs
-#   nav_msgs
+   navigation
    std_msgs
  )
 
