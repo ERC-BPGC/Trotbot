@@ -26,6 +26,6 @@ source devel/setup.bash
 - [ ] Use namedtuple() for coordinates
 - [ ] Implement adjustable sample_area
 - [X] Transform path in odom update
-- [ ] Modify dynamic_caller to call any type of algorithm
+- [X] Modify path_planner to call any type of algorithm
 - [X] Make skeleton ROS code for each node
 - [ ] Write Controller Action server
