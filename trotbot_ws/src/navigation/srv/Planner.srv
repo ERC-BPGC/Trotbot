@@ -1,0 +1,6 @@
+navigation/Point_xy start
+navigation/Point_xy goal
+navigation/PolyArray obstacle_list
+---
+navigation/PointArray path
+bool ack

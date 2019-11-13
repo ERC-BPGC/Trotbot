@@ -1,2 +1,2 @@
-/home/harshal/trotbot/trotbot_ws/devel/./cmake.lock 1
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./cmake.lock 1
 /home/twm/comp/trotbot/new/Trotbot/trotbot_ws/devel/./cmake.lock 1

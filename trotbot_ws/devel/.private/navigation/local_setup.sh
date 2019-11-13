@@ -3,7 +3,7 @@
 
 # since this file is sourced either use the provided _CATKIN_SETUP_DIR
 # or fall back to the destination set at configure time
-: ${_CATKIN_SETUP_DIR:=/home/harshal/trotbot/trotbot_ws/devel/.private/navigation}
+: ${_CATKIN_SETUP_DIR:=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation}
 CATKIN_SETUP_UTIL_ARGS="--extend --local"
 . "$_CATKIN_SETUP_DIR/setup.sh"
 unset CATKIN_SETUP_UTIL_ARGS

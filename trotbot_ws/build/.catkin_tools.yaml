@@ -1,6 +1,6 @@
-devel_space: /home/harshal/trotbot/trotbot_ws/devel
+devel_space: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel
 install: false
-install_space: /home/harshal/trotbot/trotbot_ws/install
+install_space: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/install
 profile: default
-source_space: /home/harshal/trotbot/trotbot_ws/src
-workspace: /home/harshal/trotbot/trotbot_ws
+source_space: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src
+workspace: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws
