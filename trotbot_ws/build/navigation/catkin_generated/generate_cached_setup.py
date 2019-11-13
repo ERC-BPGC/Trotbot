@@ -12,16 +12,16 @@ try:
     from catkin.environment_cache import generate_environment_script
 except ImportError:
     # search for catkin package in all workspaces and prepend to path
-    for workspace in "/home/harshal/trotbot/trotbot_ws/devel;/home/harshal/learn_workspace/devel;/home/harshal/catkin_build_ws/devel;/opt/ros/kinetic".split(';'):
+    for workspace in "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel;/home/tyjo/catkin_ws_o/catkin_ws_kratos/devel;/home/tyjo/catkin_ws_o/catkin_ws_trot/devel;/home/tyjo/packagez/rovio_pack/catkin_ws_kalibr/devel;/opt/ros/kinetic".split(';'):
         python_path = os.path.join(workspace, 'lib/python2.7/dist-packages')
         if os.path.isdir(os.path.join(python_path, 'catkin')):
             sys.path.insert(0, python_path)
             break
     from catkin.environment_cache import generate_environment_script
 
-code = generate_environment_script('/home/harshal/trotbot/trotbot_ws/devel/.private/navigation/env.sh')
+code = generate_environment_script('/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/env.sh')
 
-output_filename = '/home/harshal/trotbot/trotbot_ws/build/navigation/catkin_generated/setup_cached.sh'
+output_filename = '/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/catkin_generated/setup_cached.sh'
 with open(output_filename, 'w') as f:
     #print('Generate script for cached setup "%s"' % output_filename)
     f.write('\n'.join(code))

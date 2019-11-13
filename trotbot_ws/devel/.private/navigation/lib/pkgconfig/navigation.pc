@@ -1,8 +1,8 @@
-prefix=/home/harshal/trotbot/trotbot_ws/devel/.private/navigation
+prefix=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation
 
 Name: navigation
 Description: Description of navigation
 Version: 0.0.0
-Cflags: 
-Libs: -L/home/harshal/trotbot/trotbot_ws/devel/.private/navigation/lib 
+Cflags: -I/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/include
+Libs: -L/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/lib 
 Requires: 
