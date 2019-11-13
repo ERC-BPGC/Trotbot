@@ -12,7 +12,7 @@ def check_intersection(points_list, obstacle_list):
     
     Args:
         points_list: list of points in the line.
-        obstacle_list: list of obstacles as polygons.
+        obstacle_list: list of obstacles as list of points.
 
     Returns:
         boolean specifying whether or not the line intersects
