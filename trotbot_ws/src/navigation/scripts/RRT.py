@@ -2,7 +2,7 @@
 
 import random
 import math
-from shapely.geometry import Polygon, Point, LineString
+from shapely.geometry import Polygon, Point
 from descartes import PolygonPatch
 import matplotlib.pyplot as plt
 
