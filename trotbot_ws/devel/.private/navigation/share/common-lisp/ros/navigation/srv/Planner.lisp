@@ -10,13 +10,18 @@
   ((start
     :reader start
     :initarg :start
-    :type (cl:vector std_msgs-msg:Float32)
-   :initform (cl:make-array 0 :element-type 'std_msgs-msg:Float32 :initial-element (cl:make-instance 'std_msgs-msg:Float32)))
+    :type navigation-msg:Point_xy
+    :initform (cl:make-instance 'navigation-msg:Point_xy))
    (goal
     :reader goal
     :initarg :goal
-    :type (cl:vector std_msgs-msg:Float32)
-   :initform (cl:make-array 0 :element-type 'std_msgs-msg:Float32 :initial-element (cl:make-instance 'std_msgs-msg:Float32))))
+    :type navigation-msg:Point_xy
+    :initform (cl:make-instance 'navigation-msg:Point_xy))
+   (obstacle_list
+    :reader obstacle_list
+    :initarg :obstacle_list
+    :type navigation-msg:PolyArray
+    :initform (cl:make-instance 'navigation-msg:PolyArray)))
 )
 
 (cl:defclass Planner-request (<Planner-request>)
@@ -36,45 +41,22 @@
 (cl:defmethod goal-val ((m <Planner-request>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader navigation-srv:goal-val is deprecated.  Use navigation-srv:goal instead.")
   (goal m))
+
+(cl:ensure-generic-function 'obstacle_list-val :lambda-list '(m))
+(cl:defmethod obstacle_list-val ((m <Planner-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader navigation-srv:obstacle_list-val is deprecated.  Use navigation-srv:obstacle_list instead.")
+  (obstacle_list m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <Planner-request>) ostream)
   "Serializes a message object of type '<Planner-request>"
-  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'start))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
-  (cl:map cl:nil #'(cl:lambda (ele) (roslisp-msg-protocol:serialize ele ostream))
-   (cl:slot-value msg 'start))
-  (cl:let ((__ros_arr_len (cl:length (cl:slot-value msg 'goal))))
-    (cl:write-byte (cl:ldb (cl:byte 8 0) __ros_arr_len) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 8) __ros_arr_len) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 16) __ros_arr_len) ostream)
-    (cl:write-byte (cl:ldb (cl:byte 8 24) __ros_arr_len) ostream))
-  (cl:map cl:nil #'(cl:lambda (ele) (roslisp-msg-protocol:serialize ele ostream))
-   (cl:slot-value msg 'goal))
+  (roslisp-msg-protocol:serialize (cl:slot-value msg 'start) ostream)
+  (roslisp-msg-protocol:serialize (cl:slot-value msg 'goal) ostream)
+  (roslisp-msg-protocol:serialize (cl:slot-value msg 'obstacle_list) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <Planner-request>) istream)
   "Deserializes a message object of type '<Planner-request>"
-  (cl:let ((__ros_arr_len 0))
-    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
-    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
-    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
-    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
-  (cl:setf (cl:slot-value msg 'start) (cl:make-array __ros_arr_len))
-  (cl:let ((vals (cl:slot-value msg 'start)))
-    (cl:dotimes (i __ros_arr_len)
-    (cl:setf (cl:aref vals i) (cl:make-instance 'std_msgs-msg:Float32))
-  (roslisp-msg-protocol:deserialize (cl:aref vals i) istream))))
-  (cl:let ((__ros_arr_len 0))
-    (cl:setf (cl:ldb (cl:byte 8 0) __ros_arr_len) (cl:read-byte istream))
-    (cl:setf (cl:ldb (cl:byte 8 8) __ros_arr_len) (cl:read-byte istream))
-    (cl:setf (cl:ldb (cl:byte 8 16) __ros_arr_len) (cl:read-byte istream))
-    (cl:setf (cl:ldb (cl:byte 8 24) __ros_arr_len) (cl:read-byte istream))
-  (cl:setf (cl:slot-value msg 'goal) (cl:make-array __ros_arr_len))
-  (cl:let ((vals (cl:slot-value msg 'goal)))
-    (cl:dotimes (i __ros_arr_len)
-    (cl:setf (cl:aref vals i) (cl:make-instance 'std_msgs-msg:Float32))
-  (roslisp-msg-protocol:deserialize (cl:aref vals i) istream))))
+  (roslisp-msg-protocol:deserialize (cl:slot-value msg 'start) istream)
+  (roslisp-msg-protocol:deserialize (cl:slot-value msg 'goal) istream)
+  (roslisp-msg-protocol:deserialize (cl:slot-value msg 'obstacle_list) istream)
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<Planner-request>)))
@@ -85,26 +67,28 @@
   "navigation/PlannerRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Planner-request>)))
   "Returns md5sum for a message object of type '<Planner-request>"
-  "e099e7e7ce9aa3ba23a5f56a66d6f6e9")
+  "0f8ba09d5a21e9916f0e3bf633247872")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'Planner-request)))
   "Returns md5sum for a message object of type 'Planner-request"
-  "e099e7e7ce9aa3ba23a5f56a66d6f6e9")
+  "0f8ba09d5a21e9916f0e3bf633247872")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<Planner-request>)))
   "Returns full string definition for message of type '<Planner-request>"
-  (cl:format cl:nil "std_msgs/Float32[] start~%std_msgs/Float32[] goal~%~%================================================================================~%MSG: std_msgs/Float32~%float32 data~%~%"))
+  (cl:format cl:nil "navigation/Point_xy start~%navigation/Point_xy goal~%navigation/PolyArray obstacle_list~%~%================================================================================~%MSG: navigation/Point_xy~%float32[] point~%================================================================================~%MSG: navigation/PolyArray~%navigation/PointArray[] polygons~%~%================================================================================~%MSG: navigation/PointArray~%navigation/Point_xy[] points~%  ~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'Planner-request)))
   "Returns full string definition for message of type 'Planner-request"
-  (cl:format cl:nil "std_msgs/Float32[] start~%std_msgs/Float32[] goal~%~%================================================================================~%MSG: std_msgs/Float32~%float32 data~%~%"))
+  (cl:format cl:nil "navigation/Point_xy start~%navigation/Point_xy goal~%navigation/PolyArray obstacle_list~%~%================================================================================~%MSG: navigation/Point_xy~%float32[] point~%================================================================================~%MSG: navigation/PolyArray~%navigation/PointArray[] polygons~%~%================================================================================~%MSG: navigation/PointArray~%navigation/Point_xy[] points~%  ~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <Planner-request>))
   (cl:+ 0
-     4 (cl:reduce #'cl:+ (cl:slot-value msg 'start) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ (roslisp-msg-protocol:serialization-length ele))))
-     4 (cl:reduce #'cl:+ (cl:slot-value msg 'goal) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ (roslisp-msg-protocol:serialization-length ele))))
+     (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'start))
+     (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'goal))
+     (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'obstacle_list))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <Planner-request>))
   "Converts a ROS message object to a list"
   (cl:list 'Planner-request
     (cl:cons ':start (start msg))
     (cl:cons ':goal (goal msg))
+    (cl:cons ':obstacle_list (obstacle_list msg))
 ))
 ;//! \htmlinclude Planner-response.msg.html
 
@@ -157,16 +141,16 @@
   "navigation/PlannerResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<Planner-response>)))
   "Returns md5sum for a message object of type '<Planner-response>"
-  "e099e7e7ce9aa3ba23a5f56a66d6f6e9")
+  "0f8ba09d5a21e9916f0e3bf633247872")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'Planner-response)))
   "Returns md5sum for a message object of type 'Planner-response"
-  "e099e7e7ce9aa3ba23a5f56a66d6f6e9")
+  "0f8ba09d5a21e9916f0e3bf633247872")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<Planner-response>)))
   "Returns full string definition for message of type '<Planner-response>"
-  (cl:format cl:nil "navigation/PointArray path~%bool ack~%~%================================================================================~%MSG: navigation/PointArray~%std_msgs/Header header~%geometry_msgs/Point[] points~%  ~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
+  (cl:format cl:nil "navigation/PointArray path~%bool ack~%~%================================================================================~%MSG: navigation/PointArray~%navigation/Point_xy[] points~%  ~%================================================================================~%MSG: navigation/Point_xy~%float32[] point~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'Planner-response)))
   "Returns full string definition for message of type 'Planner-response"
-  (cl:format cl:nil "navigation/PointArray path~%bool ack~%~%================================================================================~%MSG: navigation/PointArray~%std_msgs/Header header~%geometry_msgs/Point[] points~%  ~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%# 0: no frame~%# 1: global frame~%string frame_id~%~%================================================================================~%MSG: geometry_msgs/Point~%# This contains the position of a point in free space~%float64 x~%float64 y~%float64 z~%~%~%"))
+  (cl:format cl:nil "navigation/PointArray path~%bool ack~%~%================================================================================~%MSG: navigation/PointArray~%navigation/Point_xy[] points~%  ~%================================================================================~%MSG: navigation/Point_xy~%float32[] point~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <Planner-response>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'path))

@@ -3,6 +3,8 @@
           START
           GOAL-VAL
           GOAL
+          OBSTACLE_LIST-VAL
+          OBSTACLE_LIST
           PATH-VAL
           PATH
           ACK-VAL

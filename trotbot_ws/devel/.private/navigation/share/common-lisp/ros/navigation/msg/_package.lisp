@@ -3,7 +3,15 @@
   (:export
    "<POINTARRAY>"
    "POINTARRAY"
-   "<POLYGONARRAY>"
-   "POLYGONARRAY"
+   "<POINTARRAY>"
+   "POINTARRAY"
+   "<POINT_XY>"
+   "POINT_XY"
+   "<POINT_XY>"
+   "POINT_XY"
+   "<POLYARRAY>"
+   "POLYARRAY"
+   "<POLYARRAY>"
+   "POLYARRAY"
   ))
 

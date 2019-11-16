@@ -77,7 +77,7 @@ namespace message_traits
 
 
 // BOOLTRAITS {'IsFixedSize': False, 'IsMessage': True, 'HasHeader': False}
-// {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'navigation': ['/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg']}
+// {'std_msgs': ['/opt/ros/kinetic/share/std_msgs/cmake/../msg'], 'geometry_msgs': ['/opt/ros/kinetic/share/geometry_msgs/cmake/../msg'], 'navigation': ['/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg', '/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
@@ -120,12 +120,12 @@ struct MD5Sum< ::navigation::PlannerResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "7dbb4339dd73402726335b4f58e3f859";
+    return "d2ffe07356360c7bae31566a65032850";
   }
 
   static const char* value(const ::navigation::PlannerResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x7dbb4339dd734027ULL;
-  static const uint64_t static_value2 = 0x26335b4f58e3f859ULL;
+  static const uint64_t static_value1 = 0xd2ffe07356360c7bULL;
+  static const uint64_t static_value2 = 0xae31566a65032850ULL;
 };
 
 template<class ContainerAllocator>
@@ -149,33 +149,11 @@ bool ack\n\
 \n\
 ================================================================================\n\
 MSG: navigation/PointArray\n\
-std_msgs/Header header\n\
-geometry_msgs/Point[] points\n\
+navigation/Point_xy[] points\n\
   \n\
 ================================================================================\n\
-MSG: std_msgs/Header\n\
-# Standard metadata for higher-level stamped data types.\n\
-# This is generally used to communicate timestamped data \n\
-# in a particular coordinate frame.\n\
-# \n\
-# sequence ID: consecutively increasing ID \n\
-uint32 seq\n\
-#Two-integer timestamp that is expressed as:\n\
-# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n\
-# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n\
-# time-handling sugar is provided by the client library\n\
-time stamp\n\
-#Frame this data is associated with\n\
-# 0: no frame\n\
-# 1: global frame\n\
-string frame_id\n\
-\n\
-================================================================================\n\
-MSG: geometry_msgs/Point\n\
-# This contains the position of a point in free space\n\
-float64 x\n\
-float64 y\n\
-float64 z\n\
+MSG: navigation/Point_xy\n\
+float32[] point\n\
 ";
   }
 

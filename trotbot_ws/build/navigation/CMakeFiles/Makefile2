@@ -61,6 +61,7 @@ all: gtest/all
 # The main recursive "clean" target.
 clean: CMakeFiles/navigation_genpy.dir/clean
 clean: CMakeFiles/navigation_generate_messages_py.dir/clean
+clean: CMakeFiles/navigation_gennodejs.dir/clean
 clean: CMakeFiles/nav_msgs_generate_messages_nodejs.dir/clean
 clean: CMakeFiles/nav_msgs_generate_messages_lisp.dir/clean
 clean: CMakeFiles/navigation_generate_messages_nodejs.dir/clean
@@ -74,6 +75,7 @@ clean: CMakeFiles/actionlib_msgs_generate_messages_py.dir/clean
 clean: CMakeFiles/roscpp_generate_messages_cpp.dir/clean
 clean: CMakeFiles/clean_test_results.dir/clean
 clean: CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean
+clean: CMakeFiles/run_tests.dir/clean
 clean: CMakeFiles/actionlib_msgs_generate_messages_eus.dir/clean
 clean: CMakeFiles/doxygen.dir/clean
 clean: CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/clean
@@ -94,18 +96,17 @@ clean: CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
 clean: CMakeFiles/std_msgs_generate_messages_nodejs.dir/clean
 clean: CMakeFiles/geometry_msgs_generate_messages_py.dir/clean
 clean: CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/clean
-clean: CMakeFiles/run_tests.dir/clean
-clean: CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/clean
-clean: CMakeFiles/navigation_gennodejs.dir/clean
 clean: CMakeFiles/roscpp_generate_messages_eus.dir/clean
 clean: CMakeFiles/roscpp_generate_messages_py.dir/clean
 clean: CMakeFiles/navigation_generate_messages.dir/clean
+clean: CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/clean
 clean: CMakeFiles/nav_msgs_generate_messages_py.dir/clean
 clean: CMakeFiles/std_msgs_generate_messages_py.dir/clean
 clean: CMakeFiles/_navigation_generate_messages_check_deps_Planner.dir/clean
 clean: CMakeFiles/navigation_gencpp.dir/clean
 clean: CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
 clean: CMakeFiles/navigation_generate_messages_eus.dir/clean
+clean: CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/clean
 clean: CMakeFiles/navigation_geneus.dir/clean
 clean: CMakeFiles/navigation_generate_messages_lisp.dir/clean
 clean: gtest/clean
@@ -129,7 +130,7 @@ CMakeFiles/navigation_genpy.dir/all: CMakeFiles/navigation_generate_messages_py.
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_genpy.dir/rule
@@ -150,17 +151,18 @@ CMakeFiles/navigation_genpy.dir/clean:
 # All Build rule for target.
 CMakeFiles/navigation_generate_messages_py.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PointArray.dir/all
 CMakeFiles/navigation_generate_messages_py.dir/all: CMakeFiles/geometry_msgs_generate_messages_py.dir/all
-CMakeFiles/navigation_generate_messages_py.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/all
+CMakeFiles/navigation_generate_messages_py.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/all
 CMakeFiles/navigation_generate_messages_py.dir/all: CMakeFiles/std_msgs_generate_messages_py.dir/all
 CMakeFiles/navigation_generate_messages_py.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Planner.dir/all
+CMakeFiles/navigation_generate_messages_py.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/all
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_py.dir/build.make CMakeFiles/navigation_generate_messages_py.dir/depend
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_py.dir/build.make CMakeFiles/navigation_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=25,26,27,28,29 "Built target navigation_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=29,30,31,32,33,34 "Built target navigation_generate_messages_py"
 .PHONY : CMakeFiles/navigation_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_generate_messages_py.dir/rule
@@ -174,6 +176,33 @@ navigation_generate_messages_py: CMakeFiles/navigation_generate_messages_py.dir/
 CMakeFiles/navigation_generate_messages_py.dir/clean:
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_py.dir/build.make CMakeFiles/navigation_generate_messages_py.dir/clean
 .PHONY : CMakeFiles/navigation_generate_messages_py.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/navigation_gennodejs.dir
+
+# All Build rule for target.
+CMakeFiles/navigation_gennodejs.dir/all: CMakeFiles/navigation_generate_messages_nodejs.dir/all
+	$(MAKE) -f CMakeFiles/navigation_gennodejs.dir/build.make CMakeFiles/navigation_gennodejs.dir/depend
+	$(MAKE) -f CMakeFiles/navigation_gennodejs.dir/build.make CMakeFiles/navigation_gennodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num= "Built target navigation_gennodejs"
+.PHONY : CMakeFiles/navigation_gennodejs.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/navigation_gennodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_gennodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
+.PHONY : CMakeFiles/navigation_gennodejs.dir/rule
+
+# Convenience name for target.
+navigation_gennodejs: CMakeFiles/navigation_gennodejs.dir/rule
+
+.PHONY : navigation_gennodejs
+
+# clean rule for target.
+CMakeFiles/navigation_gennodejs.dir/clean:
+	$(MAKE) -f CMakeFiles/navigation_gennodejs.dir/build.make CMakeFiles/navigation_gennodejs.dir/clean
+.PHONY : CMakeFiles/navigation_gennodejs.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/nav_msgs_generate_messages_nodejs.dir
@@ -236,16 +265,17 @@ CMakeFiles/nav_msgs_generate_messages_lisp.dir/clean:
 CMakeFiles/navigation_generate_messages_nodejs.dir/all: CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/all
 CMakeFiles/navigation_generate_messages_nodejs.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PointArray.dir/all
 CMakeFiles/navigation_generate_messages_nodejs.dir/all: CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
-CMakeFiles/navigation_generate_messages_nodejs.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/all
+CMakeFiles/navigation_generate_messages_nodejs.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/all
 CMakeFiles/navigation_generate_messages_nodejs.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Planner.dir/all
+CMakeFiles/navigation_generate_messages_nodejs.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/all
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_nodejs.dir/build.make CMakeFiles/navigation_generate_messages_nodejs.dir/depend
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_nodejs.dir/build.make CMakeFiles/navigation_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=22,23,24 "Built target navigation_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=25,26,27,28 "Built target navigation_generate_messages_nodejs"
 .PHONY : CMakeFiles/navigation_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_generate_messages_nodejs.dir/rule
@@ -531,6 +561,33 @@ CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean:
 .PHONY : CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/run_tests.dir
+
+# All Build rule for target.
+CMakeFiles/run_tests.dir/all:
+	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
+	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num= "Built target run_tests"
+.PHONY : CMakeFiles/run_tests.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/run_tests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
+.PHONY : CMakeFiles/run_tests.dir/rule
+
+# Convenience name for target.
+run_tests: CMakeFiles/run_tests.dir/rule
+
+.PHONY : run_tests
+
+# clean rule for target.
+CMakeFiles/run_tests.dir/clean:
+	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/clean
+.PHONY : CMakeFiles/run_tests.dir/clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/actionlib_msgs_generate_messages_eus.dir
 
 # All Build rule for target.
@@ -645,16 +702,17 @@ CMakeFiles/_navigation_generate_messages_check_deps_PointArray.dir/clean:
 CMakeFiles/navigation_generate_messages_cpp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PointArray.dir/all
 CMakeFiles/navigation_generate_messages_cpp.dir/all: CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
 CMakeFiles/navigation_generate_messages_cpp.dir/all: CMakeFiles/std_msgs_generate_messages_cpp.dir/all
-CMakeFiles/navigation_generate_messages_cpp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/all
+CMakeFiles/navigation_generate_messages_cpp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/all
 CMakeFiles/navigation_generate_messages_cpp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Planner.dir/all
+CMakeFiles/navigation_generate_messages_cpp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/all
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_cpp.dir/build.make CMakeFiles/navigation_generate_messages_cpp.dir/depend
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_cpp.dir/build.make CMakeFiles/navigation_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=12,13,14 "Built target navigation_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=12,13,14,15 "Built target navigation_generate_messages_cpp"
 .PHONY : CMakeFiles/navigation_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_generate_messages_cpp.dir/rule
@@ -870,7 +928,7 @@ CMakeFiles/navigation_genlisp.dir/all: CMakeFiles/navigation_generate_messages_l
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_genlisp.dir/rule
@@ -1075,87 +1133,6 @@ CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/clean:
 .PHONY : CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/run_tests.dir
-
-# All Build rule for target.
-CMakeFiles/run_tests.dir/all:
-	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
-	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num= "Built target run_tests"
-.PHONY : CMakeFiles/run_tests.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/run_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
-.PHONY : CMakeFiles/run_tests.dir/rule
-
-# Convenience name for target.
-run_tests: CMakeFiles/run_tests.dir/rule
-
-.PHONY : run_tests
-
-# clean rule for target.
-CMakeFiles/run_tests.dir/clean:
-	$(MAKE) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/clean
-.PHONY : CMakeFiles/run_tests.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir
-
-# All Build rule for target.
-CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/all:
-	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/depend
-	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num= "Built target _navigation_generate_messages_check_deps_PolygonArray"
-.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
-.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/rule
-
-# Convenience name for target.
-_navigation_generate_messages_check_deps_PolygonArray: CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/rule
-
-.PHONY : _navigation_generate_messages_check_deps_PolygonArray
-
-# clean rule for target.
-CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/clean:
-	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/clean
-.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/navigation_gennodejs.dir
-
-# All Build rule for target.
-CMakeFiles/navigation_gennodejs.dir/all: CMakeFiles/navigation_generate_messages_nodejs.dir/all
-	$(MAKE) -f CMakeFiles/navigation_gennodejs.dir/build.make CMakeFiles/navigation_gennodejs.dir/depend
-	$(MAKE) -f CMakeFiles/navigation_gennodejs.dir/build.make CMakeFiles/navigation_gennodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num= "Built target navigation_gennodejs"
-.PHONY : CMakeFiles/navigation_gennodejs.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/navigation_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_gennodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
-.PHONY : CMakeFiles/navigation_gennodejs.dir/rule
-
-# Convenience name for target.
-navigation_gennodejs: CMakeFiles/navigation_gennodejs.dir/rule
-
-.PHONY : navigation_gennodejs
-
-# clean rule for target.
-CMakeFiles/navigation_gennodejs.dir/clean:
-	$(MAKE) -f CMakeFiles/navigation_gennodejs.dir/build.make CMakeFiles/navigation_gennodejs.dir/clean
-.PHONY : CMakeFiles/navigation_gennodejs.dir/clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/roscpp_generate_messages_eus.dir
 
 # All Build rule for target.
@@ -1225,7 +1202,7 @@ CMakeFiles/navigation_generate_messages.dir/all: CMakeFiles/navigation_generate_
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 23
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_generate_messages.dir/rule
@@ -1239,6 +1216,33 @@ navigation_generate_messages: CMakeFiles/navigation_generate_messages.dir/rule
 CMakeFiles/navigation_generate_messages.dir/clean:
 	$(MAKE) -f CMakeFiles/navigation_generate_messages.dir/build.make CMakeFiles/navigation_generate_messages.dir/clean
 .PHONY : CMakeFiles/navigation_generate_messages.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir
+
+# All Build rule for target.
+CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/all:
+	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/depend
+	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num= "Built target _navigation_generate_messages_check_deps_Point_xy"
+.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
+.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/rule
+
+# Convenience name for target.
+_navigation_generate_messages_check_deps_Point_xy: CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/rule
+
+.PHONY : _navigation_generate_messages_check_deps_Point_xy
+
+# clean rule for target.
+CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/clean:
+	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/clean
+.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/nav_msgs_generate_messages_py.dir
@@ -1333,7 +1337,7 @@ CMakeFiles/navigation_gencpp.dir/all: CMakeFiles/navigation_generate_messages_cp
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_gencpp.dir/rule
@@ -1382,16 +1386,17 @@ CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean:
 CMakeFiles/navigation_generate_messages_eus.dir/all: CMakeFiles/std_msgs_generate_messages_eus.dir/all
 CMakeFiles/navigation_generate_messages_eus.dir/all: CMakeFiles/geometry_msgs_generate_messages_eus.dir/all
 CMakeFiles/navigation_generate_messages_eus.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PointArray.dir/all
-CMakeFiles/navigation_generate_messages_eus.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/all
+CMakeFiles/navigation_generate_messages_eus.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/all
 CMakeFiles/navigation_generate_messages_eus.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Planner.dir/all
+CMakeFiles/navigation_generate_messages_eus.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/all
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_eus.dir/build.make CMakeFiles/navigation_generate_messages_eus.dir/depend
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_eus.dir/build.make CMakeFiles/navigation_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=15,16,17,18 "Built target navigation_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=16,17,18,19,20 "Built target navigation_generate_messages_eus"
 .PHONY : CMakeFiles/navigation_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_generate_messages_eus.dir/rule
@@ -1407,6 +1412,33 @@ CMakeFiles/navigation_generate_messages_eus.dir/clean:
 .PHONY : CMakeFiles/navigation_generate_messages_eus.dir/clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir
+
+# All Build rule for target.
+CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/all:
+	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/depend
+	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num= "Built target _navigation_generate_messages_check_deps_PolyArray"
+.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
+.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/rule
+
+# Convenience name for target.
+_navigation_generate_messages_check_deps_PolyArray: CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/rule
+
+.PHONY : _navigation_generate_messages_check_deps_PolyArray
+
+# clean rule for target.
+CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/clean:
+	$(MAKE) -f CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/build.make CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/clean
+.PHONY : CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/navigation_geneus.dir
 
 # All Build rule for target.
@@ -1418,7 +1450,7 @@ CMakeFiles/navigation_geneus.dir/all: CMakeFiles/navigation_generate_messages_eu
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_geneus.dir/rule
@@ -1440,16 +1472,17 @@ CMakeFiles/navigation_geneus.dir/clean:
 CMakeFiles/navigation_generate_messages_lisp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PointArray.dir/all
 CMakeFiles/navigation_generate_messages_lisp.dir/all: CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 CMakeFiles/navigation_generate_messages_lisp.dir/all: CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
-CMakeFiles/navigation_generate_messages_lisp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolygonArray.dir/all
+CMakeFiles/navigation_generate_messages_lisp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Point_xy.dir/all
 CMakeFiles/navigation_generate_messages_lisp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_Planner.dir/all
+CMakeFiles/navigation_generate_messages_lisp.dir/all: CMakeFiles/_navigation_generate_messages_check_deps_PolyArray.dir/all
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_lisp.dir/build.make CMakeFiles/navigation_generate_messages_lisp.dir/depend
 	$(MAKE) -f CMakeFiles/navigation_generate_messages_lisp.dir/build.make CMakeFiles/navigation_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=19,20,21 "Built target navigation_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles --progress-num=21,22,23,24 "Built target navigation_generate_messages_lisp"
 .PHONY : CMakeFiles/navigation_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/navigation_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/navigation_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles 0
 .PHONY : CMakeFiles/navigation_generate_messages_lisp.dir/rule

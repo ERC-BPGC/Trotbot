@@ -1,8 +1,8 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "navigation: 2 messages, 1 services")
+message(STATUS "navigation: 3 messages, 1 services")
 
-set(MSG_I_FLAGS "-Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg;-Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg;-Igeometry_msgs:/opt/ros/kinetic/share/geometry_msgs/cmake/../msg;-Inavigation:/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg;-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -17,19 +17,24 @@ add_custom_target(navigation_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg" NAME_WE)
 add_custom_target(_navigation_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "navigation" "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" "std_msgs/Header:geometry_msgs/Point"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "navigation" "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg" "geometry_msgs/Point32"
 )
 
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg" NAME_WE)
 add_custom_target(_navigation_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "navigation" "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg" "geometry_msgs/Point32:std_msgs/Header:geometry_msgs/Polygon"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "navigation" "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg" "navigation/Point_xy:navigation/PointArray:geometry_msgs/Point32"
+)
+
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
+add_custom_target(_navigation_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "navigation" "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" "navigation/Point_xy:geometry_msgs/Point32"
 )
 
 get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv" NAME_WE)
 add_custom_target(_navigation_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "navigation" "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv" "std_msgs/Float32:navigation/PointArray:std_msgs/Header:geometry_msgs/Point"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "navigation" "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv" "navigation/Point_xy:geometry_msgs/Point32:navigation/PointArray:navigation/PolyArray"
 )
 
 #
@@ -39,15 +44,21 @@ add_custom_target(_navigation_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/navigation
 )
 _generate_msg_cpp(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Polygon.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/navigation
+)
+_generate_msg_cpp(navigation
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "${MSG_I_FLAGS}"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/navigation
 )
 
@@ -55,7 +66,7 @@ _generate_msg_cpp(navigation
 _generate_srv_cpp(navigation
   "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Float32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/navigation
 )
 
@@ -71,9 +82,11 @@ add_custom_target(navigation_generate_messages_cpp
 add_dependencies(navigation_generate_messages navigation_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_cpp _navigation_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg" NAME_WE)
+add_dependencies(navigation_generate_messages_cpp _navigation_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_cpp _navigation_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv" NAME_WE)
 add_dependencies(navigation_generate_messages_cpp _navigation_generate_messages_check_deps_${_filename})
@@ -88,15 +101,21 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS navigation_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/navigation
 )
 _generate_msg_eus(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Polygon.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/navigation
+)
+_generate_msg_eus(navigation
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "${MSG_I_FLAGS}"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/navigation
 )
 
@@ -104,7 +123,7 @@ _generate_msg_eus(navigation
 _generate_srv_eus(navigation
   "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Float32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/navigation
 )
 
@@ -120,9 +139,11 @@ add_custom_target(navigation_generate_messages_eus
 add_dependencies(navigation_generate_messages navigation_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_eus _navigation_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg" NAME_WE)
+add_dependencies(navigation_generate_messages_eus _navigation_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_eus _navigation_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv" NAME_WE)
 add_dependencies(navigation_generate_messages_eus _navigation_generate_messages_check_deps_${_filename})
@@ -137,15 +158,21 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS navigation_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/navigation
 )
 _generate_msg_lisp(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Polygon.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/navigation
+)
+_generate_msg_lisp(navigation
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "${MSG_I_FLAGS}"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/navigation
 )
 
@@ -153,7 +180,7 @@ _generate_msg_lisp(navigation
 _generate_srv_lisp(navigation
   "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Float32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/navigation
 )
 
@@ -169,9 +196,11 @@ add_custom_target(navigation_generate_messages_lisp
 add_dependencies(navigation_generate_messages navigation_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_lisp _navigation_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg" NAME_WE)
+add_dependencies(navigation_generate_messages_lisp _navigation_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_lisp _navigation_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv" NAME_WE)
 add_dependencies(navigation_generate_messages_lisp _navigation_generate_messages_check_deps_${_filename})
@@ -186,15 +215,21 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS navigation_generate_messages_lisp)
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/navigation
 )
 _generate_msg_nodejs(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Polygon.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/navigation
+)
+_generate_msg_nodejs(navigation
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "${MSG_I_FLAGS}"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/navigation
 )
 
@@ -202,7 +237,7 @@ _generate_msg_nodejs(navigation
 _generate_srv_nodejs(navigation
   "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Float32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/navigation
 )
 
@@ -218,9 +253,11 @@ add_custom_target(navigation_generate_messages_nodejs
 add_dependencies(navigation_generate_messages navigation_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_nodejs _navigation_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg" NAME_WE)
+add_dependencies(navigation_generate_messages_nodejs _navigation_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_nodejs _navigation_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv" NAME_WE)
 add_dependencies(navigation_generate_messages_nodejs _navigation_generate_messages_check_deps_${_filename})
@@ -235,15 +272,21 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS navigation_generate_messages_nodejs
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/navigation
 )
 _generate_msg_py(navigation
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Polygon.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/navigation
+)
+_generate_msg_py(navigation
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
+  "${MSG_I_FLAGS}"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/navigation
 )
 
@@ -251,7 +294,7 @@ _generate_msg_py(navigation
 _generate_srv_py(navigation
   "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv"
   "${MSG_I_FLAGS}"
-  "/opt/ros/kinetic/share/std_msgs/cmake/../msg/Float32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/opt/ros/kinetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point.msg"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg;/opt/ros/kinetic/share/geometry_msgs/cmake/../msg/Point32.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg;/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/navigation
 )
 
@@ -267,9 +310,11 @@ add_custom_target(navigation_generate_messages_py
 add_dependencies(navigation_generate_messages navigation_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_py _navigation_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg" NAME_WE)
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg" NAME_WE)
+add_dependencies(navigation_generate_messages_py _navigation_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg" NAME_WE)
 add_dependencies(navigation_generate_messages_py _navigation_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv" NAME_WE)
 add_dependencies(navigation_generate_messages_py _navigation_generate_messages_check_deps_${_filename})
@@ -293,6 +338,9 @@ endif()
 if(TARGET geometry_msgs_generate_messages_cpp)
   add_dependencies(navigation_generate_messages_cpp geometry_msgs_generate_messages_cpp)
 endif()
+if(TARGET navigation_generate_messages_cpp)
+  add_dependencies(navigation_generate_messages_cpp navigation_generate_messages_cpp)
+endif()
 if(TARGET std_msgs_generate_messages_cpp)
   add_dependencies(navigation_generate_messages_cpp std_msgs_generate_messages_cpp)
 endif()
@@ -306,6 +354,9 @@ if(geneus_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/na
 endif()
 if(TARGET geometry_msgs_generate_messages_eus)
   add_dependencies(navigation_generate_messages_eus geometry_msgs_generate_messages_eus)
+endif()
+if(TARGET navigation_generate_messages_eus)
+  add_dependencies(navigation_generate_messages_eus navigation_generate_messages_eus)
 endif()
 if(TARGET std_msgs_generate_messages_eus)
   add_dependencies(navigation_generate_messages_eus std_msgs_generate_messages_eus)
@@ -321,6 +372,9 @@ endif()
 if(TARGET geometry_msgs_generate_messages_lisp)
   add_dependencies(navigation_generate_messages_lisp geometry_msgs_generate_messages_lisp)
 endif()
+if(TARGET navigation_generate_messages_lisp)
+  add_dependencies(navigation_generate_messages_lisp navigation_generate_messages_lisp)
+endif()
 if(TARGET std_msgs_generate_messages_lisp)
   add_dependencies(navigation_generate_messages_lisp std_msgs_generate_messages_lisp)
 endif()
@@ -334,6 +388,9 @@ if(gennodejs_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_D
 endif()
 if(TARGET geometry_msgs_generate_messages_nodejs)
   add_dependencies(navigation_generate_messages_nodejs geometry_msgs_generate_messages_nodejs)
+endif()
+if(TARGET navigation_generate_messages_nodejs)
+  add_dependencies(navigation_generate_messages_nodejs navigation_generate_messages_nodejs)
 endif()
 if(TARGET std_msgs_generate_messages_nodejs)
   add_dependencies(navigation_generate_messages_nodejs std_msgs_generate_messages_nodejs)
@@ -349,6 +406,9 @@ if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/navi
 endif()
 if(TARGET geometry_msgs_generate_messages_py)
   add_dependencies(navigation_generate_messages_py geometry_msgs_generate_messages_py)
+endif()
+if(TARGET navigation_generate_messages_py)
+  add_dependencies(navigation_generate_messages_py navigation_generate_messages_py)
 endif()
 if(TARGET std_msgs_generate_messages_py)
   add_dependencies(navigation_generate_messages_py std_msgs_generate_messages_py)

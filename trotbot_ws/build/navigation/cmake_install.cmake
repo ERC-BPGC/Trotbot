@@ -130,8 +130,9 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/navigation/msg" TYPE FILE FILES
+    "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/Point_xy.msg"
     "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg"
-    "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolygonArray.msg"
+    "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PolyArray.msg"
     )
 endif()
 

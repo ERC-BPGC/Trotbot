@@ -5,4 +5,4 @@ Description: Description of navigation
 Version: 0.0.0
 Cflags: -I/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/install/include
 Libs: -L/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/install/lib 
-Requires: 
+Requires: geometry_msgs nav_msgs roscpp rospy std_msgs message_runtime

@@ -1,0 +1,77 @@
+[36m--[0m Using CATKIN_DEVEL_PREFIX: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation
+[36m--[0m Using CMAKE_PREFIX_PATH: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel;/home/tyjo/catkin_ws_o/catkin_ws_kratos/devel;/home/tyjo/catkin_ws_o/catkin_ws_trot/devel;/home/tyjo/packagez/rovio_pack/catkin_ws_kalibr/devel;/opt/ros/kinetic
+[36m--[0m This workspace overlays: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel;/home/tyjo/catkin_ws_o/catkin_ws_kratos/devel;/home/tyjo/catkin_ws_o/catkin_ws_trot/devel;/home/tyjo/packagez/rovio_pack/catkin_ws_kalibr/devel;/opt/ros/kinetic
+[36m--[0m Using PYTHON_EXECUTABLE: /usr/bin/python
+[36m--[0m Using Debian Python package layout
+[36m--[0m Using empy: /usr/bin/empy
+[36m--[0m Using CATKIN_ENABLE_TESTING: ON
+[36m--[0m Call enable_testing()
+[36m--[0m Using CATKIN_TEST_RESULTS_DIR: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/test_results
+[36m--[0m Found gmock sources under '/usr/src/gmock': gmock will be built
+[36m--[0m Found gtest sources under '/usr/src/gmock': gtests will be built
+[36m--[0m Using Python nosetests: /usr/bin/nosetests-2.7
+[36m--[0m catkin 0.7.18
+[36m--[0m BUILD_SHARED_LIBS is on
+[36m--[0m Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
+[36m--[0m navigation: 6 messages, 2 services
+[31m[1mCMake Error[0m at /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/cmake/navigation-genmsg.cmake:79 (add_custom_target):
+  add_custom_target cannot create target "navigation_generate_messages_cpp"
+  because another target with the same name already exists.  The existing
+  target is a custom target created in source directory
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation".  See
+  documentation for policy CMP0002 for more details.
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/kinetic/share/genmsg/cmake/genmsg-extras.cmake:307 (include)
+  CMakeLists.txt:77 (generate_messages)
+
+
+[31m[1mCMake Error[0m at /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/cmake/navigation-genmsg.cmake:136 (add_custom_target):
+  add_custom_target cannot create target "navigation_generate_messages_eus"
+  because another target with the same name already exists.  The existing
+  target is a custom target created in source directory
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation".  See
+  documentation for policy CMP0002 for more details.
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/kinetic/share/genmsg/cmake/genmsg-extras.cmake:307 (include)
+  CMakeLists.txt:77 (generate_messages)
+
+
+[31m[1mCMake Error[0m at /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/cmake/navigation-genmsg.cmake:193 (add_custom_target):
+  add_custom_target cannot create target "navigation_generate_messages_lisp"
+  because another target with the same name already exists.  The existing
+  target is a custom target created in source directory
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation".  See
+  documentation for policy CMP0002 for more details.
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/kinetic/share/genmsg/cmake/genmsg-extras.cmake:307 (include)
+  CMakeLists.txt:77 (generate_messages)
+
+
+[31m[1mCMake Error[0m at /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/cmake/navigation-genmsg.cmake:250 (add_custom_target):
+  add_custom_target cannot create target
+  "navigation_generate_messages_nodejs" because another target with the same
+  name already exists.  The existing target is a custom target created in
+  source directory
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation".  See
+  documentation for policy CMP0002 for more details.
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/kinetic/share/genmsg/cmake/genmsg-extras.cmake:307 (include)
+  CMakeLists.txt:77 (generate_messages)
+
+
+[31m[1mCMake Error[0m at /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/cmake/navigation-genmsg.cmake:307 (add_custom_target):
+  add_custom_target cannot create target "navigation_generate_messages_py"
+  because another target with the same name already exists.  The existing
+  target is a custom target created in source directory
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation".  See
+  documentation for policy CMP0002 for more details.
+[36mCall Stack (most recent call first):[0m
+  /opt/ros/kinetic/share/genmsg/cmake/genmsg-extras.cmake:307 (include)
+  CMakeLists.txt:77 (generate_messages)
+
+
+[36m--[0m Configuring incomplete, errors occurred!
+See also "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles/CMakeOutput.log".
+See also "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation/CMakeFiles/CMakeError.log".
+Makefile:950: recipe for target 'cmake_check_build_system' failed
+make: *** [cmake_check_build_system] Error 1

@@ -1,0 +1,1 @@
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/gennodejs/ros/navigation/msg/Point_xy.js
