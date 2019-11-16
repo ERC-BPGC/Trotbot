@@ -11,7 +11,8 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
-let std_msgs = _finder('std_msgs');
+let Point_xy = require('../msg/Point_xy.js');
+let PolyArray = require('../msg/PolyArray.js');
 
 //-----------------------------------------------------------
 
@@ -25,19 +26,26 @@ class PlannerRequest {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.start = null;
       this.goal = null;
+      this.obstacle_list = null;
     }
     else {
       if (initObj.hasOwnProperty('start')) {
         this.start = initObj.start
       }
       else {
-        this.start = [];
+        this.start = new Point_xy();
       }
       if (initObj.hasOwnProperty('goal')) {
         this.goal = initObj.goal
       }
       else {
-        this.goal = [];
+        this.goal = new Point_xy();
+      }
+      if (initObj.hasOwnProperty('obstacle_list')) {
+        this.obstacle_list = initObj.obstacle_list
+      }
+      else {
+        this.obstacle_list = new PolyArray();
       }
     }
   }
@@ -45,17 +53,11 @@ class PlannerRequest {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type PlannerRequest
     // Serialize message field [start]
-    // Serialize the length for message field [start]
-    bufferOffset = _serializer.uint32(obj.start.length, buffer, bufferOffset);
-    obj.start.forEach((val) => {
-      bufferOffset = std_msgs.msg.Float32.serialize(val, buffer, bufferOffset);
-    });
+    bufferOffset = Point_xy.serialize(obj.start, buffer, bufferOffset);
     // Serialize message field [goal]
-    // Serialize the length for message field [goal]
-    bufferOffset = _serializer.uint32(obj.goal.length, buffer, bufferOffset);
-    obj.goal.forEach((val) => {
-      bufferOffset = std_msgs.msg.Float32.serialize(val, buffer, bufferOffset);
-    });
+    bufferOffset = Point_xy.serialize(obj.goal, buffer, bufferOffset);
+    // Serialize message field [obstacle_list]
+    bufferOffset = PolyArray.serialize(obj.obstacle_list, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -64,27 +66,20 @@ class PlannerRequest {
     let len;
     let data = new PlannerRequest(null);
     // Deserialize message field [start]
-    // Deserialize array length for message field [start]
-    len = _deserializer.uint32(buffer, bufferOffset);
-    data.start = new Array(len);
-    for (let i = 0; i < len; ++i) {
-      data.start[i] = std_msgs.msg.Float32.deserialize(buffer, bufferOffset)
-    }
+    data.start = Point_xy.deserialize(buffer, bufferOffset);
     // Deserialize message field [goal]
-    // Deserialize array length for message field [goal]
-    len = _deserializer.uint32(buffer, bufferOffset);
-    data.goal = new Array(len);
-    for (let i = 0; i < len; ++i) {
-      data.goal[i] = std_msgs.msg.Float32.deserialize(buffer, bufferOffset)
-    }
+    data.goal = Point_xy.deserialize(buffer, bufferOffset);
+    // Deserialize message field [obstacle_list]
+    data.obstacle_list = PolyArray.deserialize(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
-    length += 4 * object.start.length;
-    length += 4 * object.goal.length;
-    return length + 8;
+    length += Point_xy.getMessageSize(object.start);
+    length += Point_xy.getMessageSize(object.goal);
+    length += PolyArray.getMessageSize(object.obstacle_list);
+    return length;
   }
 
   static datatype() {
@@ -94,18 +89,27 @@ class PlannerRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'dd1a8738d5147232a034239634382b47';
+    return '312cafca219eff06ca8155401fd152ea';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    std_msgs/Float32[] start
-    std_msgs/Float32[] goal
+    navigation/Point_xy start
+    navigation/Point_xy goal
+    navigation/PolyArray obstacle_list
     
     ================================================================================
-    MSG: std_msgs/Float32
-    float32 data
+    MSG: navigation/Point_xy
+    float32[] point
+    ================================================================================
+    MSG: navigation/PolyArray
+    navigation/PointArray[] polygons
+    
+    ================================================================================
+    MSG: navigation/PointArray
+    navigation/Point_xy[] points
+      
     `;
   }
 
@@ -116,23 +120,24 @@ class PlannerRequest {
     }
     const resolved = new PlannerRequest(null);
     if (msg.start !== undefined) {
-      resolved.start = new Array(msg.start.length);
-      for (let i = 0; i < resolved.start.length; ++i) {
-        resolved.start[i] = std_msgs.msg.Float32.Resolve(msg.start[i]);
-      }
+      resolved.start = Point_xy.Resolve(msg.start)
     }
     else {
-      resolved.start = []
+      resolved.start = new Point_xy()
     }
 
     if (msg.goal !== undefined) {
-      resolved.goal = new Array(msg.goal.length);
-      for (let i = 0; i < resolved.goal.length; ++i) {
-        resolved.goal[i] = std_msgs.msg.Float32.Resolve(msg.goal[i]);
-      }
+      resolved.goal = Point_xy.Resolve(msg.goal)
     }
     else {
-      resolved.goal = []
+      resolved.goal = new Point_xy()
+    }
+
+    if (msg.obstacle_list !== undefined) {
+      resolved.obstacle_list = PolyArray.Resolve(msg.obstacle_list)
+    }
+    else {
+      resolved.obstacle_list = new PolyArray()
     }
 
     return resolved;
@@ -195,7 +200,7 @@ class PlannerResponse {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '7dbb4339dd73402726335b4f58e3f859';
+    return 'd2ffe07356360c7bae31566a65032850';
   }
 
   static messageDefinition() {
@@ -206,34 +211,11 @@ class PlannerResponse {
     
     ================================================================================
     MSG: navigation/PointArray
-    std_msgs/Header header
-    geometry_msgs/Point[] points
+    navigation/Point_xy[] points
       
     ================================================================================
-    MSG: std_msgs/Header
-    # Standard metadata for higher-level stamped data types.
-    # This is generally used to communicate timestamped data 
-    # in a particular coordinate frame.
-    # 
-    # sequence ID: consecutively increasing ID 
-    uint32 seq
-    #Two-integer timestamp that is expressed as:
-    # * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
-    # * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
-    # time-handling sugar is provided by the client library
-    time stamp
-    #Frame this data is associated with
-    # 0: no frame
-    # 1: global frame
-    string frame_id
-    
-    ================================================================================
-    MSG: geometry_msgs/Point
-    # This contains the position of a point in free space
-    float64 x
-    float64 y
-    float64 z
-    
+    MSG: navigation/Point_xy
+    float32[] point
     `;
   }
 
@@ -264,6 +246,6 @@ class PlannerResponse {
 module.exports = {
   Request: PlannerRequest,
   Response: PlannerResponse,
-  md5sum() { return 'e099e7e7ce9aa3ba23a5f56a66d6f6e9'; },
+  md5sum() { return '0f8ba09d5a21e9916f0e3bf633247872'; },
   datatype() { return 'navigation/Planner'; }
 };

@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/na
 include CMakeFiles/_navigation_generate_messages_check_deps_Planner.dir/progress.make
 
 CMakeFiles/_navigation_generate_messages_check_deps_Planner:
-	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv std_msgs/Float32:navigation/PointArray:std_msgs/Header:geometry_msgs/Point
+	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/srv/Planner.srv navigation/Point_xy:geometry_msgs/Point32:navigation/PointArray:navigation/PolyArray
 
 _navigation_generate_messages_check_deps_Planner: CMakeFiles/_navigation_generate_messages_check_deps_Planner
 _navigation_generate_messages_check_deps_Planner: CMakeFiles/_navigation_generate_messages_check_deps_Planner.dir/build.make

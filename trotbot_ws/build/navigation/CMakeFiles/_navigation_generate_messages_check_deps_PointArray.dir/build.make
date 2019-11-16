@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/na
 include CMakeFiles/_navigation_generate_messages_check_deps_PointArray.dir/progress.make
 
 CMakeFiles/_navigation_generate_messages_check_deps_PointArray:
-	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg std_msgs/Header:geometry_msgs/Point
+	catkin_generated/env_cached.sh /usr/bin/python /opt/ros/kinetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py navigation /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation/msg/PointArray.msg navigation/Point_xy:geometry_msgs/Point32
 
 _navigation_generate_messages_check_deps_PointArray: CMakeFiles/_navigation_generate_messages_check_deps_PointArray
 _navigation_generate_messages_check_deps_PointArray: CMakeFiles/_navigation_generate_messages_check_deps_PointArray.dir/build.make

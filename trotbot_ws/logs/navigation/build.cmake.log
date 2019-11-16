@@ -38,7 +38,7 @@ Not searching for unused variables given on the command line.
 [36m--[0m catkin 0.7.18
 [36m--[0m BUILD_SHARED_LIBS is on
 [36m--[0m Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
-[36m--[0m navigation: 2 messages, 1 services
+[36m--[0m navigation: 3 messages, 1 services
 [36m--[0m Configuring done
 [36m--[0m Generating done
 [36m--[0m Build files have been written to: /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation

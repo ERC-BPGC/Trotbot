@@ -3,7 +3,6 @@
 
 (defsystem "navigation-srv"
   :depends-on (:roslisp-msg-protocol :roslisp-utils :navigation-msg
-               :std_msgs-msg
 )
   :components ((:file "_package")
     (:file "Planner" :depends-on ("_package_Planner"))

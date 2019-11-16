@@ -5,20 +5,29 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import std_msgs.msg
+import navigation.msg
 
 class PlannerRequest(genpy.Message):
-  _md5sum = "dd1a8738d5147232a034239634382b47"
+  _md5sum = "312cafca219eff06ca8155401fd152ea"
   _type = "navigation/PlannerRequest"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """std_msgs/Float32[] start
-std_msgs/Float32[] goal
+  _full_text = """navigation/Point_xy start
+navigation/Point_xy goal
+navigation/PolyArray obstacle_list
 
 ================================================================================
-MSG: std_msgs/Float32
-float32 data"""
-  __slots__ = ['start','goal']
-  _slot_types = ['std_msgs/Float32[]','std_msgs/Float32[]']
+MSG: navigation/Point_xy
+float32[] point
+================================================================================
+MSG: navigation/PolyArray
+navigation/PointArray[] polygons
+
+================================================================================
+MSG: navigation/PointArray
+navigation/Point_xy[] points
+  """
+  __slots__ = ['start','goal','obstacle_list']
+  _slot_types = ['navigation/Point_xy','navigation/Point_xy','navigation/PolyArray']
 
   def __init__(self, *args, **kwds):
     """
@@ -28,7 +37,7 @@ float32 data"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       start,goal
+       start,goal,obstacle_list
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -38,12 +47,15 @@ float32 data"""
       super(PlannerRequest, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
       if self.start is None:
-        self.start = []
+        self.start = navigation.msg.Point_xy()
       if self.goal is None:
-        self.goal = []
+        self.goal = navigation.msg.Point_xy()
+      if self.obstacle_list is None:
+        self.obstacle_list = navigation.msg.PolyArray()
     else:
-      self.start = []
-      self.goal = []
+      self.start = navigation.msg.Point_xy()
+      self.goal = navigation.msg.Point_xy()
+      self.obstacle_list = navigation.msg.PolyArray()
 
   def _get_types(self):
     """
@@ -57,14 +69,24 @@ float32 data"""
     :param buff: buffer, ``StringIO``
     """
     try:
-      length = len(self.start)
+      length = len(self.start.point)
       buff.write(_struct_I.pack(length))
-      for val1 in self.start:
-        buff.write(_get_struct_f().pack(val1.data))
-      length = len(self.goal)
+      pattern = '<%sf'%length
+      buff.write(struct.pack(pattern, *self.start.point))
+      length = len(self.goal.point)
       buff.write(_struct_I.pack(length))
-      for val1 in self.goal:
-        buff.write(_get_struct_f().pack(val1.data))
+      pattern = '<%sf'%length
+      buff.write(struct.pack(pattern, *self.goal.point))
+      length = len(self.obstacle_list.polygons)
+      buff.write(_struct_I.pack(length))
+      for val1 in self.obstacle_list.polygons:
+        length = len(val1.points)
+        buff.write(_struct_I.pack(length))
+        for val2 in val1.points:
+          length = len(val2.point)
+          buff.write(_struct_I.pack(length))
+          pattern = '<%sf'%length
+          buff.write(struct.pack(pattern, *val2.point))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -75,30 +97,47 @@ float32 data"""
     """
     try:
       if self.start is None:
-        self.start = None
+        self.start = navigation.msg.Point_xy()
       if self.goal is None:
-        self.goal = None
+        self.goal = navigation.msg.Point_xy()
+      if self.obstacle_list is None:
+        self.obstacle_list = navigation.msg.PolyArray()
       end = 0
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      self.start = []
-      for i in range(0, length):
-        val1 = std_msgs.msg.Float32()
-        start = end
-        end += 4
-        (val1.data,) = _get_struct_f().unpack(str[start:end])
-        self.start.append(val1)
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.start.point = struct.unpack(pattern, str[start:end])
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      self.goal = []
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.goal.point = struct.unpack(pattern, str[start:end])
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      self.obstacle_list.polygons = []
       for i in range(0, length):
-        val1 = std_msgs.msg.Float32()
+        val1 = navigation.msg.PointArray()
         start = end
         end += 4
-        (val1.data,) = _get_struct_f().unpack(str[start:end])
-        self.goal.append(val1)
+        (length,) = _struct_I.unpack(str[start:end])
+        val1.points = []
+        for i in range(0, length):
+          val2 = navigation.msg.Point_xy()
+          start = end
+          end += 4
+          (length,) = _struct_I.unpack(str[start:end])
+          pattern = '<%sf'%length
+          start = end
+          end += struct.calcsize(pattern)
+          val2.point = struct.unpack(pattern, str[start:end])
+          val1.points.append(val2)
+        self.obstacle_list.polygons.append(val1)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -111,14 +150,24 @@ float32 data"""
     :param numpy: numpy python module
     """
     try:
-      length = len(self.start)
+      length = len(self.start.point)
       buff.write(_struct_I.pack(length))
-      for val1 in self.start:
-        buff.write(_get_struct_f().pack(val1.data))
-      length = len(self.goal)
+      pattern = '<%sf'%length
+      buff.write(self.start.point.tostring())
+      length = len(self.goal.point)
       buff.write(_struct_I.pack(length))
-      for val1 in self.goal:
-        buff.write(_get_struct_f().pack(val1.data))
+      pattern = '<%sf'%length
+      buff.write(self.goal.point.tostring())
+      length = len(self.obstacle_list.polygons)
+      buff.write(_struct_I.pack(length))
+      for val1 in self.obstacle_list.polygons:
+        length = len(val1.points)
+        buff.write(_struct_I.pack(length))
+        for val2 in val1.points:
+          length = len(val2.point)
+          buff.write(_struct_I.pack(length))
+          pattern = '<%sf'%length
+          buff.write(val2.point.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -130,30 +179,47 @@ float32 data"""
     """
     try:
       if self.start is None:
-        self.start = None
+        self.start = navigation.msg.Point_xy()
       if self.goal is None:
-        self.goal = None
+        self.goal = navigation.msg.Point_xy()
+      if self.obstacle_list is None:
+        self.obstacle_list = navigation.msg.PolyArray()
       end = 0
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      self.start = []
-      for i in range(0, length):
-        val1 = std_msgs.msg.Float32()
-        start = end
-        end += 4
-        (val1.data,) = _get_struct_f().unpack(str[start:end])
-        self.start.append(val1)
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.start.point = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
-      self.goal = []
+      pattern = '<%sf'%length
+      start = end
+      end += struct.calcsize(pattern)
+      self.goal.point = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      self.obstacle_list.polygons = []
       for i in range(0, length):
-        val1 = std_msgs.msg.Float32()
+        val1 = navigation.msg.PointArray()
         start = end
         end += 4
-        (val1.data,) = _get_struct_f().unpack(str[start:end])
-        self.goal.append(val1)
+        (length,) = _struct_I.unpack(str[start:end])
+        val1.points = []
+        for i in range(0, length):
+          val2 = navigation.msg.Point_xy()
+          start = end
+          end += 4
+          (length,) = _struct_I.unpack(str[start:end])
+          pattern = '<%sf'%length
+          start = end
+          end += struct.calcsize(pattern)
+          val2.point = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
+          val1.points.append(val2)
+        self.obstacle_list.polygons.append(val1)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -162,12 +228,6 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_f = None
-def _get_struct_f():
-    global _struct_f
-    if _struct_f is None:
-        _struct_f = struct.Struct("<f")
-    return _struct_f
 # This Python file uses the following encoding: utf-8
 """autogenerated by genpy from navigation/PlannerResponse.msg. Do not edit."""
 import sys
@@ -175,12 +235,10 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import geometry_msgs.msg
 import navigation.msg
-import std_msgs.msg
 
 class PlannerResponse(genpy.Message):
-  _md5sum = "7dbb4339dd73402726335b4f58e3f859"
+  _md5sum = "d2ffe07356360c7bae31566a65032850"
   _type = "navigation/PlannerResponse"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """navigation/PointArray path
@@ -188,34 +246,11 @@ bool ack
 
 ================================================================================
 MSG: navigation/PointArray
-std_msgs/Header header
-geometry_msgs/Point[] points
+navigation/Point_xy[] points
   
 ================================================================================
-MSG: std_msgs/Header
-# Standard metadata for higher-level stamped data types.
-# This is generally used to communicate timestamped data 
-# in a particular coordinate frame.
-# 
-# sequence ID: consecutively increasing ID 
-uint32 seq
-#Two-integer timestamp that is expressed as:
-# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
-# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
-# time-handling sugar is provided by the client library
-time stamp
-#Frame this data is associated with
-# 0: no frame
-# 1: global frame
-string frame_id
-
-================================================================================
-MSG: geometry_msgs/Point
-# This contains the position of a point in free space
-float64 x
-float64 y
-float64 z
-"""
+MSG: navigation/Point_xy
+float32[] point"""
   __slots__ = ['path','ack']
   _slot_types = ['navigation/PointArray','bool']
 
@@ -256,19 +291,13 @@ float64 z
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self
-      buff.write(_get_struct_3I().pack(_x.path.header.seq, _x.path.header.stamp.secs, _x.path.header.stamp.nsecs))
-      _x = self.path.header.frame_id
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
       length = len(self.path.points)
       buff.write(_struct_I.pack(length))
       for val1 in self.path.points:
-        _x = val1
-        buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
+        length = len(val1.point)
+        buff.write(_struct_I.pack(length))
+        pattern = '<%sf'%length
+        buff.write(struct.pack(pattern, *val1.point))
       buff.write(_get_struct_B().pack(self.ack))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -282,29 +311,19 @@ float64 z
       if self.path is None:
         self.path = navigation.msg.PointArray()
       end = 0
-      _x = self
-      start = end
-      end += 12
-      (_x.path.header.seq, _x.path.header.stamp.secs, _x.path.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.path.header.frame_id = str[start:end].decode('utf-8')
-      else:
-        self.path.header.frame_id = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       self.path.points = []
       for i in range(0, length):
-        val1 = geometry_msgs.msg.Point()
-        _x = val1
+        val1 = navigation.msg.Point_xy()
         start = end
-        end += 24
-        (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
+        end += 4
+        (length,) = _struct_I.unpack(str[start:end])
+        pattern = '<%sf'%length
+        start = end
+        end += struct.calcsize(pattern)
+        val1.point = struct.unpack(pattern, str[start:end])
         self.path.points.append(val1)
       start = end
       end += 1
@@ -322,19 +341,13 @@ float64 z
     :param numpy: numpy python module
     """
     try:
-      _x = self
-      buff.write(_get_struct_3I().pack(_x.path.header.seq, _x.path.header.stamp.secs, _x.path.header.stamp.nsecs))
-      _x = self.path.header.frame_id
-      length = len(_x)
-      if python3 or type(_x) == unicode:
-        _x = _x.encode('utf-8')
-        length = len(_x)
-      buff.write(struct.pack('<I%ss'%length, length, _x))
       length = len(self.path.points)
       buff.write(_struct_I.pack(length))
       for val1 in self.path.points:
-        _x = val1
-        buff.write(_get_struct_3d().pack(_x.x, _x.y, _x.z))
+        length = len(val1.point)
+        buff.write(_struct_I.pack(length))
+        pattern = '<%sf'%length
+        buff.write(val1.point.tostring())
       buff.write(_get_struct_B().pack(self.ack))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -349,29 +362,19 @@ float64 z
       if self.path is None:
         self.path = navigation.msg.PointArray()
       end = 0
-      _x = self
-      start = end
-      end += 12
-      (_x.path.header.seq, _x.path.header.stamp.secs, _x.path.header.stamp.nsecs,) = _get_struct_3I().unpack(str[start:end])
-      start = end
-      end += 4
-      (length,) = _struct_I.unpack(str[start:end])
-      start = end
-      end += length
-      if python3:
-        self.path.header.frame_id = str[start:end].decode('utf-8')
-      else:
-        self.path.header.frame_id = str[start:end]
       start = end
       end += 4
       (length,) = _struct_I.unpack(str[start:end])
       self.path.points = []
       for i in range(0, length):
-        val1 = geometry_msgs.msg.Point()
-        _x = val1
+        val1 = navigation.msg.Point_xy()
         start = end
-        end += 24
-        (_x.x, _x.y, _x.z,) = _get_struct_3d().unpack(str[start:end])
+        end += 4
+        (length,) = _struct_I.unpack(str[start:end])
+        pattern = '<%sf'%length
+        start = end
+        end += struct.calcsize(pattern)
+        val1.point = numpy.frombuffer(str[start:end], dtype=numpy.float32, count=length)
         self.path.points.append(val1)
       start = end
       end += 1
@@ -385,26 +388,14 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_3I = None
-def _get_struct_3I():
-    global _struct_3I
-    if _struct_3I is None:
-        _struct_3I = struct.Struct("<3I")
-    return _struct_3I
 _struct_B = None
 def _get_struct_B():
     global _struct_B
     if _struct_B is None:
         _struct_B = struct.Struct("<B")
     return _struct_B
-_struct_3d = None
-def _get_struct_3d():
-    global _struct_3d
-    if _struct_3d is None:
-        _struct_3d = struct.Struct("<3d")
-    return _struct_3d
 class Planner(object):
   _type          = 'navigation/Planner'
-  _md5sum = 'e099e7e7ce9aa3ba23a5f56a66d6f6e9'
+  _md5sum = '0f8ba09d5a21e9916f0e3bf633247872'
   _request_class  = PlannerRequest
   _response_class = PlannerResponse

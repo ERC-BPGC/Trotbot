@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
   "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/roseus/ros/navigation/manifest.l"
   "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/roseus/ros/navigation/msg/PointArray.l"
-  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/roseus/ros/navigation/msg/PolygonArray.l"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/roseus/ros/navigation/msg/Point_xy.l"
+  "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/roseus/ros/navigation/msg/PolyArray.l"
   "/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/navigation/share/roseus/ros/navigation/srv/Planner.l"
   "CMakeFiles/navigation_generate_messages_eus"
 )

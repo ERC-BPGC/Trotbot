@@ -14,25 +14,25 @@
 
 (in-package "ROS")
 
-(if (not (find-package "STD_MSGS"))
-  (ros::roseus-add-msgs "std_msgs"))
 
 
 
 
 (defclass navigation::PlannerRequest
   :super ros::object
-  :slots (_start _goal ))
+  :slots (_start _goal _obstacle_list ))
 
 (defmethod navigation::PlannerRequest
   (:init
    (&key
-    ((:start __start) (let (r) (dotimes (i 0) (push (instance std_msgs::Float32 :init) r)) r))
-    ((:goal __goal) (let (r) (dotimes (i 0) (push (instance std_msgs::Float32 :init) r)) r))
+    ((:start __start) (instance navigation::Point_xy :init))
+    ((:goal __goal) (instance navigation::Point_xy :init))
+    ((:obstacle_list __obstacle_list) (instance navigation::PolyArray :init))
     )
    (send-super :init)
    (setq _start __start)
    (setq _goal __goal)
+   (setq _obstacle_list __obstacle_list)
    self)
   (:start
    (&rest __start)
@@ -48,46 +48,43 @@
      (progn
        (if __goal (setq _goal (car __goal)))
        _goal)))
+  (:obstacle_list
+   (&rest __obstacle_list)
+   (if (keywordp (car __obstacle_list))
+       (send* _obstacle_list __obstacle_list)
+     (progn
+       (if __obstacle_list (setq _obstacle_list (car __obstacle_list)))
+       _obstacle_list)))
   (:serialization-length
    ()
    (+
-    ;; std_msgs/Float32[] _start
-    (apply #'+ (send-all _start :serialization-length)) 4
-    ;; std_msgs/Float32[] _goal
-    (apply #'+ (send-all _goal :serialization-length)) 4
+    ;; navigation/Point_xy _start
+    (send _start :serialization-length)
+    ;; navigation/Point_xy _goal
+    (send _goal :serialization-length)
+    ;; navigation/PolyArray _obstacle_list
+    (send _obstacle_list :serialization-length)
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; std_msgs/Float32[] _start
-     (write-long (length _start) s)
-     (dolist (elem _start)
-       (send elem :serialize s)
-       )
-     ;; std_msgs/Float32[] _goal
-     (write-long (length _goal) s)
-     (dolist (elem _goal)
-       (send elem :serialize s)
-       )
+     ;; navigation/Point_xy _start
+       (send _start :serialize s)
+     ;; navigation/Point_xy _goal
+       (send _goal :serialize s)
+     ;; navigation/PolyArray _obstacle_list
+       (send _obstacle_list :serialize s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; std_msgs/Float32[] _start
-   (let (n)
-     (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _start (let (r) (dotimes (i n) (push (instance std_msgs::Float32 :init) r)) r))
-     (dolist (elem- _start)
-     (send elem- :deserialize buf ptr-) (incf ptr- (send elem- :serialization-length))
-     ))
-   ;; std_msgs/Float32[] _goal
-   (let (n)
-     (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _goal (let (r) (dotimes (i n) (push (instance std_msgs::Float32 :init) r)) r))
-     (dolist (elem- _goal)
-     (send elem- :deserialize buf ptr-) (incf ptr- (send elem- :serialization-length))
-     ))
+   ;; navigation/Point_xy _start
+     (send _start :deserialize buf ptr-) (incf ptr- (send _start :serialization-length))
+   ;; navigation/Point_xy _goal
+     (send _goal :deserialize buf ptr-) (incf ptr- (send _goal :serialization-length))
+   ;; navigation/PolyArray _obstacle_list
+     (send _obstacle_list :deserialize buf ptr-) (incf ptr- (send _obstacle_list :serialization-length))
    ;;
    self)
   )
@@ -148,7 +145,7 @@
   :super ros::object
   :slots ())
 
-(setf (get navigation::Planner :md5sum-) "e099e7e7ce9aa3ba23a5f56a66d6f6e9")
+(setf (get navigation::Planner :md5sum-) "0f8ba09d5a21e9916f0e3bf633247872")
 (setf (get navigation::Planner :datatype-) "navigation/Planner")
 (setf (get navigation::Planner :request) navigation::PlannerRequest)
 (setf (get navigation::Planner :response) navigation::PlannerResponse)
@@ -156,94 +153,66 @@
 (defmethod navigation::PlannerRequest
   (:response () (instance navigation::PlannerResponse :init)))
 
-(setf (get navigation::PlannerRequest :md5sum-) "e099e7e7ce9aa3ba23a5f56a66d6f6e9")
+(setf (get navigation::PlannerRequest :md5sum-) "0f8ba09d5a21e9916f0e3bf633247872")
 (setf (get navigation::PlannerRequest :datatype-) "navigation/PlannerRequest")
 (setf (get navigation::PlannerRequest :definition-)
-      "std_msgs/Float32[] start
-std_msgs/Float32[] goal
+      "navigation/Point_xy start
+navigation/Point_xy goal
+navigation/PolyArray obstacle_list
 
 ================================================================================
-MSG: std_msgs/Float32
+MSG: navigation/Point_xy
+float32[] point
+================================================================================
+MSG: navigation/PolyArray
+navigation/PointArray[] polygons
+
+================================================================================
+MSG: navigation/PointArray
+navigation/Point_xy[] points
 ---
 navigation/PointArray path
 bool ack
 
 ================================================================================
 MSG: navigation/PointArray
-std_msgs/Header header
-geometry_msgs/Point[] points
+navigation/Point_xy[] points
   
 ================================================================================
-MSG: std_msgs/Header
-# Standard metadata for higher-level stamped data types.
-# This is generally used to communicate timestamped data 
-# in a particular coordinate frame.
-# 
-# sequence ID: consecutively increasing ID 
-uint32 seq
-#Two-integer timestamp that is expressed as:
-# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
-# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
-# time-handling sugar is provided by the client library
-time stamp
-#Frame this data is associated with
-# 0: no frame
-# 1: global frame
-string frame_id
-
-================================================================================
-MSG: geometry_msgs/Point
-# This contains the position of a point in free space
-float64 x
-float64 y
-float64 z
+MSG: navigation/Point_xy
 ")
 
-(setf (get navigation::PlannerResponse :md5sum-) "e099e7e7ce9aa3ba23a5f56a66d6f6e9")
+(setf (get navigation::PlannerResponse :md5sum-) "0f8ba09d5a21e9916f0e3bf633247872")
 (setf (get navigation::PlannerResponse :datatype-) "navigation/PlannerResponse")
 (setf (get navigation::PlannerResponse :definition-)
-      "std_msgs/Float32[] start
-std_msgs/Float32[] goal
+      "navigation/Point_xy start
+navigation/Point_xy goal
+navigation/PolyArray obstacle_list
 
 ================================================================================
-MSG: std_msgs/Float32
+MSG: navigation/Point_xy
+float32[] point
+================================================================================
+MSG: navigation/PolyArray
+navigation/PointArray[] polygons
+
+================================================================================
+MSG: navigation/PointArray
+navigation/Point_xy[] points
 ---
 navigation/PointArray path
 bool ack
 
 ================================================================================
 MSG: navigation/PointArray
-std_msgs/Header header
-geometry_msgs/Point[] points
+navigation/Point_xy[] points
   
 ================================================================================
-MSG: std_msgs/Header
-# Standard metadata for higher-level stamped data types.
-# This is generally used to communicate timestamped data 
-# in a particular coordinate frame.
-# 
-# sequence ID: consecutively increasing ID 
-uint32 seq
-#Two-integer timestamp that is expressed as:
-# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
-# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
-# time-handling sugar is provided by the client library
-time stamp
-#Frame this data is associated with
-# 0: no frame
-# 1: global frame
-string frame_id
-
-================================================================================
-MSG: geometry_msgs/Point
-# This contains the position of a point in free space
-float64 x
-float64 y
-float64 z
+MSG: navigation/Point_xy
 ")
 
 
 
-(provide :navigation/Planner "e099e7e7ce9aa3ba23a5f56a66d6f6e9")
+(provide :navigation/Planner "0f8ba09d5a21e9916f0e3bf633247872")
 
 

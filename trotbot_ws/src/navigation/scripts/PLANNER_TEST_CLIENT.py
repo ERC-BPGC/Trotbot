@@ -35,4 +35,3 @@ if __name__=="__main__":
 	
 	o=Client_t2()
 	o.get_response()
-    

@@ -1,0 +1,1 @@
+/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/obstacle/share/obstacle/cmake/obstacleConfig-version.cmake

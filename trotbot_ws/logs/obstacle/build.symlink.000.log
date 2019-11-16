@@ -1,0 +1,3 @@
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/pkgconfig/obstacle.pc
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/obstacle/cmake/obstacleConfig-version.cmake
+Symlinking /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/obstacle/cmake/obstacleConfig.cmake

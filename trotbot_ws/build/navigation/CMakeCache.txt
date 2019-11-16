@@ -376,6 +376,8 @@ nav_msgs_DIR:PATH=/opt/ros/kinetic/share/nav_msgs/cmake
 //Value Computed by CMake
 navigation_BINARY_DIR:STATIC=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/build/navigation
 
+navigation_DIR:PATH=
+
 //Value Computed by CMake
 navigation_SOURCE_DIR:STATIC=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/src/navigation
 
