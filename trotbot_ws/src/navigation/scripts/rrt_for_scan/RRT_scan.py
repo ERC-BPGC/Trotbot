@@ -90,7 +90,7 @@ class RRT():
         if check_intersection_scan([start_point, goal_point], line_obstacles):
             while True:
                 # Sample random point in specified area
-                rnd_point = sampler(self.sample_area, goal_point, self.goal_sample_rate)
+                rnd_point = self.sampler(self.sample_area, goal_point, self.goal_sample_rate)
 
                 # Find nearest node to the sampled point
                 distance_list = [(node.x - rnd_point[0])**2 + (node.y - rnd_point[1])**2 for node in node_list]
