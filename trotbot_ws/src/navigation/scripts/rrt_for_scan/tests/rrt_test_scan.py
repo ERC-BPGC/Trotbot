@@ -3,9 +3,9 @@
 import time
 import sys
 import os
-from context import RRT, utils
-from RRT_scan import RRT
+# from context import RRT, utils
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from RRT_scan import RRT
 
 from utils_scan import visualize_scan , make_obstacles_scan
 from utils_scan import adjustable_random_sampler as sampler
