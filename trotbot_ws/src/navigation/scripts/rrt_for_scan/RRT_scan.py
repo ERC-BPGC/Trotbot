@@ -6,9 +6,7 @@ from shapely.geometry import Polygon, Point, LineString
 from descartes import PolygonPatch
 import matplotlib.pyplot as plt
 
-from utils import check_intersection
-from utils import adjustable_random_sampler as sampler
-
+from utils_scan import adjustable_random_sampler as sampler
 from utils_scan import scan_obstacle_checker , make_obstacles_scan , check_intersection_scan
 
 
@@ -65,7 +63,7 @@ class RRT():
         Args:
             start_point: tuple with start point coordinates.
             end_point: tuple with end point coordinates.
-            obstacle_list: list of obstacles which themselves are list of points
+            scan_list:LaserScan polar distances to Obstacles [r1,r2,r3...] initially assuming every scan occurs at 1 rad interval
             animation: flag for showing planning visualization (default False)
 
         Returns:
