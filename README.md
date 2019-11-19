@@ -1,5 +1,20 @@
 # Trotbot
 
+Find scripts in trotbot_ws/src/navigation
+
+Prerequisites:
+- ROS Kinetic
+- Python catkin-tools
+
+
+To use this workspace do:
+
+```
+cd trotbot_ws
+catkin build
+source devel/setup.bash
+```
+
 ## TODO
 
 - [X] Transfer dynamic parameters from class init to Planning()
@@ -10,6 +25,7 @@
 - [ ] Using some kind of python collection for storing path (05/11/19)
 - [ ] Use namedtuple() for coordinates
 - [ ] Implement adjustable sample_area
-- [ ] Transform path in odom update
-- [ ] Modify dynamic_caller to call any type of algorithm
-- [ ] Make skeleton ROS code for each node
+- [X] Transform path in odom update
+- [X] Modify path_planner to call any type of algorithm
+- [X] Make skeleton ROS code for each node
+- [ ] Write Controller Action server
