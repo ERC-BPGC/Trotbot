@@ -8,6 +8,8 @@ project(navigation)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  genmsg 
+  actionlib_msgs
   geometry_msgs
   nav_msgs
   roscpp
@@ -62,15 +64,13 @@ find_package(catkin REQUIRED COMPONENTS
  add_service_files(
    FILES
    Planner.srv
-#   Service2.srv
  )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   Action1.action
-#   Action2.action
-# )
+add_action_files(
+  FILES
+  MoveBot.action
+)
 
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
@@ -78,6 +78,7 @@ find_package(catkin REQUIRED COMPONENTS
    geometry_msgs
    navigation
    std_msgs
+   actionlib_msgs
  )
 
 ################################################
