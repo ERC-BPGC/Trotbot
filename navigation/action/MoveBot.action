@@ -1,0 +1,8 @@
+# Define the goal
+navigation/Point_xy goal  # Specify which dishwasher we want to use
+---
+# Define the result
+bool ack
+---
+# Define a feedback message
+bool ack
