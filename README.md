@@ -1,21 +1,31 @@
-Arduino interface to MCS-12085/12086 Optical Mouse Sensor
+# Trotbot
 
-Connect SDIO/SCLK to pins defined in mcs-12085.cpp and then call
-mcs12085_dx() and mcs12085_dy() to read distance mouse has moved since
-last call.
+Find scripts in trotbot_ws/src/navigation
 
-
-# Procedure to run obstacle_expansion:
-
-1.Create a catkin package named obstacle_expander 
-(dependencies:message_runtime
-rospy
-jsk_recognition_msgs
-sensor_msgs
-geometry_msgs
-)
-
-2.copy the three message files to msg folder and source files to scripts folder
+Prerequisites:
+- ROS Kinetic
+- Python catkin-tools
 
 
-3.edit the CMakelists
+To use this workspace do:
+
+```
+cd trotbot_ws
+catkin build
+source devel/setup.bash
+```
+
+## TODO
+
+- [X] Transfer dynamic parameters from class init to Planning()
+- [X] Remove do_rrt()
+- [X] Test new RRT code
+- [X] Add animation feature to RRT code (just add plt.show() at the end of your script)
+- [X] Update los_optimizer
+- [ ] Using some kind of python collection for storing path (05/11/19)
+- [ ] Use namedtuple() for coordinates
+- [ ] Implement adjustable sample_area
+- [X] Transform path in odom update
+- [X] Modify path_planner to call any type of algorithm
+- [X] Make skeleton ROS code for each node
+- [ ] Write Controller Action server
