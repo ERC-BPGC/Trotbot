@@ -1,8 +1,0 @@
-prefix=/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/obstacle
-
-Name: obstacle
-Description: Description of obstacle
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/obstacle/lib 
-Requires: 

@@ -1,5 +1,0 @@
-obstacle
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/obstacle/cmake.lock /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/./cmake.lock
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/obstacle/lib/pkgconfig/obstacle.pc /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/lib/pkgconfig/obstacle.pc
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/obstacle/share/obstacle/cmake/obstacleConfig-version.cmake /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/obstacle/cmake/obstacleConfig-version.cmake
-/home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/.private/obstacle/share/obstacle/cmake/obstacleConfig.cmake /home/tyjo/catkin_ws_o/test_codes/Trotbot/trotbot_ws/devel/share/obstacle/cmake/obstacleConfig.cmake

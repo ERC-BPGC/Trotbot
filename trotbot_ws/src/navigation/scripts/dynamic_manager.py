@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 
 import rospy
 import actionlib
@@ -9,6 +9,7 @@ import math
 import utils
 import collections
 from navigation.msg import *
+
 
 # Define some usefull named tuples
 Orientation = collections.namedtuple('Orientation', ['roll', 'pitch', 'yaw'])
@@ -25,7 +26,7 @@ class Manager():
 		
 		self.obstacle_sub = rospy.Subscriber("obstacles", PolyArray, self._obstacle_update)
 		
-		self.controller_client = actionlib.SimpleActionClient('move_bot' MoveBotAction)
+		self.controller_client = actionlib.SimpleActionClient('move_bot', MoveBotAction)
 		self.controller_client.wait_for_server()
 		
 		self.plan_path = rospy.ServiceProxy('rrt_planner_service', Planner)
@@ -100,3 +101,4 @@ class Manager():
 
 def main():
 	rospy.init_node("manager", anonymous=True)
+
