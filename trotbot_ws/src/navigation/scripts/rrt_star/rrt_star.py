@@ -33,11 +33,11 @@ class RRTStar(RRT):
 
 
     def __init__(self, start, goal, obstacle_list, rand_area,
-                 expand_dis=3.0,
+                 expand_dis=3,
                  path_resolution=1.0,
                  goal_sample_rate=20,
                  max_iter=300,
-                 connect_circle_dist=50.0
+                 connect_circle_dist=20.0
                  ):
         super(RRTStar , self).__init__(start, goal, obstacle_list,
                          rand_area, expand_dis, path_resolution, goal_sample_rate, max_iter)
@@ -155,7 +155,8 @@ class RRTStar(RRT):
             improved_cost = near_node.cost > edge_node.cost
 
             if no_collision and improved_cost:
-                near_node = edge_node
+                # print("Yep")
+                # near_node = edge_node
                 near_node.parent = new_node
                 self.propagate_cost_to_leaves(new_node)
 
