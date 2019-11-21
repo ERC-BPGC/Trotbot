@@ -8,5 +8,5 @@
 - [X] Frame of reference update in odom_update function in Manager class
 - [X] Obstacle detection testing using LaserScan
 - [ ] Controller action server
-- [ ] Add Code for RRT*
+- [X] Add Code for RRT*
 
