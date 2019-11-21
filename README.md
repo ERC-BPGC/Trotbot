@@ -1,8 +1,7 @@
 # Trotbot
 
 ## About 
-
-![trotbot](Trotbot.jpg "trotbot")
+<img src="https://github.com/ERC-BPGC/Trotbot/blob/master/Trotbot.jpg" alt="drawing" width="400"/>
 
 **Trotbot** is a robot designed to serve as a delivery robot in an indoor environment. The deliverables will be placed inside the container. It will be able to autonomously navigate around obstacles and reach waypoints set in and around its environment. Identification tags will be used by the Bot to locate the rooms and localize itself.
 
