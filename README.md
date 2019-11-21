@@ -1,8 +1,9 @@
 # Trotbot
 
+## About 
+
 ![trotbot](Trotbot.jpg "trotbot")
 
-## About 
 **Trotbot** is a robot designed to serve as a delivery robot in an indoor environment. The deliverables will be placed inside the container. It will be able to autonomously navigate around obstacles and reach waypoints set in and around its environment. Identification tags will be used by the Bot to locate the rooms and localize itself.
 
 ## Prerequisites:
@@ -29,6 +30,8 @@ source devel/setup.bash
 
 # run scripts from the navigation package
 ```
+
+**Note**: The packages have been tested with ROS Kinetic on Ubuntu 16.04.
 
 -----------------------
 
