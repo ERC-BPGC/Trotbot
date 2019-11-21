@@ -1,9 +1,0 @@
-[31m[1mCMake Error[0m at /opt/ros/kinetic/share/catkin/cmake/catkin_package.cmake:224 (message):
-  catkin_package() DEPENDS on the catkin package 'navigation' which must
-  therefore be listed as a run dependency in the package.xml
-[36mCall Stack (most recent call first):[0m
-  /opt/ros/kinetic/share/catkin/cmake/catkin_package.cmake:102 (_catkin_package)
-  CMakeLists.txt:112 (catkin_package)
-
-
-make: *** [cmake_check_build_system] Error 1
