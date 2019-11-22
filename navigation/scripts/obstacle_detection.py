@@ -2,19 +2,24 @@ import rospy
 import math
 import numpy
 
-from geometry_msgs import Polygon, Point32
+from geometry_msgs.msg import Polygon, Point32
 from sensor_msgs.msg import LaserScan
-from std_msgs.msg import float32
+from std_msgs.msg import Float32
 
-#IMPORT CUSTOM MESSAGES HERE (PointArray and PolygonArray)
-from navigation.msg import PointArray, PolygonArray
+from navigation.msg import PointArray, PolyArray
+
 
 def callback_laserscan(msg):
 	"""
-
+		scan callback function
+		Args:
+			msg: LaserScan data
 	"""
+	global scanLen 
+
 	#Split obstacles
-	obstacles_1D = split_array(msg.ranges, 0.5)	#Tuning required
+	obstacles_1D = split_array(msg.ranges, 0.25)	#Tuning required
+	scanLen = len(msg.ranges)
 
 	#Expand Obstacles
 	obstacle_list = expand(obstacles_1D, 0.35)	#Tuning required
@@ -59,31 +64,39 @@ def expand(obstacles_1D, expand_dis, angle_deviation=0):
 		obstacles: Array of geometry_msgs.Polygon
 
 	"""
+	global scanLen
 	obstacle_list = []
-	obstacles = PolygonArray()
+	obstacles = PolyArray()
 
 	#Create tuples of ranges with their angles
-	least_angle = 2*math.pi/len(obstacles_1D)
+	# least_angle = 2*math.pi/len(obstacles_1D)
+	least_angle = 2*math.pi/scanLen
+	pt_count = 0
 
 	for i in range(len(obstacles_1D)):
-		obstacles_1D[i] = (obstacles_1D[i], angle_deviation + i*least_angle)
+		# obstacles_1D[i] = (obstacles_1D[i], angle_deviation + i*least_angle)
+		for j in range(len(obstacles_1D[i])):
+			obstacles_1D[i][j] = (obstacles_1D[i][j], angle_deviation + pt_count*least_angle)
+			pt_count = pt_count + 1
 
+	# print(obstacles_1D[5])
+	# print(obstacles_1D)
 
 	#For each 1D obstacle, create a new list
 	#Fill the new list by expanding on one side
 	#Append the list by expanding on the other side in reverse order
-	
 
 	for obstacle in obstacles_1D:
 		point_list = []
-		for p in obstacle:
-			point_list.append(max(0, p[0] - expand_dis),p[1])
-		point_list.append((obstacle[-1][0] , obstacle[-1][1]+3*least_angle))
-		for p in reversed(obstacle):
-			point_list.append((p[0] + expand_dis), p[1])
+
+		for point in obstacle:
+			point_list.append((max(0,point[0] - expand_dis),point[1]))
+		point_list.append((obstacle[-1][0] , obstacle[-1][1]+2*least_angle))
+
+		for point in reversed(obstacle):
+			point_list.append(((point[0] + expand_dis), point[1]))
 		point_list.append((obstacle[0][0] , obstacle[0][1]-3*least_angle))
 
-		#Call rtheta_to_xy for each point in the list
 		point_list = [rtheta_to_xy(p) for p in point_list]
 
 		#Convert new list to geometry_msgs Polygons
@@ -108,7 +121,7 @@ def rtheta_to_xy(point_rtheta):
 	point = Point32()
 	point.x = point_rtheta[0]*math.cos(point_rtheta[1])
 	point.y = point_rtheta[0]*math.sin(point_rtheta[1])
-	point.z=0
+	point.z = 0
 
 	return point
 
@@ -118,8 +131,9 @@ if __name__ == "__main__":
 
 	rospy.init_node("obstacle_detection", anonymous=True)
 
-	
-	obstacles_pub = rospy.Publisher("obstacles", PolygonArray ,queue_size=5)
+	scanLen = 0
+
+	obstacles_pub = rospy.Publisher("obstacles", PolyArray ,queue_size=5)
 	lidar_sub = rospy.Subscriber("scan", LaserScan, callback_laserscan)
 
 	rospy.spin()

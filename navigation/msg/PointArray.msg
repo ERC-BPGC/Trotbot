@@ -1,2 +1,1 @@
-navigation/Point_xy[] points
-  
+geometry_msgs/Point32[] points
