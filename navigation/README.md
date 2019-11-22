@@ -4,11 +4,46 @@
 
 Meet the prequisites mentioned [here](https://github.com/ERC-BPGC/Trotbot).
 
-Then:
+To use this package run:
+1) Obstacle Detector Node:
 ```
-# To use the path planner
-rosrun navigation path_planner.py
+$ rosrun navigation obstacle_detector.py
 ```
+* Subscribed Topics:
+    - /scan (sensor_msgs/LaserScan)
+* Published Topics:
+    - /obstacles (navigation/PolygonArray)
+
+
+2) Path Planner Service:
+```
+$ rosrun navigation path_planner.py
+```
+* Subscribed Topics:
+    - 
+* Published Topics:
+    -
+
+
+3) Dynamic Manager Action Client:
+```
+$ rosrun navigation dynamic_manager.py
+```
+* Subscribed Topics:
+    - /scan (sensor_msgs/LaserScan)
+* Published Topics:
+    - /obstacles (navigation/PolygonArray)
+
+4) Dynamic Manager Action Server:
+```
+$ rosrun navigation controller.py
+```
+* Subscribed Topics:
+    - /scan (sensor_msgs/LaserScan)
+* Published Topics:
+    - /obstacles (navigation/PolygonArray)
+
+
 
 ## Hardware Used:
 - RP-Lidar A1
@@ -20,6 +55,6 @@ rosrun navigation path_planner.py
 ## Known Issues:
 
 ## Results:
-Path Planning:
-
+Path Planning: `python ./scripts/rrt_for_scan/tests/rrt_test_scan.py`
 ![path planning](./scripts/rrt_for_scan/tests/plan.png "path planning")
+
