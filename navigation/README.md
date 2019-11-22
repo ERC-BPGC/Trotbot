@@ -4,7 +4,7 @@
 
 Meet the prequisites mentioned [here](https://github.com/ERC-BPGC/Trotbot).
 
-To use this package run:
+To use this package run following nodes in different terminals:
 1) Obstacle Detector Node:
 ```
 $ rosrun navigation obstacle_detector.py
@@ -14,6 +14,7 @@ $ rosrun navigation obstacle_detector.py
 * Published Topics:
     - /obstacles (navigation/PolygonArray)
 
+<br />
 
 2) Path Planner:
 ```
@@ -25,6 +26,7 @@ $ rosrun navigation path_planner.py
     - /rrt_planning_service (navigation/Planner)
         - returns boolean
 
+<br />
 
 3) Dynamic Manager:
 ```
@@ -37,6 +39,8 @@ $ rosrun navigation dynamic_manager.py
     - /rrt_planner_service (navigation/Planner)
 * Action Client:
     - /move_bot (navigation/MoveBot.action)
+
+<br />
 
 4) Controller:
 ```
@@ -77,3 +81,7 @@ python2 ./navigation/rrt_for_scan/tests/rrt_test.py
 nosetests -s ./navigation/rrt_star/tests/rrt_star_scan_test.py
 ```
 
+## References:
+1.   Bloesch, M., Burri, M., Omari, S., Hutter, M., & Siegwart, R. (2017). Iterated extended Kalman filter based visual-inertial odometry using direct photometric feedback. The International Journal of Robotics Research, 36(10), 1053–1072. https://doi.org/10.1177/0278364917728574
+
+2.   S. Karaman and E. Frazzoli. Incremental sampling-based algorithms for optimal motion planning. In Robotics: Science and Systems (RSS), Zaragoza, Spain, June 2010 https://arxiv.org/abs/1105.1186 
