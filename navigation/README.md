@@ -15,34 +15,39 @@ $ rosrun navigation obstacle_detector.py
     - /obstacles (navigation/PolygonArray)
 
 
-2) Path Planner Service:
+2) Path Planner:
 ```
 $ rosrun navigation path_planner.py
 ```
 * Subscribed Topics:
-    - 
-* Published Topics:
-    -
+    - /scan (sensor_msgs/LaserScan)
+* Services:
+    - /rrt_planning_service (navigation/Planner)
+        - returns boolean
 
 
-3) Dynamic Manager Action Client:
+3) Dynamic Manager:
 ```
 $ rosrun navigation dynamic_manager.py
 ```
 * Subscribed Topics:
+    - /obstacles (navigation/PolyArray)
     - /scan (sensor_msgs/LaserScan)
-* Published Topics:
-    - /obstacles (navigation/PolygonArray)
+* Services(): 
+    - /rrt_planner_service (navigation/Planner)
+* Action Client:
+    - /move_bot (navigation/MoveBot.action)
 
-4) Dynamic Manager Action Server:
+4) Controller:
 ```
 $ rosrun navigation controller.py
 ```
 * Subscribed Topics:
-    - /scan (sensor_msgs/LaserScan)
+    - /odom (nav_msgs/Odometry)
 * Published Topics:
-    - /obstacles (navigation/PolygonArray)
-
+    - /cmd_vel (geometry_msgs/Twist)
+* Action Server:
+    - /move_bot (navigation/MoveBot.action)
 
 
 ## Hardware Used:
@@ -54,7 +59,21 @@ $ rosrun navigation controller.py
 
 ## Known Issues:
 
+
+
 ## Results:
-Path Planning: `python ./scripts/rrt_for_scan/tests/rrt_test_scan.py`
-![path planning](./scripts/rrt_for_scan/tests/plan.png "path planning")
+Path Planning: RRT and RRT*
+
+<img src="https://github.com/ERC-BPGC/Trotbot/blob/master/navigation/scripts/rrt_for_scan/tests/plan.png" alt="RRT" title="RRT" width="400"/> 
+
+To get the results use:
+```
+python2 ./navigation/rrt_for_scan/tests/rrt_test.py
+```
+
+<img src="https://github.com/ERC-BPGC/Trotbot/blob/master/navigation/scripts/rrt_star/tests/RRTstar_without_max_iter.png" alt="RRT*" title="RRT*" width="400"/>
+
+```
+nosetests -s ./navigation/rrt_star/tests/rrt_star_scan_test.py
+```
 

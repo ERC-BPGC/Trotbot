@@ -20,7 +20,7 @@ class Root():
 	"""
     def __init__(self, *args , **kwargs):
 		"""
-		Initialize all the planning algos. Service to be called --> 'algo_name'_planner_service  
+			Initialize all the planning algos. Service to be called --> 'algo_name'_planner_service  
 		"""
 		#RRT Planner Service 
 		self.planning_srv = rospy.Service('rrt_planner_service', Planner, self.plan)

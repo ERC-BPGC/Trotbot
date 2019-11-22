@@ -19,8 +19,6 @@ Orientation = collections.namedtuple('Orientation', ['roll', 'pitch', 'yaw'])
 REACH_DIST = 0.01
 
 
-# TO DO: publish on cmd_vel
-
 # define the function to transform the goal point
 class Controller():
     def __init__(self):

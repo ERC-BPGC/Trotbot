@@ -4,9 +4,10 @@ import numpy
 
 from geometry_msgs import Polygon, Point32
 from sensor_msgs.msg import LaserScan
-from stad_msgs import float32
+from std_msgs.msg import float32
 
 #IMPORT CUSTOM MESSAGES HERE (PointArray and PolygonArray)
+from navigation.msg import PointArray, PolygonArray
 
 def callback_laserscan(msg):
 	"""
@@ -32,7 +33,7 @@ def split_array(ranges, threshold):
 		obstacles_1D: List of list of ranges
 	"""
 	obstacles_1D = [[ranges[0]]]
-	current_obstacle_index = 0;
+	current_obstacle_index = 0
 	for i in range(len(ranges)-1):
 		if abs(ranges[i] - ranges[i+1]) > threshold:
 			obstacles_1D.append([])
