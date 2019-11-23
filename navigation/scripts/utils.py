@@ -56,6 +56,34 @@ def adjustable_random_sampler(sample_area, goal, goal_sample_rate):
         return goal
 
 
+def split_path(path, threshold):
+    """Split straight line portions of the path into equal parts
+        if larger than a threshold.
+
+        For each line segment in the path, if the segment is above
+        a threshold, points are inserted in equal distance, splitting
+        it up into multiple segments.
+
+        Args:
+            path: list of tuples containing coordinates for a point in path..
+            threshold: length above which segments should be split up.
+
+        Returns:
+            Split path as a list of tuples containing coordinates.
+    """
+
+    # split_path = []
+
+    # for i in range(len(path) - 1):
+    #     split_path.append(path[i])
+
+    #     dist = math.sqrt((path[i][0] - path[i + 1][0])**2 
+    #                         + (path[i][1] - path[i + 1][1])**2)
+    #     if dist > threshold:
+    #         number_of_segments = dist // threshold
+    #         for j in range(1, number_of_segments):
+                
+
 
 def los_optimizer(path, obstacle_list):
     """Line of Sight Path Optimizer.
