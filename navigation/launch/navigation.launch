@@ -1,0 +1,8 @@
+<launch>
+
+    <node name="obstacle_detector" pkg="navigation" type="obstacle_detection.py"/>
+    <node name="dynamic_manager" pkg="navigation" type="dynamic_manager.py"/>
+    <node name="path_planner" pkg="navigation" type="path_planner.py"/>
+    <node name="controller" pkg="navigation" type="controller.py"/>
+  
+</launch>

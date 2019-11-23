@@ -23,7 +23,7 @@ REACH_DIST = 0.01
 class Controller():
     def __init__(self):
         """
-
+            Initializes the controller class.
         """
         # self.feedback = 
         self.result = False
@@ -36,23 +36,31 @@ class Controller():
         
         rospy.loginfo("...Controller Initialized...")
 
+
     def transform_goal(self):
         """
-
+            Transform the goal point after getting the odom update
         """
-        self.goal[0] = self.goal[0] - self.position.x
-        self.goal[1] = self.goal[1] - self.position.y
+        goal = Point(self.goal[0],self.goal[1])
+        goal = shapely.affinity.translate(goal, -self.position.x, -self.position.y)
+        goal = shapely.affinity.rotate(goal, angle=math.degrees(self.orientation.yaw), origin=(0, 0))
+        self.goal[0] = goal.x
+        self.goal[1] = goal.y
+
 
     def server_cb(self, moveGoal):
         """
+            Callback function for the action server
+            Updates the goal location
 
+            Arg: /navigation/MoveGoal
         """
         self.goal = moveGoal.goal
 
 
     def update_odom(self, data):
         """
-
+            Callback function for odom update
         """
         self.position = Point(data.pose.pose.position.x, data.pose.pose.position.y)
         self.orientation = Orientation(
@@ -76,6 +84,8 @@ class Controller():
 
     def set_vel(self):
         """
+            Publishes velocity on /cmd_vel
+            Simple proportional logic is used to generate the velocities
 
         """
         goal_norm = linalg.norm(self.goal)
@@ -90,4 +100,8 @@ def main():
 
 if __name__ == "__main__":
     rospy.init_node("controller",anonymous=True)
-    main()
+    try:
+        main()
+
+    except Exception as err:
+        rospy.loginfo("%s was thrown",err)
