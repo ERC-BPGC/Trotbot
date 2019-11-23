@@ -6,9 +6,9 @@ from RRT import RRT
 import utils
 from utils import adjustable_random_sampler as sampler
 from utils import los_optimizer as path_optimizer
-
+from geometry_msgs.msg import Point32
 from navigation.srv import Planner , PlannerRequest , PlannerResponse
-from navigation.msg import Point_xy, PolyArray, PointArray
+from navigation.msg import PolyArray, PointArray
 
 class Root():
     """
@@ -31,23 +31,31 @@ class Root():
 			Args:
 				request: Request by ros client. Contains start , goal , obstacle_list as:
 
-					navigation/Point_xy start
-						float32[] point
+					geometry_msg/Point32 start
+						float32 x
+						float32 y
+						float32 z
 
-					navigation/Point_xy goal
-						float32[] point
+					geometry_msg/Point32 goal
+						float32 x
+						float32 y
+						float32 z
 
 					navigation/PolyArray obstacle_list
 						navigation/PointArray[] polygons
-							navigation/Point_xy[] points
-								float32[] point
+							navigation/Point32[] points
+								float32 x
+								float32 y
+								float32 z
 
 			Returns:
 				RETURN_RESP: PlannerResponse()
 				
 				navigation/PointArray path
-					navigation/Point_xy[] points
-						float32[] point
+					navigation/Point32[] points
+						float32 x
+						float32 y
+						float32 z
 				
 				bool ack
 
@@ -79,7 +87,7 @@ class Root():
 		OPTIMIZED_PATH = path_optimizer(PATH, OBSTACLE)
 		
 		#Convert optimized path to Ros Format and Send
-		RETURN_RESP.path.points = [Point_xy( [ pts[0] , pts[1] ] ) for pts in OPTIMIZED_PATH]
+		RETURN_RESP.path.points = [ Point32(x=p[0], y=p[1]) for p in OPTIMIZED_PATH ]
 		RETURN_RESP.ack = True
 		print("-"*30)
 		return RETURN_RESP

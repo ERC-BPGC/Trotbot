@@ -8,7 +8,8 @@ from shapely.geometry import Point, LineString
 import math
 import utils
 import collections
-from navigation.msg import PolyArray, PointArray, Point_xy, MoveBotAction, MoveBotGoal, Odometry
+from geometry_msgs.msg import Point32
+from navigation.msg import PolyArray, PointArray, MoveBotAction, MoveBotGoal, Odometry
 from navigation.srv import Planner, PlannerRequest, PlannerResponse
 
 
@@ -80,7 +81,7 @@ class Manager():
 			request = PlannerRequest()
 			request.start.point = [0, 0]
 			request.goal.point = list(list(goal_point.coords)[0])
-			request.obstacle_list.polygons= [ PointArray([ Point_xy(list(p)) for p in o ]) for o in self.obstacles ]
+			request.obstacle_list.polygons= [ PointArray([ Point32(x=p[0], y=p[1]) for p in o ]) for o in self.obstacles ]
 		
 			response = self.plan_path(request)
 		

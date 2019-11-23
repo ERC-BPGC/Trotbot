@@ -1,5 +1,5 @@
 # Define the goal
-navigation/Point_xy goal  # Specify which dishwasher we want to use
+geometry_msgs/Point32 goal  # Specify which dishwasher we want to use
 ---
 # Define the result
 bool ack

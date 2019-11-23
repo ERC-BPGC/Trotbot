@@ -1,5 +1,5 @@
-navigation/Point_xy start
-navigation/Point_xy goal
+geometry_msgs/Point32 start
+geometry_msgs/Point32 goal
 navigation/PolyArray obstacle_list
 ---
 navigation/PointArray path
