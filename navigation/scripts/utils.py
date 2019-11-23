@@ -1,10 +1,17 @@
 #! /usr/bin/env python
 
 import random
+import collections
 import math
-from shapely.geometry import Polygon, Point, LineString
-from descartes import PolygonPatch
+import shapely
+
 import matplotlib.pyplot as plt
+
+from descartes import PolygonPatch
+from shapely.geometry import Polygon, Point, LineString
+
+# Usefull named tuple to use for storing Orientation
+Orientation = collections.namedtuple('Orientation', ['roll', 'pitch', 'yaw'])
 
 
 def check_intersection(points_list, obstacle_list):
@@ -124,3 +131,22 @@ def visualize_path(path, obstacle_list):
         ax.add_patch(poly_patch)
 
     plt.show()
+
+
+def transform(obj, position, orientation):
+    """Tranform geometric object (shape, line, point etc)
+        w.r.t given position and orientation in cartesian 
+        system of coordinates.
+
+        Args:
+            obj: shapely.geometry type object to be transformed.
+            position: shapely.geometry.point denoting base location.
+            orientation: utils.Orientation having base roll pitch and yaw.
+
+        Returns:
+            Transformed object of type shapely.geometry.
+    """
+
+    obj = shapely.affinity.translate(obj, -position.x, -position.y)
+    obj = shapely.affinity.rotate(obj, angle=math.degrees(orientation.yaw), origin=(0, 0))
+    return obj
