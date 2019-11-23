@@ -1,7 +1,9 @@
 # Trotbot
 
 ## About 
-<img src="https://github.com/ERC-BPGC/Trotbot/blob/master/Trotbot.jpg" alt="drawing" width="400"/>
+<p align="center">
+  <img src="https://github.com/ERC-BPGC/Trotbot/blob/master/Trotbot.jpg" alt="drawing" width="400"/>
+</p>
 
 **Trotbot** is a robot designed to serve as a delivery robot in an indoor environment. The deliverables will be placed inside the container. It will be able to autonomously navigate around obstacles and reach waypoints set in and around its environment. Identification tags will be used by the Bot to locate the rooms and localize itself.
 
@@ -11,7 +13,7 @@
 - [Python catkin-tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) 
 - [librealsense](https://github.com/IntelRealSense/librealsense)
 - [rplidar_ros](https://github.com/Slamtec/rplidar_ros)
-- shapely 
+- [shapely](https://shapely.readthedocs.io/en/stable/manual.html) 
 - descartes
 - numpy
 

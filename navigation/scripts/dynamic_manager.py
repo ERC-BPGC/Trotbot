@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! /usr/bin/env python
 
 import rospy
 import actionlib
@@ -8,22 +8,23 @@ from shapely.geometry import Point, LineString
 import math
 import utils
 import collections
-from navigation.msg import *
+from geometry_msgs.msg import Point32
+from navigation.msg import PolyArray, PointArray, MoveBotAction, MoveBotGoal, Odometry
+from navigation.srv import Planner, PlannerRequest, PlannerResponse
 
 
-# Define some usefull named tuples
 Orientation = collections.namedtuple('Orientation', ['roll', 'pitch', 'yaw'])
 
 class Manager():
 
 	def __init__(self):
-		self.position = None 
-		self.orientation = None
+		self.position = Point(0, 0) 
+		self.orientation = Orientation(0, 0, 0)
+		self.current_goal_point = Point(0, 0)
 		self.obstacles = []
 		self.path = collections.deque()
 
-		# self.odometry_sub = rospy.Subscriber("odom", Odometry, self.odom_update)
-		
+		self.odometry_sub = rospy.Subscriber("odom", Odometry, self._odom_update)
 		self.obstacle_sub = rospy.Subscriber("obstacles", PolyArray, self._obstacle_update)
 		
 		self.controller_client = actionlib.SimpleActionClient('move_bot', MoveBotAction)
@@ -31,8 +32,9 @@ class Manager():
 		
 		self.plan_path = rospy.ServiceProxy('rrt_planner_service', Planner)
 
-	def go_to(self, goal):
-		self._call_path_planner()
+	def go_to(self, goal_point):
+		self.current_goal_point = goal_point
+		self._call_path_planner(self.current_goal_point)
 		while len(self.path) is not 0:
 			self._move_to_next_point()
 
@@ -41,11 +43,11 @@ class Manager():
 		next_point = self.path[0]
 		goal_for_controller = MoveBotGoal()
 		goal_for_controller.goal.point = list(next_point)
-		self.controller_client.send_goal(goal_for_controller, done_cb=self._next_point_reached)	
+		self.controller_client.send_goal(goal_for_controller, done_cb=self._next_point_reached)
+		controller_client.wait_for_result()
 
-
-	def _next_point_reached(self, done):
-		if done:
+	def _next_point_reached(self, _, done):
+		if done.ack:
 			self.path.popleft()
 
 	def _odom_update(self, data): 
@@ -68,37 +70,32 @@ class Manager():
 	def _obstacle_update(self, data): 
 		self.obstacles = [ [ (point.x, point.y) for point in polygon.points ] for polygon in data.polygons ] 
 		if not utils.check_intersection(self.path, self.obstacles):
-			self._call_path_planner()
+			self._call_path_planner(self.current_goal_point)
 
-	def _call_path_planner(self, first_plan=False):
+	def _call_path_planner(self, goal_point):
 		rospy.logwarn("Waiting for Service")
 		rospy.wait_for_service("rrt_planner_service")
 		
 		try:
 			response = PlannerResponse()
 			request = PlannerRequest()
-			
-			request.start.point=#[ , ] Set initial points here
-			request.goal.point=#[ , ]
-			
-			#Obstacle to be given in theis format:
-			# request.obstacle_list.polygons=[
-			# PointArray([ Point_xy([8, 5]), Point_xy([7,8]), Point_xy([2,9]), Point_xy([3,5]) ]),
-			# PointArray([ Point_xy([3,3]), Point_xy([3,5]), Point_xy([5,5]), Point_xy([5,3]) ])
-			# ]
-
+			request.start.point = [0, 0]
+			request.goal.point = list(list(goal_point.coords)[0])
+			request.obstacle_list.polygons= [ PointArray([ Point32(x=p[0], y=p[1]) for p in o ]) for o in self.obstacles ]
+		
 			response = self.plan_path(request)
-			try response.ack:
+		
+			if response.ack:
 				self.path = collections.deque([(pt.point[0],pt.point[1]) for pt in response.path.points])
-			except Exception as e:
+			else:
 				print("Failed to compute path!")
-				print(e)
 
-
-	    except rospy.ServiceException, e:
-	        print "Service call failed: %s"%e
+		except rospy.ServiceException as e:
+			print("Service call failed: %s", e)
 
 
 def main():
 	rospy.init_node("manager", anonymous=True)
-
+	bot = Manager()
+	local_goal = Point(5, 5) # Will come from global planner when complete
+	bot.go_to(local_goal)
