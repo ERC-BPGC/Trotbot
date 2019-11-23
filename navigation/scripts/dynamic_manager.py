@@ -9,7 +9,8 @@ import math
 import utils
 import collections
 from geometry_msgs.msg import Point32
-from navigation.msg import PolyArray, PointArray, MoveBotAction, MoveBotGoal, Odometry
+from nav_msgs.msg import Odometry
+from navigation.msg import PolyArray, PointArray, MoveBotAction, MoveBotGoal
 from navigation.srv import Planner, PlannerRequest, PlannerResponse
 
 
@@ -29,7 +30,7 @@ class Manager():
 		
 		self.controller_client = actionlib.SimpleActionClient('move_bot', MoveBotAction)
 		self.controller_client.wait_for_server()
-		
+		# print("server found")
 		self.plan_path = rospy.ServiceProxy('rrt_planner_service', Planner)
 
 	def go_to(self, goal_point):
@@ -42,9 +43,10 @@ class Manager():
 	def _move_to_next_point(self):
 		next_point = self.path[0]
 		goal_for_controller = MoveBotGoal()
-		goal_for_controller.goal.point = list(next_point)
-		self.controller_client.send_goal(goal_for_controller, done_cb=self._next_point_reached)
-		controller_client.wait_for_result()
+		goal_for_controller.goal.x,goal_for_controller.goal.y = list(next_point)
+		# print(goal_for_controller)
+		self.controller_client.send_goal(goal_for_controller, self._next_point_reached)
+		self.controller_client.wait_for_result()
 
 	def _next_point_reached(self, _, done):
 		if done.ack:
@@ -53,7 +55,7 @@ class Manager():
 	def _odom_update(self, data): 
 		self.position = Point(data.pose.pose.position.x, data.pose.pose.position.y)
 		self.orientation = Orientation(
-			transformations.euler_from_quaternion([
+			*transformations.euler_from_quaternion([
 				data.pose.pose.orientation.x, data.pose.pose.orientation.y, 
 				data.pose.pose.orientation.z, data.pose.pose.orientation.w
 		]))
@@ -69,6 +71,7 @@ class Manager():
 
 	def _obstacle_update(self, data): 
 		self.obstacles = [ [ (point.x, point.y) for point in polygon.points ] for polygon in data.polygons ] 
+		# print(self.obstacles[6])
 		if not utils.check_intersection(self.path, self.obstacles):
 			self._call_path_planner(self.current_goal_point)
 
@@ -79,14 +82,15 @@ class Manager():
 		try:
 			response = PlannerResponse()
 			request = PlannerRequest()
-			request.start.point = [0, 0]
-			request.goal.point = list(list(goal_point.coords)[0])
+			[request.start.x, request.start.y] = [0, 0]
+			[request.goal.x,request.goal.y] = list(list(goal_point.coords)[0])
 			request.obstacle_list.polygons= [ PointArray([ Point32(x=p[0], y=p[1]) for p in o ]) for o in self.obstacles ]
-		
+
+			# print(request)
 			response = self.plan_path(request)
-		
+			# print(response)
 			if response.ack:
-				self.path = collections.deque([(pt.point[0],pt.point[1]) for pt in response.path.points])
+				self.path = collections.deque([(pt.x,pt.y) for pt in response.path.points])
 			else:
 				print("Failed to compute path!")
 
@@ -97,5 +101,13 @@ class Manager():
 def main():
 	rospy.init_node("manager", anonymous=True)
 	bot = Manager()
-	local_goal = Point(5, 5) # Will come from global planner when complete
+	local_goal = Point(0, 1) # Will come from global planner when complete
 	bot.go_to(local_goal)
+	
+	rospy.spin()
+
+if __name__ == "__main__": 
+	main()
+
+	# except Exception as err:
+		# print("%s error was observed",err)

@@ -25,11 +25,16 @@ class Controller():
         """
             Initializes the controller class.
         """
-        # self.feedback = 
-        self.result = False
+        self.feedback = MoveBotFeedback()
+        self.result = MoveBotResult()
         self.velocity = Twist()
         
-        self.server = actionlib.SimpleActionServer("move_bot", MoveBotAction, self.server_cb, False)  # change the boolean to turn on the server automatically
+        self.result.ack = False
+        self.feedback.ack = False
+
+        self.goal = None
+
+        self.server = actionlib.SimpleActionServer('move_bot', MoveBotAction, self.server_cb, True)  # change the boolean to turn on the server automatically
 
         self.odom_update = rospy.Subscriber("odom", Odometry, self.update_odom)
         self.vel_pub = rospy.Publisher("cmd_vel", Twist, queue_size=5)
@@ -41,11 +46,13 @@ class Controller():
         """
             Transform the goal point after getting the odom update
         """
-        goal = Point(self.goal[0],self.goal[1])
+        print(self.goal)
+        goal = Point(self.goal.x,self.goal.y)
+
         goal = shapely.affinity.translate(goal, -self.position.x, -self.position.y)
         goal = shapely.affinity.rotate(goal, angle=math.degrees(self.orientation.yaw), origin=(0, 0))
-        self.goal[0] = goal.x
-        self.goal[1] = goal.y
+        self.goal.x = goal.x
+        self.goal.y = goal.y
 
 
     def server_cb(self, moveGoal):
@@ -63,21 +70,25 @@ class Controller():
             Callback function for odom update
         """
         self.position = Point(data.pose.pose.position.x, data.pose.pose.position.y)
+
         self.orientation = Orientation(
-			transformations.euler_from_quaternion([
-				data.pose.pose.orientation.x, data.pose.pose.orientation.y, 
-				data.pose.pose.orientation.z, data.pose.pose.orientation.w
-		]))
+			*transformations.euler_from_quaternion(
+                [data.pose.pose.orientation.x, data.pose.pose.orientation.y,
+                 data.pose.pose.orientation.z, data.pose.pose.orientation.w]))
 
         self.transform_goal()
 
-        if self.goal[0] < REACH_DIST and self.goal[1] < REACH_DIST:
-            self.result = True
+        if self.goal.x < REACH_DIST and self.goal.y < REACH_DIST:
+            self.result.ack = True
+            self.feedback.ack = True
             self.server.set_succeeded(self.result, "Reached Goal Point :)")
 
         if self.server.is_preempt_requested():
-            self.result = False
+            self.result.ack = False
+            self.feedback.ack = False
             self.server.set_preempted(self.result, "Goal Preempt")
+
+        self.server.publish_feedback(self.feedback)
 
         self.set_vel()
 
@@ -88,9 +99,9 @@ class Controller():
             Simple proportional logic is used to generate the velocities
 
         """
-        goal_norm = linalg.norm(self.goal)
-        self.velocity.linear.x = self.goal[0] / goal_norm
-        self.velocity.linear.y = self.goal[1] / goal_norm
+        goal_norm = linalg.norm([self.goal.x,self.goal.y])
+        self.velocity.linear.x = self.goal.x / goal_norm
+        self.velocity.linear.y = self.goal.y / goal_norm
 
         self.vel_pub.publish(self.velocity)
 
