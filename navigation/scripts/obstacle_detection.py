@@ -2,7 +2,7 @@ import rospy
 import math
 import numpy
 
-from geometry_msgs import Polygon, Point32
+from geometry_msgs.msg import Polygon, Point32
 from sensor_msgs.msg import LaserScan
 from std_msgs.msg import float32
 
