@@ -19,7 +19,7 @@
 
 To install the python dependencies:
 ```bash
-pip2 install --user $LIBRARY_NAME
+pip2 install -r dependencies.txt
 ```
 
 
