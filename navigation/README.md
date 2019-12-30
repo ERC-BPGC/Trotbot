@@ -68,14 +68,14 @@ $ rosrun navigation controller.py
 ## Results:
 Path Planning: RRT and RRT*
 
-<img src="https://github.com/ERC-BPGC/Trotbot/blob/master/navigation/scripts/rrt_for_scan/tests/plan.png" alt="RRT" title="RRT" width="400"/> 
+<img src="scripts/rrt_for_scan/tests/plan.png" alt="RRT" title="RRT" width="400"/> 
 
 To get the results use:
 ```
-python2 ./navigation/rrt_for_scan/tests/rrt_test.py
+python2 scripts/rrt_for_scan/tests/rrt_test_scan.py
 ```
 
-<img src="https://github.com/ERC-BPGC/Trotbot/blob/master/navigation/scripts/rrt_star/tests/RRTstar_without_max_iter.png" alt="RRT*" title="RRT*" width="400"/>
+<img src="scripts/rrt_star/tests/RRTstar_without_max_iter.png" alt="RRT*" title="RRT*" width="400"/>
 
 ```
 nosetests -s ./navigation/rrt_star/tests/rrt_star_scan_test.py
