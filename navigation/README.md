@@ -72,7 +72,7 @@ Path Planning: RRT and RRT*
 
 To get the results use:
 ```
-python2 ./navigation/rrt_for_scan/tests/rrt_test.py
+python2 scripts/rrt_for_scan/tests/rrt_test_scan.py
 ```
 
 <img src="https://github.com/ERC-BPGC/Trotbot/blob/master/navigation/scripts/rrt_star/tests/RRTstar_without_max_iter.png" alt="RRT*" title="RRT*" width="400"/>
