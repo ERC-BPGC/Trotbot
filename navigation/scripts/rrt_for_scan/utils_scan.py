@@ -12,7 +12,7 @@ THRESHOLD = 0.25 # 1/2 of bot length
 ALPHA = 10 # Experimental in scan_obstacle_checker for optimization
 MIN_ANG = 0 # Starting angle at which the lidar starts
 MAX_ANG = 2*PI # Max angle of Lidar
-SHOW_ANIMATION =True
+SHOW_ANIMATION =False
 EXPAND_DIS = 0.5
 
 def make_obstacles_scan(scan_list):
@@ -255,5 +255,4 @@ def los_optimizer_scan(path , line_obstacles):
 			optimized_path.append(path[current_index])
 				 
 
-	print(optimized_path)
 	return optimized_path
