@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) +
 try:
     from rrt_star_scan import RRTStar 
 except:
-    raise ImportError("RRT not imported")
+    raise ImportError("RRT* not imported")
 
 def test1():
     inf  = np.nan_to_num(np.inf)
