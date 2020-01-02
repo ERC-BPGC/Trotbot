@@ -79,7 +79,7 @@ $ rosrun navigation controller.py
 ## Results:
 ### 1) Obstacle detection
 
-<img src="scripts/mapping/tests/lidar_grid.png" alt="lidar_to_grid" title="RRT" width="450" height="220"/> <img src="scripts/mapping/tests/mapping_rviz.png" alt="rviz grid map" title="RRT*" width="450" height="220"/>
+<img src="scripts/mapping/tests/lidar_grid.png" alt="lidar_to_grid" title="RRT" width="400" height="320"/> <img src="scripts/mapping/tests/mapping_rviz.png" alt="rviz grid map" title="RRT*" width="400" height="280"/>
 
 ```
 nosetests -s scripts/mapping/tests/lidar_to_grid_test.py
