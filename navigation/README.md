@@ -101,6 +101,14 @@ python2 scripts/rrt_for_scan/tests/rrt_test_scan.py
 nosetests -s ./navigation/rrt_star/tests/rrt_star_scan_test.py
 ```
 
+### 3) Grid Based: Dijkstra
+
+<img src = "scripts/grid_based/tests/dijkstra_test1.png" alt="Dijkstra" width="400" />
+
+```
+python2 scripts/grid_based/dijkstra.py
+```
+
 
 ## References:
 1.   Bloesch, M., Burri, M., Omari, S., Hutter, M., & Siegwart, R. (2017). Iterated extended Kalman filter based visual-inertial odometry using direct photometric feedback. The International Journal of Robotics Research, 36(10), 1053–1072. https://doi.org/10.1177/0278364917728574

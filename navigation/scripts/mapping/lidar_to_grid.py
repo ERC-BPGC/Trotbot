@@ -14,7 +14,7 @@ MIN_ANG = 0 #Minimum angle of 2D Lidar
 MAX_ANG = 2*pi #Maximum Angle of 2D Lidar
 MAX_HEIGHT = 15.0 #Range of Y-axis for mapping:(-MAX_HEIGHT/2 , MAX_HEIGHT/2)
 MAX_WIDTH = 15.0 #Range of X-axis for mapping:(-MAX_WIDTH/2 , MAX_WIDTH/2)
-XY_RESO = 0.1 #Grid Resolution of Probability map
+XY_RESO = 0.2 #Grid Resolution of Probability map
 SCAN_LEN = 360 # Length of your LaserScan Array
 BOT_LENGTH = 0.5 # Max Length of your bot
 
