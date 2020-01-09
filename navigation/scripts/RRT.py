@@ -142,7 +142,7 @@ class RRT():
         if animation == True:
             RRT.visualize_tree(node_list, obstacle_list)
 
-        return path, node_list
+        return list(reversed(path)), node_list
 
     @staticmethod
     def visualize_tree(node_list, obstacle_list, rnd_point=None):
