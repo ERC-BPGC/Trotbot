@@ -13,13 +13,11 @@
 - [Python catkin-tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) 
 - [librealsense](https://github.com/IntelRealSense/librealsense)
 - [rplidar_ros](https://github.com/Slamtec/rplidar_ros)
-- [shapely](https://shapely.readthedocs.io/en/stable/manual.html) 
-- descartes
-- numpy
 
 To install the python dependencies:
 ```bash
-pip2 install --user $LIBRARY_NAME
+pip2 install -r requirements.txt
+sudo apt-get install ros-kinetic-turtrlebot3-*
 ```
 
 

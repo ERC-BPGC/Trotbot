@@ -5,14 +5,25 @@
 Meet the prequisites mentioned [here](https://github.com/ERC-BPGC/Trotbot).
 
 To use this package run following nodes in different terminals:
-1) Obstacle Detector Node:
-```
-$ rosrun navigation obstacle_detector.py
-```
-* Subscribed Topics:
-    - /scan (sensor_msgs/LaserScan)
-* Published Topics:
-    - /obstacles (navigation/PolygonArray)
+1) Obstacle Detector Node:  
+    a. Polygon Type
+    ```
+    $ rosrun navigation obstacle_detector.py
+    ```
+    * Subscribed Topics:
+        - /scan (sensor_msgs/LaserScan)
+    * Published Topics:
+        - /obstacles (navigation/PolygonArray)
+    
+    b. Grid Type
+    ```
+    $ rosrun navigation lidar_to_grid.py
+    ```
+    * Subscribed Topics:
+        - /scan (sensor_msgs/LaserScan)
+    * Published Topics:
+        - /gridmap (nav_msgs/OccupancyGrid)
+    
 
 <br />
 
@@ -66,20 +77,38 @@ $ rosrun navigation controller.py
 
 
 ## Results:
-Path Planning: RRT and RRT*
+### 1) Obstacle detection
 
-<img src="https://github.com/ERC-BPGC/Trotbot/blob/master/navigation/scripts/rrt_for_scan/tests/plan.png" alt="RRT" title="RRT" width="400"/> 
+<img src="scripts/mapping/tests/lidar_grid.png" alt="lidar_to_grid" title="RRT" width="400" height="320"/> <img src="scripts/mapping/tests/mapping_rviz.png" alt="rviz grid map" title="RRT*" width="400" height="280"/>
 
-To get the results use:
 ```
-python2 ./navigation/rrt_for_scan/tests/rrt_test.py
+nosetests -s scripts/mapping/tests/lidar_to_grid_test.py
 ```
 
-<img src="https://github.com/ERC-BPGC/Trotbot/blob/master/navigation/scripts/rrt_star/tests/RRTstar_without_max_iter.png" alt="RRT*" title="RRT*" width="400"/>
+<!-- <img src="scripts/mapping/tests/mapping_rviz.png" alt="RRT*" title="RRT*" width="400"/> -->
+
+### 2) Path Planning: RRT and RRT*
+
+<img src="scripts/rrt_for_scan/tests/plan.png" alt="RRT" title="RRT" width="400"/> 
+
+```
+python2 scripts/rrt_for_scan/tests/rrt_test_scan.py
+```
+
+<img src="scripts/rrt_star/tests/RRTstar_without_max_iter.png" alt="RRT*" title="RRT*" width="400"/>
 
 ```
 nosetests -s ./navigation/rrt_star/tests/rrt_star_scan_test.py
 ```
+
+### 3) Grid Based: Dijkstra
+
+<img src = "scripts/grid_based/tests/dijkstra_test1.png" alt="Dijkstra" width="400" />
+
+```
+python2 scripts/grid_based/dijkstra.py
+```
+
 
 ## References:
 1.   Bloesch, M., Burri, M., Omari, S., Hutter, M., & Siegwart, R. (2017). Iterated extended Kalman filter based visual-inertial odometry using direct photometric feedback. The International Journal of Robotics Research, 36(10), 1053–1072. https://doi.org/10.1177/0278364917728574
