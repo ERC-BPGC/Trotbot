@@ -10,6 +10,10 @@ import matplotlib.pyplot as plt
 from descartes import PolygonPatch
 from shapely.geometry import Polygon, Point, LineString
 
+# Some parameters
+REACH_DIST = 0.01
+
+
 # Usefull named tuple to use for storing Orientation
 Orientation = collections.namedtuple('Orientation', ['roll', 'pitch', 'yaw'])
 
@@ -178,3 +182,25 @@ def transform(obj, position, orientation):
     obj = shapely.affinity.translate(obj, -position.x, -position.y)
     obj = shapely.affinity.rotate(obj, angle=math.degrees(orientation.yaw), origin=(0, 0))
     return obj
+
+
+def unwrap_pose(pose):
+    """Unwrap pose type ROS message into position and
+        orientation as tuple.
+
+        Args:
+            pose: geometry_msgs/Pose
+
+        Returns:
+            position as Point and orientations as 
+            Orientation objects
+    """
+
+    position = Point(pose.position.x, pose.position.y)
+    orientation = Orientation(
+        transformations.euler_from_quaternion([
+            pose.orientation.x, pose.orientation.y, 
+            pose.pose.orientation.z, pose.orientation.w
+    ]))
+
+    return position, orientation
