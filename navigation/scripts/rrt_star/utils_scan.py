@@ -8,45 +8,49 @@ from descartes import PolygonPatch
 import matplotlib.pyplot as plt
 
 PI = np.pi
-THRESHOLD = 0.25
-ALPHA = 10
+THRESHOLD = 0.25 # 1/2 of bot length
+ALPHA = 10 # Experimental in scan_obstacle_checker for optimization
+MIN_ANG = 0 # Starting angle at which the lidar starts
+MAX_ANG = 2*PI # Max angle of Lidar
+SHOW_ANIMATION = False
+EXPAND_DIS = 0.5
 
 def make_obstacles_scan(scan_list):
-	""" 
-		Make List of Lines from scan representing different obstacles 
-
+	"""Make Line obstacles from Laserscan
         Args:
-            scan_list : List of scan points
-
+            scan_list: List of LaserScan ranges
         Return:
-            line_obstacles : List of obstacles in LineString Format
-			pts : Cartesian form (x,y) of scan. List of [(x,y)]
-	"""
-	#Convert the scan to a numoy arra of points
-	pt_ang = np.arange(0,2*np.pi,np.pi/180)
+            (line_obstacles , pts) : (Making lines of scan obstacles , scan_list(r,theta) --> scan_list(x,y) )
+    """
+
+	pt_ang = np.arange( MIN_ANG , MAX_ANG , (MAX_ANG - MIN_ANG)/len(scan_list) )
 	pt_scan = np.array(scan_list)
-	pts = [] #To be returned cartesian form of scan
-	pt_x = np.multiply(pt_scan,np.cos(pt_ang))
-	pt_y = np.multiply(pt_scan,np.sin(pt_ang))
+	pts = []
+	pt_x = np.multiply(pt_scan , np.cos(pt_ang))
+	pt_y = np.multiply(pt_scan , np.sin(pt_ang))
 
 	for a,b in zip(pt_x,pt_y):
 		pts.append((a,b))
 
-	pt_scan = np.array(scan_list)
-	#Shifting the scan values
 	pt_scan_prev = np.append(pt_scan[1:],pt_scan[0])
-	# Taking the absolute difference and comparing with Threshold
+	
 	line_obst = abs(pt_scan_prev - pt_scan)>2*THRESHOLD
-	ind=np.argwhere(line_obst==True)
-	ind  = np.append(0 , ind)
-	ind  = np.append(ind, len(scan_list))
-
+	ind=(np.argwhere(line_obst==True)).reshape(-1)
+	
 	line_obstacles = []
-	pt_scan_enum = list(enumerate(scan_list))
+	
 	for i in range(len(ind)-1):
-		line = [(pt[0] , pt[1]) for pt in pts[ind[i]+1:ind[i+1]+1]]
+		line = [ (pt[0] , pt[1]) for pt in pts[ind[i]+1 : ind[i+1]+1] ]
 		line_obstacles.append(line)
 
+	if SHOW_ANIMATION:
+		plt.clf()
+		for i in range(len(line_obstacles)):
+			plt.plot([x for (x, _) in line_obstacles[i]], [y for (_, y) in line_obstacles[i]],'k')
+		plt.grid(True)
+		plt.axis([-7,7,-7,7])
+		plt.show()
+	
 	return (line_obstacles , pts)
 
 
@@ -84,25 +88,22 @@ def scan_obstacle_checker(scan_list , point):
 	#Point in polar coordinates (rho , phi)
 	phi = math.atan2(point[1] , point[0])
 	
-	if phi<0:
-		phi = 2*PI + phi
-
 	rho = math.sqrt(point[0]**2 + point[1]**2)
 
-	# Phi in degrees, used for indexing in LaserScan
-	phi_deg = int(math.floor(phi*180/PI))
-
 	#enumerating the list 
-	scan_list_enum = list(enumerate(scan_list))
+	scan_list_enum = np.arange( MIN_ANG , MAX_ANG , (MAX_ANG - MIN_ANG)/len(scan_list) )
 
-	for obstacle in scan_list_enum:
+	for obstacle in zip(scan_list_enum , scan_list):
 		# Checking the absolute of vector difference from each coordinate to be greater than THRESHOLD
-		if abs(complex(cmath.rect(obstacle[1],obstacle[0]*PI/180) - complex(cmath.rect(rho,phi))))<THRESHOLD:
+		if abs( complex( cmath.rect(obstacle[1] , obstacle[0]) ) - complex( cmath.rect(rho , phi) ) ) < THRESHOLD:
 			return float('nan'),float('nan')
 	return point
 
 #############################################################
 ##################EXPERIMENTAL###############################
+	# Phi in degrees, used for indexing in LaserScan
+	# phi_deg = int(math.floor(phi*180/PI))
+
 	# try:
 	# 	ALPHA = int(math.ceil(math.asin(THRESHOLD/rho)))
 	# except:
@@ -183,7 +184,7 @@ def visualize_scan(path, scan_list):
 	plt.clf()
 
     # Plot each point in the path
-	plt.plot([x for (x, _) in path], [y for (_, y) in path],'b')
+	plt.plot([x for (x, _) in path], [y for (_, y) in path],'b*-')
 	plt.plot([x for (x, _) in pts], [y for (_, y) in pts],'r.')
 	plt.axis((-5,5,-5,5))
     
@@ -208,6 +209,23 @@ def los_optimizer_scan(path , line_obstacles):
             only the path uptill the intersection is returned.
 	"""
 
+	#Reversing the path obtained from rrt because it gives path starting from last index
+	path.reverse()
+
+	#Since straight line added in RRT adding points between the last and second_last index
+	ang_last = math.atan2(path[-1][1]-path[-2][1] , path[-1][0]-path[-2][0])
+	dist_last = math.sqrt((path[-1][1]-path[-2][1])**2 + (path[-1][0]-path[-2][0])**2)
+
+	second_last=path[-2][:]
+	unit_last = (EXPAND_DIS*math.cos(ang_last) , EXPAND_DIS*math.sin(ang_last))
+	add_pt = path[-2][:]
+	
+	i = 1
+	while math.sqrt((add_pt[1]-second_last[1])**2 + (add_pt[0]-second_last[0])**2) < dist_last:
+		add_pt = (second_last[0] + i*unit_last[0] , second_last[1] + i*unit_last[1])
+		path.insert(-1 , add_pt)
+		i+=1
+
 	# Init optimized path with the start as first point in path.
 	optimized_path = [path[0]]
 
@@ -220,7 +238,7 @@ def los_optimizer_scan(path , line_obstacles):
 
 		# Loop from last point in path to the current one, checking if 
 		# any direct connection exists.
-		for lookahead_index in range(len(path) - 1 , current_index, -1):
+		for lookahead_index in range(len(path) - 1 , current_index , -1):
 			if not check_intersection_scan([path[current_index], path[lookahead_index]], line_obstacles):
 				# If direct connection exists then add this lookahead point to optimized
 				# path directly and skip to it for next iteration of while loop
@@ -233,6 +251,8 @@ def los_optimizer_scan(path , line_obstacles):
 		# and the edge between current and next point passes through an obstacle.  
 		if not index_updated:    
 		# In this case we return the path so far  
-			return optimized_path
+			current_index+=1
+			optimized_path.append(path[current_index])
+				 
 
 	return optimized_path

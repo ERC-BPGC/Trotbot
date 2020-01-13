@@ -69,7 +69,7 @@ class RRTStar(object):
                     expand_dis=1.0,
                     path_resolution=1.0,
                     goal_sample_rate=0.1,
-                    max_iter=250,
+                    max_iter=500,
                     connect_circle_dist=10.0,
                     search_until_max_iter = True,
                     initial_exploration = 20

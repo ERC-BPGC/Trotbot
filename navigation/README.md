@@ -101,13 +101,15 @@ python2 scripts/rrt_for_scan/tests/rrt_test_scan.py
 nosetests -s ./navigation/rrt_star/tests/rrt_star_scan_test.py
 ```
 
-### 3) Grid Based: Dijkstra
+### 3) Grid Based: Dijkstra and A*
 
 <img src = "scripts/grid_based/tests/dijkstra_test1.png" alt="Dijkstra" width="400" />
 
 ```
-python2 scripts/grid_based/dijkstra.py
+nosetests -s scripts/grid_based/tests/dijkstra.py
+nosetests -s scripts/grid_based/tests/a_star_test.py
 ```
+
 
 
 ## References:
