@@ -45,7 +45,7 @@ class Manager():
 		next_point = self.path[0]
 		goal_for_controller = MoveBotGoal()
 		goal_for_controller.goal.point = list(next_point)
-		self.controller_client.send_goal(goal_for_controller, done_cb=self.__next_point_reached)
+		self.controller_client.send_goal(goal_for_controller, feedback_cb=self.__next_point_reached)
 		controller_client.wait_for_result()
 
 	def __next_point_reached(self, _, done):
