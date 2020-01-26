@@ -26,12 +26,12 @@ class Manager():
 		self.obstacles = []
 		self.path = collections.deque()
 
+		self.plan_path = rospy.ServiceProxy('rrt_planner_service', Planner)
+
 		self.odometry_sub = rospy.Subscriber("odom", Odometry, self.__odom_update)
 		self.obstacle_sub = rospy.Subscriber("obstacles", PolyArray, self.__obstacle_update)
 
 		self.controller_client = actionlib.SimpleActionClient('move_bot', MoveBotAction)
-
-		self.plan_path = rospy.ServiceProxy('rrt_planner_service', Planner)
 
 		rospy.loginfo("...Manager Initialized...")
 		self.controller_client.wait_for_server()
@@ -80,17 +80,18 @@ class Manager():
 
 	def __call_path_planner(self, goal_point):
 
-		rospy.logwarn("Waiting for Service")
+		# rospy.logwarn("Waiting for Service")
 		rospy.wait_for_service("rrt_planner_service")
 		
 		try:
 			response = PlannerResponse()
 			request = PlannerRequest()
 			request.start.x, request.start.y = 0, 0
-			request.goal.x, request.goal.y = list(list(goal_point.coords)[0])
+			request.goal.x, request.goal.y = list(goal_point.coords)[0]
 			request.obstacle_list.polygons = [ PointArray([ Point32(x=p[0], y=p[1]) for p in o ]) for o in self.obstacles ]
 		
 			response = self.plan_path(request)
+			# rospy.loginfo("Planned path")
 		
 			if response.ack:
 				self.path = collections.deque([ Point(pt.x, pt.y) for pt in response.path.points ])
@@ -103,7 +104,7 @@ class Manager():
 
 def main():
 	bot = Manager()
-	local_goal = Point(5, 5) # Will come from global planner when complete
+	local_goal = Point(5, 0) # Will come from global planner when complete
 	bot.go_to(local_goal)
 
 

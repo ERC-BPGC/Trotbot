@@ -28,7 +28,6 @@ def check_intersection(points_list, obstacle_list):
         boolean specifying whether or not the line intersects
         and of the obstacles. 
     """
-    print(points_list)
     direct_line = LineString(points_list)
     for obstacle in obstacle_list:
         if direct_line.intersects(Polygon(obstacle)):

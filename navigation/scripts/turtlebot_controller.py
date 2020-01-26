@@ -7,7 +7,7 @@ import actionlib
 import shapely
 from shapely.geometry import Point, LineString
 import math
-import numpy.linalg as linalg
+import numpy as np
 import utils
 import collections
 from nav_msgs.msg import Odometry
@@ -74,10 +74,9 @@ class Controller():
             Publishes velocity on /cmd_vel
             Simple proportional logic is used to generate the velocities
         """
-        goal_norm = linalg.norm(self.goal)
-        
-        self.velocity.linear.x = self.goal.x / goal_norm
-        self.velocity.linear.y = self.goal.y / goal_norm
+
+        self.velocity.linear.x = 1
+        self.velocity.angular.z = np.arctan2(self.goal.y, self.goal.x)
 
         # rospy.loginfo("Publishing velocity")
         self.vel_pub.publish(self.velocity)

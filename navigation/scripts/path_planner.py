@@ -6,7 +6,8 @@ from RRT import RRT
 import utils
 from utils import adjustable_random_sampler as sampler
 from utils import los_optimizer as path_optimizer
-from geometry_msgs.msg import Point32
+from nav_msgs.msg import Path
+from geometry_msgs.msg import Point32, Point
 from navigation.srv import Planner , PlannerRequest , PlannerResponse
 from navigation.msg import PolyArray, PointArray
 
@@ -24,6 +25,8 @@ class Root():
 		"""
 		#RRT Planner Service 
 		self.planning_srv = rospy.Service('rrt_planner_service', Planner, self.plan)
+
+		self.planning_pub = rospy.Publisher('path', Path, queue_size=5)
 
     def plan(self , request):
 		"""Call Path planner selected(RRT, )
@@ -78,7 +81,7 @@ class Root():
 		RETURN_RESP = PlannerResponse()
 
 		print("-"*30)
-		rospy.loginfo(" Starting to plan from %r -> %r \n Obstacles-> %r"%(ST_PT,END_PT,OBSTACLE))
+		rospy.loginfo(" Starting to plan from %r -> %r \n"%(ST_PT,END_PT))
 		print("-"*30)
 		
 		#Make class instance and get path,optimized_path
@@ -87,6 +90,13 @@ class Root():
 		OPTIMIZED_PATH = path_optimizer(PATH, OBSTACLE)
 		
 		#Convert optimized path to Ros Format and Send
+		path_to_be_published = Path()
+		path_to_be_published.poses = [Point(x=p[0], y=p[1], z=0) for p in OPTIMIZED_PATH]
+		print(path_to_be_published)
+		self.planning_pub.publish(path_to_be_published)
+
+
+
 		RETURN_RESP.path.points = [ Point32(x=p[0], y=p[1]) for p in OPTIMIZED_PATH ]
 		RETURN_RESP.ack = True
 		print("-"*30)
