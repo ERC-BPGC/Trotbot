@@ -64,15 +64,15 @@ class Root():
 		
 		#Converting request from ros msg format -> basic python data type
 
-		ST_PT = tuple(request.start.point) 
-		END_PT = tuple(request.goal.point)
+		ST_PT = request.start.x, request.start.y
+		END_PT = request.goal.x, request.goal.y
 		ROBST = request.obstacle_list.polygons
 		OBSTACLE = []
 		
 		#Extracting Obstacle information from ROBST
 		for pt_array in ROBST : 
 			tmp = []
-			tmp = [tuple(pt.point) for pt in pt_array.points]
+			tmp = [(pt.x, pt.y) for pt in pt_array.points]
 			OBSTACLE.append(tmp)
 		
 		RETURN_RESP = PlannerResponse()

@@ -6,9 +6,13 @@ import math
 import shapely
 
 import matplotlib.pyplot as plt
-
+from tf import transformations
 from descartes import PolygonPatch
 from shapely.geometry import Polygon, Point, LineString
+
+# Some parameters
+REACH_DIST = 0.01
+
 
 # Usefull named tuple to use for storing Orientation
 Orientation = collections.namedtuple('Orientation', ['roll', 'pitch', 'yaw'])
@@ -20,12 +24,11 @@ def check_intersection(points_list, obstacle_list):
     Args:
         points_list: list of points in the line.
         obstacle_list: list of obstacles as list of points.
-
     Returns:
         boolean specifying whether or not the line intersects
         and of the obstacles. 
     """
-
+    print(points_list)
     direct_line = LineString(points_list)
     for obstacle in obstacle_list:
         if direct_line.intersects(Polygon(obstacle)):
@@ -38,7 +41,6 @@ def check_intersection(points_list, obstacle_list):
 def adjustable_random_sampler(sample_area, goal, goal_sample_rate):
     """Randomly sample point in area while sampling goal point 
         at a specified rate.
-
         Args:
             sample_area: area to sample point in (min and max)
             goal: tuple containing goal point coordinates.
@@ -59,15 +61,12 @@ def adjustable_random_sampler(sample_area, goal, goal_sample_rate):
 def split_path(path, threshold):
     """Split straight line portions of the path into equal parts
         if larger than a threshold.
-
         For each line segment in the path, if the segment is above
         a threshold, points are inserted in equal distance, splitting
         it up into multiple segments.
-
         Args:
             path: list of tuples containing coordinates for a point in path..
             threshold: length above which segments should be split up.
-
         Returns:
             Split path as a list of tuples containing coordinates.
     """
@@ -87,16 +86,13 @@ def split_path(path, threshold):
 
 def los_optimizer(path, obstacle_list):
     """Line of Sight Path Optimizer.
-
         For each point in the path, it checks if there is a direct
         connection to procceeding points which does not pass through
         any obstacles. By joining such points, number of uneccessary
         points in the path are reduced.
-
         Args:
             path: list of tuples containing coordinates for a point in path..
             obstacle_list: list of obstacles.
-
         Returns:
             Optimized path as a list of tuples containing coordinates.
             If path is found to be intersecting with any obstacle and
@@ -135,11 +131,9 @@ def los_optimizer(path, obstacle_list):
 
 def visualize_path(path, obstacle_list):
     """Draw the path along with environment obstacles.
-
         Args:
             path: list of points in the path as tuples.
             obstacle_list: list of obtacles.
-
         Returns:
             Nothing. Function is used to visualize path.
     """
@@ -165,12 +159,10 @@ def transform(obj, position, orientation):
     """Tranform geometric object (shape, line, point etc)
         w.r.t given position and orientation in cartesian 
         system of coordinates.
-
         Args:
             obj: shapely.geometry type object to be transformed.
             position: shapely.geometry.point denoting base location.
             orientation: utils.Orientation having base roll pitch and yaw.
-
         Returns:
             Transformed object of type shapely.geometry.
     """
@@ -178,3 +170,23 @@ def transform(obj, position, orientation):
     obj = shapely.affinity.translate(obj, -position.x, -position.y)
     obj = shapely.affinity.rotate(obj, angle=math.degrees(orientation.yaw), origin=(0, 0))
     return obj
+
+
+def unwrap_pose(pose):
+    """Unwrap pose type ROS message into position and
+        orientation as tuple.
+        Args:
+            pose: geometry_msgs/Pose
+        Returns:
+            position as Point and orientations as 
+            Orientation objects
+    """
+
+    position = Point(pose.position.x, pose.position.y)
+    orientation = Orientation(
+        *transformations.euler_from_quaternion([
+            pose.orientation.x, pose.orientation.y, 
+            pose.orientation.z, pose.orientation.w
+    ]))
+
+    return position, orientation
