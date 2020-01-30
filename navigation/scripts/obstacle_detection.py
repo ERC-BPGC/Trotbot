@@ -99,7 +99,12 @@ def expand(obstacles_1D, expand_dis, angle_deviation=0):
 			point_list.append(((point[0] + expand_dis), point[1]))
 		point_list.append((obstacle[0][0] , obstacle[0][1]-3*least_angle))
 
-		point_list = [rtheta_to_xy(p) for p in point_list]
+		new_point_list = []
+		for pt in point_list:
+			if not math.isinf(pt[0]):
+				new_point_list.append(pt)
+
+		point_list = [rtheta_to_xy(p) for p in new_point_list]
 
 		#Convert new list to geometry_msgs Polygons
 		polygon = PointArray()
