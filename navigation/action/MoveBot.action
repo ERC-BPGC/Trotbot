@@ -2,7 +2,7 @@
 geometry_msgs/Point32 goal  # Specify which dishwasher we want to use
 ---
 # Define the result
-bool ack
+std_msgs/Bool ack
 ---
 # Define a feedback message
-bool ack
+std_msgs/Bool ack
