@@ -50,10 +50,11 @@ class Bot():
             msg.pose.pose.orientation.z,
             msg.pose.pose.orientation.w
         ]))
-        #self.position.x -= self.position0.x
-        #self.position.y -= self.position0.y
-        self.path_use = [Point(p[0], p[1]) for p in utils.transform(
-                LineString([(p.x, p.y) for p in self.path]), self.position, self.orientation).coords]
+        self.position.x -= self.position0.x
+        self.position.y -= self.position0.y
+        if len(self.path) > 1:
+            self.path_use = [Point(p[0], p[1]) for p in utils.transform(
+                    LineString([(p.x, p.y) for p in self.path]), self.position, self.orientation).coords]
         print([(p.x, p.y) for p in self.path_use][1])        
         self._set_goal()
         self.vel_update()
@@ -78,7 +79,7 @@ class Bot():
     def obstacle_update(self, data):
         ## call back for odom sub
         self.obstacles = data
-        if len(self.path) < 2 or utils.check_intersection([(point.x, point.y) for point in self.path], [[(point.x, point.y) for point in polygon.points] for polygon in self.obstacles.polygons]):
+        if len(self.path) < 1 or utils.check_intersection([(point.x, point.y) for point in self.path], [[(point.x, point.y) for point in polygon.points] for polygon in self.obstacles.polygons]):
             self.get_path()
 
     def _set_goal(self):
@@ -105,9 +106,9 @@ class Bot():
         ## callback for the planner request
         rospy.wait_for_service('rrt_planner_service')
         try:
-            #self.position0 = Point(self.position.x, self.position.y)
-            #self.orientation0 = Orientation(self.orientation.roll, self.orientation.pitch, self.orientation.yaw)
             self.final_goal = utils.transform(self.final_goal, self.position, self.orientation)
+            self.position0 = Point(self.position.x, self.position.y)
+            self.orientation0 = Orientation(self.orientation.roll, self.orientation.pitch, self.orientation.yaw)            
             response = PlannerResponse()
             request = PlannerRequest()
             request.start.x = 0
