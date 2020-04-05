@@ -12,6 +12,7 @@ from navigation.srv import Planner, PlannerRequest, PlannerResponse
 import tf
 import utils
 import collections
+import shapely
 
 
 Orientation = namedtuple('Orientation', ['roll', 'pitch', 'yaw'])
@@ -22,9 +23,10 @@ class Bot():
     def __init__(self):
         self.final_goal = Point()
         self.path = []
+        self.path_use = []
         self.vel_pub = rospy.Publisher('robot0/cmd_vel', Twist, queue_size=10)
         self.odom_sub = rospy.Subscriber('robot0/odom', Odometry, self.odom_update)
-        #self.path_sub = rospy.Subscriber('/path', Path, self._update_path)
+        self.path_sub = rospy.Subscriber('/path', Path, self._update_path)
         self.obstacle_sub = rospy.Subscriber('obstacles', PolyArray, self.obstacle_update)
         self.obstacles = PolyArray()
         self.obstacle_list = []
@@ -36,6 +38,8 @@ class Bot():
         self.goal = Point()
         self.goal_reached = False
         self.rate = rospy.Rate(10)
+        self.position0 = Point(0, 0, 0)
+        self.orientation0 = Orientation(0, 0, 0)
         
     def odom_update(self, msg):
         ## callback for odom sub
@@ -46,6 +50,11 @@ class Bot():
             msg.pose.pose.orientation.z,
             msg.pose.pose.orientation.w
         ]))
+        #self.position.x -= self.position0.x
+        #self.position.y -= self.position0.y
+        self.path_use = [Point(p[0], p[1]) for p in utils.transform(
+                LineString([(p.x, p.y) for p in self.path]), self.position, self.orientation).coords]
+        print([(p.x, p.y) for p in self.path_use][1])        
         self._set_goal()
         self.vel_update()
         self.rate.sleep()
@@ -55,8 +64,8 @@ class Bot():
         ##function for setting the velocity
         
         if self.move_to_goal:
-            self.velocity.linear.x = 0.25*(self.goal.x) 
-            self.velocity.linear.y = 0.25*(self.goal.y) 
+            self.velocity.linear.x = 0.05*(self.goal.x) 
+            self.velocity.linear.y = 0.05*(self.goal.y) 
         else:
             self.velocity.linear.x = 0
             self.velocity.linear.y = 0
@@ -68,70 +77,48 @@ class Bot():
 
     def obstacle_update(self, data):
         ## call back for odom sub
-        self.obstacles = data.polygons
-        for obstacle in self.obstacles:
-            obstacle = Polygon([(p.x, p.y) for p in obstacle.points])
-            self.obstacle_list.append(obstacle)
-        if len(self.path) <= 2 or utils.check_intersection([(p.x, p.y) for p in self.path], [[(point.x, point.y) for point in polygon.points] for polygon in self.obstacles]) == True:
-            self.get_path(self.final_goal)
+        self.obstacles = data
+        if len(self.path) < 2 or utils.check_intersection([(point.x, point.y) for point in self.path], [[(point.x, point.y) for point in polygon.points] for polygon in self.obstacles.polygons]):
+            self.get_path()
 
     def _set_goal(self):
-        self.path = utils.transform(
-                LineString(self.path), self.position, self.orientation).coords
-        self.path = [Point(p[0] , p[1]) for p in self.path]
-
-        self.final_goal = utils.transform(self.final_goal, self.position, self.orientation)
-        self.path_use = self.path  
-        if abs(self.final_goal.x - self.position.x) < DISTMIN and (self.final_goal.y - self.position.y) < DISTMIN:
+        if abs(self.final_goal.x) < DISTMIN and (self.final_goal.y) < DISTMIN:
             self.goal_reached = True  
 
         if len(self.path_use) != 0 and not self.goal_reached:
             self.next_loc = self.path_use[0]
             print((self.next_loc.x, self.next_loc.y), len(self.path))
-            if abs(self.next_loc.x - self.position.x) < DISTMIN and abs(self.next_loc.y - self.position.y) < DISTMIN:
+            if abs(self.next_loc.x) < DISTMIN and abs(self.next_loc.y) < DISTMIN:
                 self.move_to_goal = False
                 self.path.pop(0)
             else :
                 self.goal = self.next_loc
                 self.move_to_goal = True
-        elif len(self.path_use) == 0 and not self.goal_reached:
-            self.get_path(self.final_goal) 
         elif self.goal_reached:
             self.velocity.linear.x, self.velocity.linear.y = 0, 0
             self.vel_pub.publish(self.velocity)
             print('-------Completed Path-------')      
          
 
-    def collision_check(self):
-        ## checking collsions in the path
-        intersection = 0
-        directline = LineString([(p.x, p.y) for p in self.path])
-        for obstacle in self.obstacle_list:
-            if directline.intersects(obstacle):
-                intersection += 1
-        if intersection > 0:
-            collision = True
-        else:
-            collision = False
-        return collision
+    def get_path(self):
         
-
-    def get_path(self, goal):
         ## callback for the planner request
         rospy.wait_for_service('rrt_planner_service')
         try:
+            #self.position0 = Point(self.position.x, self.position.y)
+            #self.orientation0 = Orientation(self.orientation.roll, self.orientation.pitch, self.orientation.yaw)
+            self.final_goal = utils.transform(self.final_goal, self.position, self.orientation)
             response = PlannerResponse()
             request = PlannerRequest()
             request.start.x = 0
             request.start.y = 0
-            request.goal.x = goal.x
-            request.goal.y = goal.y
+            request.goal.x = self.final_goal.x
+            request.goal.y = self.final_goal.y
             request.obstacle_list = self.obstacles
 
             response = self.path_planner(request)
-            self.path = [Point(p.x, p.y) for p in response.path.points]   
-       
-                
+            if not response.ack:
+                print('----Path not planned----')             
 
 
         except rospy.ServiceException :
@@ -145,12 +132,16 @@ class Bot():
             point = Point(pose.position.x, pose.position.y)
             self.path.append(point)
         
+        
+
+        
+        
 
 
 def main():
     rospy.init_node('BOT')
     bot = Bot()
-    bot.final_goal = Point(10, 10)
+    bot.final_goal = Point(5, 5)
     rospy.spin()
 
 if __name__ == '__main__':
