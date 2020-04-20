@@ -4,12 +4,14 @@ import rospy
 from std_msgs.msg import Header
 from geometry_msgs.msg import Point, Twist, Pose, PoseStamped, Quaternion, TransformStamped
 from nav_msgs.msg import Path, Odometry
+from sensor_msgs.msg import LaserScan
 from shapely.geometry import LineString, Polygon
 from navigation.msg import PointArray, PolyArray
 import utils
 import math
 import numpy as np 
-import tf_conversions, tf2_ros
+import tf_conversions, tf2_ros, tf
+from obstacle_detection_2 import get_obst
 
 DISTMIN = 0.01 # parameter for tuning
 
@@ -21,6 +23,7 @@ class Manager():
         self.position = Point()
         self.goal = Point()
         self.final_goal = Point()
+        self.final_goal_use = Point()
         self.path = Path()
         self.path_points = []
         self.odometry = Odometry()
@@ -40,6 +43,7 @@ class Manager():
         self.vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
         self.odom_sub = rospy.Subscriber('/odom', Odometry, self._odom_callback)
         self.path_pub = rospy.Publisher('/path', Path, queue_size=10)
+        self.laser_sub = rospy.Subscriber('/scan',LaserScan, self.get_obst)
 
         #init booleans
 
@@ -56,14 +60,12 @@ class Manager():
             Callback for odometry
         '''
         self.position, self.orientation = utils.unwrap_pose(msg.pose.pose)
-
-        self.get_obst()
         self._check_path()
         self._set_goal()
         self.broadcast_transforms()
 
 
-    def get_obst(self):
+    def get_obst(self, msg):
         ##run this fucntion to update obstacles
         '''
             1. Return obstacle in the form of Polgons?
@@ -71,7 +73,7 @@ class Manager():
             2. update self.obstacles
         '''
 
-        self.obstacle_message = output from obst_detect algos
+        self.obstacle_message = get_obst(msg)
 
         #Assuming message is PolyArray
 
@@ -89,6 +91,7 @@ class Manager():
                 position0 and orientation0 (check self.broadcast_transforms)
             3. Return a list of coordinates and store in self.path_points
         '''
+        self.final_goal_use = self.transform_point('odom', 'bot', self.final_goal)
         self.position0 = self.position
         self.orientation0 = self.orientation
 
@@ -113,13 +116,16 @@ class Manager():
                 3. Publish transfomed and optimised path message
             '''
 
+            #transforming points from planner frame to bot frame
+            self.path_points_use = [(self.transform_point('planner', 'bot', point).x, (self.transform_point('planner', 'bot', point).y) for p in self.path_points]
+
             #optimise path
-            self.path_points = utils.los_optimizer(self.path_points, self.obstacles)
+            self.path_points_use = utils.los_optimizer(self.path_points_use, self.obstacles)
 
             #publish path message wrt bot frame (Check this part)
             self.path.header = Header(frame_id='planner')
             self.path.poses = [PoseStamped(pose=Pose(position=Point(p[0], p[1]), orientation = Quaternion(x=0, y=0, z=0, w=1))
-                , header = Header(frame_id = 'bot')) for p in self.path_points]
+                , header = Header(frame_id = 'bot')) for p in self.path_points_use]
             
             self.path_pub.publish(self.path)
 
@@ -204,6 +210,15 @@ class Manager():
 
         self.br_planner.sendTransform(t_planner)
         self.br_bot.sendTransform(t_bot)
+
+    def transform_point(self, current, target, point):
+        tf_listener = tf.TransformListener()
+
+        if tf_listener.frameExists(parent) and tf_listener.frameExists(child):
+            transform = tf_listener.getLatestCommonTime(target, current)
+            pose_in_target = tf_listener.transformPoint(target, Point)
+            return pose_in_target
+
 
 if __name__ == '__main__':
     rospy.init_node('dynamic_manager_2.0')
