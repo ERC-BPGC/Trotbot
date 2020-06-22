@@ -227,7 +227,7 @@ class Manager():
 if __name__ == '__main__':
 
     # Initialise node
-    rospy.init_node('dynManager')
+    rospy.init_node('dynamicManager')
     rate = rospy.Rate(10)
     
     # Manager Instance
