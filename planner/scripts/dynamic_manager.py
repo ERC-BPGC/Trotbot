@@ -13,10 +13,21 @@ try :
 except:
     raise ImportError
 
+try:
+    import gennav
+    from gennav.planners.rrt import RRT, Node
+    from gennav.planners.samplers import uniform_adjustable_random_sampler as sampler
+    from gennav.utils.planner import los_optimizer as path_optimiser
+    
+except ImportError:
+    from local.RRT import RRT, Node
+    from local.utils import adjustable_random_sampler as sampler
+    from local.utils import los_optimizer as path_optimiser
+
+    rospy.logwarn("Cannot import from GENNAV")
+    rospy.logwarn("Importing locally")
+
 import numpy as np
-from local.RRT import RRT, Node
-from local.utils import adjustable_random_sampler as sampler
-from local.utils import los_optimizer as path_optimiser
 from shapely.geometry import LineString, Polygon
 import shapely
 import time
@@ -137,13 +148,6 @@ class Manager():
                     
                 except Exception as err:
                     print(err)
-            
-            elif self.not_reached:
-                self.publish_path()
-                
-            else :
-                self.publish_path()
-                rospy.loginfo("-"*10 + 'End-Reached' + '-'*10)
 
         elif self.goalNotReachable():
 
@@ -172,7 +176,7 @@ class Manager():
         '''
             A function to take care of the call to path planner
         '''
-        path, _ = self.path_planner((self.position.x, self.position.y), (self.goal.x, self.goal.y), self.obstacles)
+        path, _ = self.path_planner.plan((self.position.x, self.position.y), (self.goal.x, self.goal.y), self.obstacles)
         optimised_path = path_optimiser(path, self.obstacles)
         self.path_points = optimised_path
 
@@ -195,11 +199,25 @@ class Manager():
     # check by using shapely module
     def collision(self):
         '''
-            Checks for collision in between the present point and the succesive point
+            Checks for collision in between keeping into robots bodyframe into account
+            Args:  
+                Safety Parameter: (float) adds an extra safety distance between the robot and the obstacles
+            Returns:
+                Collision : (bool) Whether a collision is detected or not
         '''
+        path_modified = []
+        for i in range(len(self.path_points)):
+            if i == len(self.path_points) - 1:
+                p1, p2 = self.expand_points(self.path_points[i], self.path_points[i-1], 0)
+            else:
+                p1, p2 = self.expand_points(self.path_points[i], self.path_points[i+1], 0)
+
+            path_modified.insert(i, p2)
+            path_modified.insert(-i-1, p1)
+
         for obst in self.obstacles:
             if len(self.path_points) >=2:
-                if LineString(self.path_points).intersects(Polygon(obst)):
+                if LineString(path_modified).intersects(Polygon(obst)):
                     return True
         else:
             return False  
@@ -207,12 +225,27 @@ class Manager():
     def goalNotReachable(self):
         '''
             Function returns if goal is not reachable due to obstacle blockage
+            Note : Further work needed
         '''
         for obst in self.obstacles:
             if shapely.geometry.Point(self.goal.x, self.goal.y).within(Polygon(obst)):
                 True
         else:
             return False
+    
+    def expand_points(self, point1, point2, r):
+        """
+            Returns two points which are perpendicular to point1 with a distance of r
+            Args:
+                point1 = (tuple) point1
+                point2 = (tuple) point2 
+                r = (float) safety distance
+        """
+
+        theta = np.deg2rad(np.arctan2(point2[1] - point1[1], point2[0] - point1[0]))
+        p1 = point1[0] + (r * np.cos(90 +  theta)), point1[1] + (r * np.sin(90 + theta))
+        p2 = point1[0] + (-r * np.cos(90 + theta)), point1[1] + (-r * np.sin(90 + theta))
+        return p1, p2
 
     ###--------------------------------------Transforms---------------------------------------------------------###
 
