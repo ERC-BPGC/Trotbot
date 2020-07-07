@@ -1,0 +1,7 @@
+<launch>
+
+    <node pkg="planner" name="dynamicManager" type="dynamic_manager.py" output="screen"/>
+    <node pkg="obst_detect" name="obstacle_detection" type="obstacle_detection.py" output="screen"/>
+    <node pkg="controller" name="omnicontroller" type="controller.py" output="screen"/>
+    
+</launch>
